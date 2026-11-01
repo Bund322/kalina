@@ -1,6 +1,6 @@
 # 03 — Общая галерея из работ мастеров
 
-Status: ready-for-agent
+Status: resolved
 Blocked by: 02
 
 ## Что сделать

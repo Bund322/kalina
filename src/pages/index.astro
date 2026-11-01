@@ -3,7 +3,9 @@ import Base from '../layouts/Base.astro';
 import PriceList from '../components/PriceList.astro';
 import Contact from '../components/Contact.astro';
 import { Image } from 'astro:assets';
-import { masters, directionLabel } from '../data/masters';
+import { masters, directionLabel, gallery, directionCategories } from '../data/masters';
+
+const works = gallery();
 
 const letters = [...'Калина'];
 const words = ['Тату', 'Пирсинг', 'Эскизы', 'Ботаника', 'Fine line', 'Орнамент', 'Титан', 'Стерильно'];
@@ -37,8 +39,16 @@ const marquee = [...words, ...words, ...words, ...words];
           <button class="chip" data-f="piercing" aria-pressed="false">Пирсинг</button>
         </div>
       </div>
-      <div class="grid" id="grid"></div>
-      <p class="note">Сейчас в плитках иллюстрации-заглушки в цветах студии. Сюда встанут ваши фото работ.</p>
+      <div class="grid" id="grid">
+        {works.map((w) => (
+          <figure class="tile rv" data-c={directionCategories(w.master.direction).join(' ')}>
+            <a href={`/masters/${w.master.slug}`} aria-label={`${w.caption ?? 'Работа'} — мастер ${w.master.name}`}>
+              <Image src={w.image} alt={w.caption ?? `Работа мастера ${w.master.name}`} widths={[300, 600]} sizes="(max-width: 900px) 50vw, 25vw" />
+              <figcaption><b>{w.caption ?? w.master.name}</b><small>{w.caption ? `${w.master.name} →` : 'Портфолио →'}</small></figcaption>
+            </a>
+          </figure>
+        ))}
+      </div>
     </div>
   </section>
 

@@ -36,7 +36,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Мастера**: `src/data/masters.json` + фото в `src/content/masters/<slug>/` (в JSON — только имя файла).
   `src/data/masters.ts` валидирует JSON схемой zod и подставляет фото через `import.meta.glob`;
   ошибка в JSON или отсутствующий файл роняют сборку с понятным сообщением. Не больше 9 работ на мастера.
-  Из этих данных строятся `/masters/[slug]` (`getStaticPaths`) и секция «Мастера» на главной.
+  Из этих данных строятся `/masters/[slug]` (`getStaticPaths`), секция «Мастера» и галерея «Работы»
+  на главной. Галерея (`gallery()`) чередует мастеров: сначала первые работы (обложки), потом вторые и т. д.;
+  плитка ведёт на страницу мастера, фильтр (`src/scripts/home.ts`) смотрит на `data-c` — список
+  категорий через пробел (мастер `both` попадает и в тату, и в пирсинг).
   Фото выводятся через `<Image>` из `astro:assets` — при сборке сжимаются в WebP.
 - Навигация (`components/Header.astro`) ведёт на якоря главной (`/#works` и т. п.) и на страницы
   `/piercing`, `/tattoo`; активный пункт помечается `aria-current`. На экранах ≤560px шесть пунктов в одну
@@ -44,8 +47,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Временное
 
-- Галерея на главной — SVG-заглушки, которые рисует `src/scripts/home.ts` (`arts`). Их заменят работы
-  из `masters.json` (задача 03).
 - Мастера в `masters.json` (Алина, Вера, Ника) и их фото — примерные, фото сгенерированы `npm run placeholders`.
 - `/piercing` и `/tattoo` — страницы-заглушки до задач 04–07.
 - Плейсхолдеры контента (адрес, телефон, имена мастеров, цены) и поясняющие `<p class="note">…</p>` —

@@ -190,3 +190,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .pf{background:var(--sand-lt)}
 .pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:700px){.pf-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* плитка-ссылка в общей галерее */
+.tile>a{position:absolute;inset:0;display:block;color:inherit;text-decoration:none}
+.tile:focus-within figcaption{transform:none;opacity:1}

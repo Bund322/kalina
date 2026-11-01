@@ -91,3 +91,26 @@ function load(): Master[] {
 }
 
 export const masters = load();
+
+export interface GalleryItem extends Work {
+  master: Master;
+}
+
+/**
+ * Работы всех мастеров для общей галереи: сначала обложки (первая работа каждого мастера),
+ * затем вторые работы и т. д. — так мастера чередуются, а не идут блоками.
+ */
+export function gallery(): GalleryItem[] {
+  const rounds = Math.max(0, ...masters.map((m) => m.works.length));
+  const items: GalleryItem[] = [];
+  for (let i = 0; i < rounds; i++) {
+    for (const master of masters) {
+      const work = master.works[i];
+      if (work) items.push({ ...work, master });
+    }
+  }
+  return items;
+}
+
+/** Категории для фильтра галереи: «both» относится и к тату, и к пирсингу. */
+export const directionCategories = (d: Direction) => (d === 'both' ? ['tattoo', 'piercing'] : [d]);
