@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PriceList from '../components/PriceList.astro';
 import Contact from '../components/Contact.astro';
+import Teasers from '../components/Teasers.astro';
 import { Image } from 'astro:assets';
 import { masters, directionLabel, gallery, directionCategories } from '../data/masters';
 
@@ -70,6 +71,8 @@ const marquee = [...words, ...words, ...words, ...words];
       <p class="note">Имена, тексты и фото мастеров примерные — замените их в src/data/masters.json и src/content/masters/.</p>
     </div>
   </section>
+
+  <Teasers />
 
   <section id="prices">
     <div class="wrap two">

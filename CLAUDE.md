@@ -74,6 +74,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   `/piercing`, `/tattoo`; активный пункт помечается `aria-current`. На экранах ≤560px шесть пунктов в одну
   строку, при нехватке места лента прокручивается вбок.
 
+## Тизеры
+
+На главной (`components/Teasers.astro`) — статичные кадры моделей из `src/assets/teasers/`, а не живые сцены.
+Чтобы переснять кадр после правки модели или точек: открыть `/piercing` или `/tattoo` в `npm run dev`,
+в консоли взять сцену (`window.__stage` / `window.__tattoo.stage`), задать `renderer.setSize(…, false)`
+и ракурс через `flyTo(view, true)`, отрисовать кадр и сохранить `renderer.domElement.toDataURL('image/png')`
+в PNG (фон прозрачный).
+
 ## Временное
 
 - Мастера в `masters.json` (Алина, Вера, Ника) и их фото — примерные, фото сгенерированы `npm run placeholders`.

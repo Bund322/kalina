@@ -60,6 +60,8 @@ function init(root: HTMLElement) {
     maxDistance: 0.75,
   });
   stage.flyTo(VIEWS.full, true);
+  // В dev-режиме сцена доступна из консоли: снять координаты точек, отрисовать кадр для тизера.
+  if (import.meta.env.DEV) Object.assign(window, { __stage: stage });
   // Подсказка «вращайте модель» нужна только до первого действия.
   stage.controls.addEventListener('start', () => root.classList.add('touched'));
   document.addEventListener('piercing:select', () => root.classList.add('touched'));
