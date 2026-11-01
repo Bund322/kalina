@@ -1,14 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import Contact from '../components/Contact.astro';
+import PiercingHead from '../components/PiercingHead.astro';
 ---
-<Base title="Пирсинг">
-  <section class="stub">
+<Base title="Пирсинг" description="Интерактивная 3D-модель головы: выберите прокол — ухо, нос, лицо — и узнайте о нём подробнее.">
+  <section class="pc">
     <div class="wrap">
-      <div class="label rv">3D-модель головы</div>
-      <h2 class="rv" style="font-size:clamp(2.4rem,7vw,5rem);color:var(--brick)">Пирсинг</h2>
-      <p class="rv">Здесь будет 3D-голова, которую можно вращать: нажмите на точку прокола, чтобы узнать о нём подробнее.</p>
-      <p class="note">Страница в разработке.</p>
+      <div class="sec-head rv">
+        <div><div class="label">3D-модель головы</div><h2>Пирсинг</h2></div>
+        <p class="pc-lede">Покрутите голову и нажмите на точку — расскажем, что это за прокол.</p>
+      </div>
+      <PiercingHead />
     </div>
   </section>
   <Contact />

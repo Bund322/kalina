@@ -15,6 +15,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` — сборка в `dist/`; на хостинг (обычный виртуальный, Timeweb/SprintHost) уходит только `dist/`.
 - `npm run placeholders` — создать фото-заглушки для всех файлов из `masters.json`, которых ещё нет
   (`tools/make-placeholders.mjs`, через sharp; существующие файлы не трогает).
+- `npm run models` — пересобрать 3D-модели `public/models/*.glb` из исходника в `assets-src/`
+  (`tools/build-models.mjs`, gltf-transform + meshopt). Запускать после правки исходника или среза.
 - `npm run check` — проверка типов (`astro check`; при первом запуске попросит поставить `@astrojs/check`).
 
 Тестов и линтера нет.
@@ -32,7 +34,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   (и `public/favicon.svg`).
 - **Контент — в JSON**, не в разметке: `src/data/studio.json` (прайс с категориями `tattoo|piercing|common`,
   контакты, ссылки мессенджеров). Типизированный доступ — `src/data/studio.ts`; пустая ссылка мессенджера
-  заменяется якорем `/#book`. Дальше по ТЗ появятся `piercings.json`, `tattoo-zones.json`.
+  заменяется якорем `/#book`. Дальше по ТЗ появится `tattoo-zones.json`.
+- **3D**: `src/scripts/three/stage.ts` — общая сцена (прозрачный рендерер, свет, OrbitControls без зума
+  колесом и без взгляда снизу, перелёты камеры `flyTo`, загрузка meshopt-glb, растворение среза шеи в шейдере).
+  Модель — CC0 female base mesh (`assets-src/fab-body-kit/`, см. `SOURCE.md`); на сайт идёт обрезанный
+  и сжатый `public/models/head.glb`.
+- **/piercing**: `src/data/piercings.json` — проколы с группой (`ear|nose|face|body`) и точками `{p, n}`
+  в координатах `head.glb` (точки сняты рейкастом по модели; при смене модели или среза их надо переснять).
+  Две точки — индастриал (`bar: true`, рисуется штанга) и симметрия губ; общий `spot` — один маркер на
+  несколько проколов (язык/смайл «внутри рта»). Валидация — `src/data/piercings.ts`.
+  `components/PiercingHead.astro` отдаёт данные в `<script type="application/json">`, сцену поднимает
+  `src/scripts/piercing-head.ts`: маркеры — спрайты постоянного экранного размера, попадание считается
+  в пикселях с проверкой перекрытия головой; точки уха показываются только вблизи, издали — маркер «Ухо».
+  Выбор прокола (с модели или из списка) — событие `piercing:select` (`detail.ids`) на корне сцены.
+  Без WebGL остаётся список.
 - **Мастера**: `src/data/masters.json` + фото в `src/content/masters/<slug>/` (в JSON — только имя файла).
   `src/data/masters.ts` валидирует JSON схемой zod и подставляет фото через `import.meta.glob`;
   ошибка в JSON или отсутствующий файл роняют сборку с понятным сообщением. Не больше 9 работ на мастера.
@@ -48,7 +63,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Временное
 
 - Мастера в `masters.json` (Алина, Вера, Ника) и их фото — примерные, фото сгенерированы `npm run placeholders`.
-- `/piercing` и `/tattoo` — страницы-заглушки до задач 04–07.
+- `/tattoo` — страница-заглушка до задач 06–07. На `/piercing` вместо попапа пока панель с названием
+  выбранного прокола (попап — задача 05).
 - Плейсхолдеры контента (адрес, телефон, имена мастеров, цены) и поясняющие `<p class="note">…</p>` —
   убрать после замены на реальные данные.
 

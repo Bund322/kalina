@@ -1,6 +1,6 @@
 # 04 — /piercing: вращаемая 3D-голова с точками проколов
 
-Status: ready-for-agent
+Status: resolved
 Blocked by: 01
 
 ## Что сделать
