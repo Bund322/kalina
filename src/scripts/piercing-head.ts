@@ -1,5 +1,6 @@
 // /piercing: 3D-голова с точками проколов. Данные приходят из <script type="application/json"> в разметке,
-// выбор прокола сообщается событием `piercing:select` на корне сцены — его слушают список и попап.
+// выбор прокола — всплывающее событие `piercing:select` (detail.ids; пустой список — снять выбор).
+// Его шлют маркеры, список, карточки «Проколы на теле» и попап; слушают все на document.
 import type * as THREE from 'three';
 import { createStage, hasWebGL, type Stage, type View } from './three/stage';
 
@@ -31,18 +32,16 @@ function init(root: HTMLElement) {
 
   // Выбор работает и без 3D: список кнопок рассылает то же событие.
   let selected: string[] = [];
-  const select = (ids: string[]) => {
-    selected = ids;
+  const select = (ids: string[]) =>
     root.dispatchEvent(new CustomEvent<SelectDetail>('piercing:select', { detail: { ids }, bubbles: true }));
-  };
   root.querySelectorAll<HTMLButtonElement>('[data-piercing]').forEach((b) =>
     b.addEventListener('click', () => select([b.dataset.piercing!])),
   );
   root.querySelectorAll<HTMLButtonElement>('[data-view]').forEach((b) =>
     b.addEventListener('click', () => stage?.flyTo(VIEWS[b.dataset.view as keyof typeof VIEWS])),
   );
-  root.addEventListener('piercing:select', (e) => {
-    const ids = (e as CustomEvent<SelectDetail>).detail.ids;
+  document.addEventListener('piercing:select', (e) => {
+    const ids = (selected = (e as CustomEvent<SelectDetail>).detail.ids);
     root.querySelectorAll<HTMLButtonElement>('[data-piercing]').forEach((b) =>
       b.setAttribute('aria-pressed', String(ids.includes(b.dataset.piercing!))),
     );
@@ -63,7 +62,7 @@ function init(root: HTMLElement) {
   stage.flyTo(VIEWS.full, true);
   // Подсказка «вращайте модель» нужна только до первого действия.
   stage.controls.addEventListener('start', () => root.classList.add('touched'));
-  root.addEventListener('piercing:select', () => root.classList.add('touched'));
+  document.addEventListener('piercing:select', () => root.classList.add('touched'));
 
   stage
     .load('/models/head.glb')
@@ -79,7 +78,7 @@ function init(root: HTMLElement) {
     });
 
   // Перелёт к выбранному проколу: ухо — крупным планом, остальное — лицо.
-  root.addEventListener('piercing:select', (e) => {
+  document.addEventListener('piercing:select', (e) => {
     const p = data.find((d) => d.id === (e as CustomEvent<SelectDetail>).detail.ids[0]);
     if (!stage || !p?.points) return;
     stage.flyTo(p.group === 'ear' ? VIEWS.ear : VIEWS.face);

@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import { piercings, groupLabel } from '../data/piercings';
+---
+<div class="pp" data-piercing-popup hidden>
+  <div class="pp-backdrop" data-close></div>
+  <section class="pp-card" role="dialog" aria-label="Прокол" tabindex="-1">
+    <button class="pp-close" type="button" data-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+    </button>
+    <div class="pp-tabs" role="tablist" data-tabs hidden></div>
+    {piercings.map((p) => (
+      <article data-pp={p.id} hidden>
+        <div class="label">{groupLabel[p.group]}</div>
+        <h3>{p.name}</h3>
+        <dl class="pp-meta">
+          <div><dt>Цена</dt><dd>{p.price}</dd></div>
+          <div><dt>Заживление</dt><dd>{p.healing}</dd></div>
+        </dl>
+        <p>{p.description}</p>
+        <div class="pp-photos">
+          {p.photos.map((img, i) => (
+            <Image src={img} alt={`${p.name}, фото ${i + 1}`} widths={[240, 480]} sizes="(max-width: 900px) 42vw, 150px" loading="lazy" />
+          ))}
+        </div>
+      </article>
+    ))}
+  </section>
+</div>
+
+<script>
+  import '../scripts/piercing-popup';
+</script>

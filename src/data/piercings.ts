@@ -1,3 +1,4 @@
+import type { ImageMetadata } from 'astro';
 import { z } from 'astro/zod';
 import raw from './piercings.json';
 
@@ -16,11 +17,26 @@ const schema = z.array(
     bar: z.boolean().optional(),
     /** Проколы с одинаковым spot делят один маркер (язык и смайл — «внутри рта»). */
     spot: z.string().optional(),
+    description: z.string().min(1),
+    /** Строкой, как на сайте: «от 3 500 ₽». */
+    price: z.string().min(1),
+    healing: z.string().min(1),
+    /** Имена файлов в src/content/piercings/. */
+    photos: z.array(z.string().min(1)).min(1).max(3, 'не больше 3 фото на прокол'),
   }),
 );
 
-export type Piercing = z.infer<typeof schema>[number];
-export type PiercingGroup = Piercing['group'];
+type RawPiercing = z.infer<typeof schema>[number];
+export type PiercingGroup = RawPiercing['group'];
+export type Piercing = Omit<RawPiercing, 'photos'> & { photos: ImageMetadata[] };
+
+const files = import.meta.glob<{ default: ImageMetadata }>('/src/content/piercings/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+
+function photo(id: string, file: string): ImageMetadata {
+  const found = files[`/src/content/piercings/${file}`];
+  if (!found) throw new Error(`piercings.json: у прокола «${id}» нет файла src/content/piercings/${file}. Проверьте имя файла.`);
+  return found.default;
+}
 
 const parsed = schema.safeParse(raw);
 if (!parsed.success) {
@@ -30,7 +46,7 @@ if (!parsed.success) {
   throw new Error(`piercings.json заполнен с ошибками:\n${issues}`);
 }
 
-export const piercings: Piercing[] = parsed.data;
+export const piercings: Piercing[] = parsed.data.map((p) => ({ ...p, photos: p.photos.map((f) => photo(p.id, f)) }));
 
 export const groupLabel: Record<PiercingGroup, string> = {
   ear: 'Ухо',

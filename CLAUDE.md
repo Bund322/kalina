@@ -13,7 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` — dev-сервер на http://localhost:4321 (в приложении — `preview_start` с именем `astro-dev`
   из `.claude/launch.json`).
 - `npm run build` — сборка в `dist/`; на хостинг (обычный виртуальный, Timeweb/SprintHost) уходит только `dist/`.
-- `npm run placeholders` — создать фото-заглушки для всех файлов из `masters.json`, которых ещё нет
+- `npm run placeholders` — создать фото-заглушки для всех файлов из `masters.json` и `piercings.json`, которых ещё нет
   (`tools/make-placeholders.mjs`, через sharp; существующие файлы не трогает).
 - `npm run models` — пересобрать 3D-модели `public/models/*.glb` из исходника в `assets-src/`
   (`tools/build-models.mjs`, gltf-transform + meshopt). Запускать после правки исходника или среза.
@@ -42,12 +42,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **/piercing**: `src/data/piercings.json` — проколы с группой (`ear|nose|face|body`) и точками `{p, n}`
   в координатах `head.glb` (точки сняты рейкастом по модели; при смене модели или среза их надо переснять).
   Две точки — индастриал (`bar: true`, рисуется штанга) и симметрия губ; общий `spot` — один маркер на
-  несколько проколов (язык/смайл «внутри рта», руук/ложный руук). Валидация — `src/data/piercings.ts`.
+  несколько проколов (язык/смайл «внутри рта», руук/ложный руук). У каждого прокола — описание, цена,
+  заживление и 1–3 фото из `src/content/piercings/` (в JSON — имя файла). Валидация — `src/data/piercings.ts`.
   `components/PiercingHead.astro` отдаёт данные в `<script type="application/json">`, сцену поднимает
   `src/scripts/piercing-head.ts`: маркеры — спрайты постоянного экранного размера, попадание считается
   в пикселях с проверкой перекрытия головой; точки уха показываются только вблизи, издали — маркер «Ухо».
-  Выбор прокола (с модели или из списка) — событие `piercing:select` (`detail.ids`) на корне сцены.
-  Без WebGL остаётся список.
+  Выбор прокола — всплывающее событие `piercing:select` (`detail.ids`, пустой массив — снять выбор);
+  его шлют маркеры, список, карточки «Проколы на теле» (`components/BodyPiercings.astro`) и попап,
+  а слушают на `document`. Попап (`components/PiercingPopup.astro` + `src/scripts/piercing-popup.ts`)
+  рендерит карточки всех проколов при сборке и показывает нужную; для общей точки — вкладки.
+  На компьютере это карточка справа, на экранах ≤900px — панель снизу с затемнением. Без WebGL остаётся список.
 - **Мастера**: `src/data/masters.json` + фото в `src/content/masters/<slug>/` (в JSON — только имя файла).
   `src/data/masters.ts` валидирует JSON схемой zod и подставляет фото через `import.meta.glob`;
   ошибка в JSON или отсутствующий файл роняют сборку с понятным сообщением. Не больше 9 работ на мастера.
@@ -63,8 +67,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Временное
 
 - Мастера в `masters.json` (Алина, Вера, Ника) и их фото — примерные, фото сгенерированы `npm run placeholders`.
-- `/tattoo` — страница-заглушка до задач 06–07. На `/piercing` вместо попапа пока панель с названием
-  выбранного прокола (попап — задача 05).
+- `/tattoo` — страница-заглушка до задач 06–07.
+- Тексты, цены и сроки заживления проколов в `piercings.json` написаны для примера — заказчик их правит.
 - Плейсхолдеры контента (адрес, телефон, имена мастеров, цены) и поясняющие `<p class="note">…</p>` —
   убрать после замены на реальные данные.
 

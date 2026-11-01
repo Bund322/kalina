@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import { piercings } from '../data/piercings';
+
+const body = piercings.filter((p) => p.group === 'body');
+---
+<div class="bp">
+  {body.map((p) => (
+    <button class="bp-card rv" type="button" data-piercing={p.id}>
+      <span class="bp-ph"><Image src={p.photos[0]} alt="" widths={[300, 600]} sizes="(max-width: 700px) 50vw, 280px" /></span>
+      <span class="bp-name">{p.name}</span>
+      <span class="bp-price">{p.price}</span>
+    </button>
+  ))}
+</div>
+
+<script>
+  // Карточки вне 3D-сцены рассылают то же событие выбора, что и маркеры на модели.
+  document.querySelectorAll<HTMLButtonElement>('.bp-card').forEach((b) =>
+    b.addEventListener('click', () =>
+      b.dispatchEvent(new CustomEvent('piercing:select', { detail: { ids: [b.dataset.piercing!] }, bubbles: true })),
+    ),
+  );
+</script>

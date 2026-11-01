@@ -12,6 +12,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 img{max-width:100%}
+[hidden]{display:none!important}
 body{margin:0;background:var(--sand);color:var(--ink);font-family:var(--f-body);font-size:1.25rem;line-height:1.5;font-weight:500;overflow-x:hidden}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--brick);outline-offset:3px}
@@ -215,11 +216,47 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ph-views .chip:hover{background:var(--olive-ink)}
 .no-webgl .ph-views,.no-webgl .ph-hint,.touched .ph-hint{display:none}
 .ph-hint{position:absolute;bottom:62px;left:0;right:0;text-align:center;margin:0;font-family:var(--f-ui);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive-ink);opacity:.8;pointer-events:none}
-.ph-info{border-bottom:1px solid rgba(43,30,23,.25);padding-bottom:16px;margin-bottom:20px}
-.ph-name{font-family:var(--f-display);font-size:1.9rem;color:var(--brick);margin:4px 0 0;line-height:1.1}
-.ph-choice{display:flex;gap:8px;margin-top:12px}
 .ph-list{display:grid;gap:18px}
 .ph-list ul{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
 .ph-list button{font-family:var(--f-body);font-size:1.05rem;background:transparent;border:1px solid rgba(43,30,23,.3);color:var(--ink);padding:5px 12px;border-radius:999px;cursor:pointer;transition:all .2s}
 .ph-list button:hover{border-color:var(--brick);color:var(--brick)}
 .ph-list button[aria-pressed="true"]{background:var(--brick);border-color:var(--brick);color:var(--sand)}
+
+/* попап прокола: на компьютере — карточка справа, на телефоне — панель снизу */
+.pp-card{position:fixed;z-index:70;background:var(--sand-lt);color:var(--ink);box-shadow:0 18px 50px rgba(43,30,23,.28);overflow-y:auto;overscroll-behavior:contain;outline:none;
+  top:84px;right:max(16px,calc((100vw - 1180px)/2 + 16px));width:min(380px,calc(100vw - 32px));max-height:calc(100vh - 108px);border-radius:20px;padding:26px 24px 24px;
+  opacity:0;transform:translateX(24px);transition:opacity .3s,transform .4s cubic-bezier(.2,.8,.2,1)}
+.pp.open .pp-card{opacity:1;transform:none}
+.pp-backdrop{display:none}
+.pp-close{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(43,30,23,.3);background:transparent;cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+.pp-close:hover{border-color:var(--brick);color:var(--brick)}
+.pp-close svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
+.pp-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 48px 16px 0}
+.pp-tabs .chip[aria-selected="true"]{background:var(--olive-ink);color:var(--sand)}
+.pp-card h3{font-size:2.3rem;color:var(--brick);margin:4px 48px 14px 0}
+.pp-card p{margin:0 0 16px;font-size:1.15rem}
+.pp-meta{display:flex;gap:24px;flex-wrap:wrap;margin:0 0 14px}
+.pp-meta dt{font-family:var(--f-ui);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-ink)}
+.pp-meta dd{margin:2px 0 0;font-family:var(--f-display);font-size:1.35rem;color:var(--brick)}
+.pp-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.pp-photos img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:8px;background:var(--sand-dp)}
+@media(max-width:900px){
+  .pp-backdrop{display:block;position:fixed;inset:0;z-index:69;background:rgba(43,30,23,.35);opacity:0;transition:opacity .3s}
+  .pp.open .pp-backdrop{opacity:1}
+  .pp-card{top:auto;bottom:0;left:0;right:0;width:auto;max-height:78vh;border-radius:22px 22px 0 0;padding:28px max(16px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px));transform:translateY(40px)}
+  .pp-card::before{content:"";position:absolute;top:10px;left:50%;width:44px;height:4px;margin-left:-22px;border-radius:4px;background:rgba(43,30,23,.25)}
+  .pp-photos{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:42vw;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+  .pp-photos img{scroll-snap-align:start}
+}
+.pp-lock,.pp-lock body{overflow:hidden}
+
+/* проколы на теле */
+.pc-body{background:var(--sand-lt);padding-block:clamp(48px,7vw,90px)}
+.bp{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,280px));gap:16px}
+@media(max-width:700px){.bp{grid-template-columns:repeat(2,1fr)}}
+.bp-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:0;border:0;background:transparent;text-align:left;cursor:pointer;color:inherit;font:inherit;min-width:0}
+.bp-ph{display:block;width:100%;aspect-ratio:3/4;overflow:hidden;border-radius:999px 999px 0 0;background:var(--sand-dp);margin-bottom:10px}
+.bp-ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.bp-card:hover .bp-ph img{transform:scale(1.06)}
+.bp-name{font-family:var(--f-display);font-size:1.8rem;color:var(--brick);line-height:1}
+.bp-price{font-family:var(--f-ui);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive-ink)}

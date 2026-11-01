@@ -1,4 +1,5 @@
-// Создаёт фото-заглушки в цветах студии для всех файлов, на которые ссылается src/data/masters.json.
+// Создаёт фото-заглушки в цветах студии для всех файлов, на которые ссылаются src/data/masters.json
+// и src/data/piercings.json.
 // Существующие файлы не трогает, поэтому настоящие фото не перезапишутся.
 // Запуск: npm run placeholders
 import { existsSync, mkdirSync, readFileSync } from 'node:fs';
@@ -51,6 +52,13 @@ for (const [mi, m] of masters.entries()) {
   const arts = m.direction === 'piercing' ? piercingArts : m.direction === 'both' ? [...tattooArts, ...piercingArts] : tattooArts;
   for (const [wi, w] of m.works.entries()) {
     if (await write(join(dir, w.photo), 300, 400, arts[(wi + mi) % arts.length](), 900)) created++;
+  }
+}
+const piercings = JSON.parse(readFileSync(join(root, 'src/data/piercings.json'), 'utf8'));
+for (const [pi, p] of piercings.entries()) {
+  for (const [i, file] of p.photos.entries()) {
+    const art = piercingArts[(pi + i) % piercingArts.length]();
+    if (await write(join(root, 'src/content/piercings', file), 300, 400, art, 900)) created++;
   }
 }
 console.log(`Создано заглушек: ${created}`);

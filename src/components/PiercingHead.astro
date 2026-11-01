@@ -20,55 +20,20 @@ const groups: PiercingGroup[] = ['ear', 'nose', 'face'];
     </div>
     <p class="ph-hint">Вращайте модель, нажмите на точку</p>
   </div>
-  <div class="ph-side">
-    <div class="ph-info" data-info aria-live="polite">
-      <div class="label">Прокол</div>
-      <p class="ph-name" data-info-name>Выберите точку на модели или в списке</p>
-      <div class="ph-choice" data-info-choice hidden></div>
-    </div>
-    <nav class="ph-list" aria-label="Список проколов">
-      {groups.map((g) => (
-        <div>
-          <div class="label">{groupLabel[g]}</div>
-          <ul>
-            {piercings.filter((p) => p.group === g).map((p) => (
-              <li><button data-piercing={p.id} aria-pressed="false">{p.name}</button></li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </nav>
-  </div>
+  <nav class="ph-list" aria-label="Список проколов">
+    {groups.map((g) => (
+      <div>
+        <div class="label">{groupLabel[g]}</div>
+        <ul>
+          {piercings.filter((p) => p.group === g).map((p) => (
+            <li><button data-piercing={p.id} aria-pressed="false">{p.name}</button></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </nav>
 </div>
 
 <script>
   import '../scripts/piercing-head';
-  import type { SelectDetail } from '../scripts/piercing-head';
-
-  // Пока нет попапа (задача 05): показываем название выбранного прокола, для общей точки — выбор.
-  const SPOT_LABEL: Record<string, string> = { mouth: 'Внутри рта' };
-  const root = document.querySelector<HTMLElement>('[data-piercing-stage]');
-  if (root) {
-    const data: { id: string; name: string; spot?: string }[] = JSON.parse(root.querySelector('script[type="application/json"]')!.textContent!);
-    const name = root.querySelector<HTMLElement>('[data-info-name]')!;
-    const choice = root.querySelector<HTMLElement>('[data-info-choice]')!;
-    root.addEventListener('piercing:select', (e) => {
-      const ids = (e as CustomEvent<SelectDetail>).detail.ids;
-      const items = ids.map((id) => data.find((d) => d.id === id)!).filter(Boolean);
-      if (items.length > 1) {
-        name.textContent = SPOT_LABEL[items[0].spot ?? ''] ?? items.map((it) => it.name).join(' / ');
-        choice.hidden = false;
-        choice.replaceChildren(...items.map((it) => {
-          const b = document.createElement('button');
-          b.className = 'chip';
-          b.textContent = it.name;
-          b.addEventListener('click', () => root.dispatchEvent(new CustomEvent('piercing:select', { detail: { ids: [it.id] } })));
-          return b;
-        }));
-      } else {
-        name.textContent = items[0]?.name ?? '';
-        choice.hidden = true;
-      }
-    });
-  }
 </script>

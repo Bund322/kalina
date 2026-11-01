@@ -1,6 +1,6 @@
 # 05 — Попап прокола и блок «Проколы на теле»
 
-Status: ready-for-agent
+Status: resolved
 Blocked by: 04
 
 ## Что сделать
