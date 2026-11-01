@@ -1,0 +1,361 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Калина Tattoo Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oranienbaum&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Golos+Text:wght@400;500;600&display=swap">
+<style>
+/* Layout: одностраничная визитка. Sticky-шапка, крупный логотип-заголовок, бегущая строка, галерея с фильтром, мастера, прайс + уход, запись. Одна тема по фирменной палитре. */
+:root{
+  --sand:#C4B5A0; --sand-lt:#D2C6B3; --sand-dp:#B3A28A;
+  --brick:#7F372C; --brick-dk:#5F281F;
+  --olive:#7A7840; --olive-ink:#53512A;
+  --ink:#2B1E17;
+  --f-display:'Oranienbaum','Times New Roman',serif;
+  --f-body:'Cormorant Garamond',Georgia,serif;
+  --f-ui:'Golos Text',system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--sand);color:var(--ink);font-family:var(--f-body);font-size:1.25rem;line-height:1.5;font-weight:500;overflow-x:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--brick);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;text-wrap:balance;line-height:1}
+.label{font-family:var(--f-ui);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;color:var(--olive-ink)}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--sand)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--sand);border-bottom:1px solid rgba(43,30,23,.18)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-size:1.5rem;color:var(--brick)}
+.brand svg{width:34px;height:34px}
+nav{display:flex;gap:clamp(12px,2.4vw,30px);flex-wrap:wrap;justify-content:flex-end}
+nav a{font-family:var(--f-ui);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;position:relative;padding:6px 0}
+nav a::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--brick);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+nav a:hover::after{transform:scaleX(1)}
+@media(max-width:560px){.brand span{display:none}nav a{font-size:.68rem;letter-spacing:.08em}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:clamp(36px,7vw,90px) clamp(40px,6vw,70px)}
+.hero .wrap{position:relative;text-align:center}
+.hero h1{font-size:clamp(3.6rem,17.5vw,13.5rem);color:var(--brick);letter-spacing:.01em;display:flex;justify-content:center;white-space:nowrap}
+.hero h1 span{display:inline-block;animation:rise .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(1.5s + var(--i)*.07s)}
+@keyframes rise{from{transform:translateY(60%) rotate(4deg);opacity:0}to{transform:none;opacity:1}}
+.sub{font-family:var(--f-body);font-size:clamp(.95rem,2.6vw,1.7rem);letter-spacing:.14em;text-transform:uppercase;color:var(--olive-ink);margin-top:clamp(8px,2vw,22px)}
+.lede{max-width:34ch;margin:clamp(20px,3vw,34px) auto 0;font-size:clamp(1.2rem,2.4vw,1.55rem)}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.btn{font-family:var(--f-ui);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:15px 26px;border:1.5px solid var(--brick);color:var(--brick);position:relative;overflow:hidden;transition:color .35s;display:inline-block;background:transparent;cursor:pointer}
+.btn::before{content:"";position:absolute;inset:0;background:var(--brick);transform:translateY(101%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:-1}
+.btn{z-index:0;isolation:isolate}
+.btn:hover{color:var(--sand)}.btn:hover::before{transform:none}
+.btn.solid{background:var(--brick);color:var(--sand)}
+.btn.solid::before{background:var(--olive-ink)}
+.berry-float{position:absolute;pointer-events:none;width:clamp(70px,11vw,150px);transition:transform .25s ease-out}
+.bf1{left:3%;top:8%}.bf2{right:4%;bottom:6%;width:clamp(50px,8vw,110px);opacity:.9}
+@media(max-width:700px){.berry-float{opacity:.35}}
+
+/* marquee */
+.marquee{background:var(--brick);color:var(--sand);overflow:hidden;padding:14px 0;border-block:1px solid var(--brick-dk)}
+.track{display:flex;width:max-content;animation:slide 32s linear infinite}
+.track span{font-family:var(--f-display);font-size:clamp(1.3rem,3vw,2rem);padding-right:28px;display:flex;align-items:center;gap:28px;white-space:nowrap}
+.track i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--sand);opacity:.7}
+@keyframes slide{to{transform:translateX(-50%)}}
+.marquee:hover .track{animation-play-state:paused}
+
+/* sections */
+section{padding-block:clamp(56px,9vw,110px)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(24px,4vw,44px)}
+.sec-head h2{font-size:clamp(2.4rem,7vw,5rem);color:var(--brick)}
+.rv{transform:translateY(26px);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{transform:none}
+
+/* gallery */
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.chip{font-family:var(--f-ui);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--olive-ink);background:transparent;color:var(--olive-ink);padding:9px 16px;cursor:pointer;border-radius:999px;transition:all .25s}
+.chip[aria-pressed="true"],.chip:hover{background:var(--olive-ink);color:var(--sand)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+.tile{position:relative;aspect-ratio:3/4;overflow:hidden;min-width:0;cursor:pointer;transition:opacity .4s,transform .4s}
+.tile.hide{display:none}
+.tile svg{position:absolute;inset:0;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.tile:hover svg{transform:scale(1.12) rotate(2deg)}
+.tile figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(transparent,rgba(43,30,23,.78));color:#F1E9DC;transform:translateY(60%);opacity:0;transition:all .45s cubic-bezier(.2,.8,.2,1)}
+.tile:hover figcaption,.tile:focus-visible figcaption{transform:none;opacity:1}
+.tile figcaption b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.3rem}
+.tile figcaption small{font-family:var(--f-ui);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+@media(hover:none){.tile figcaption{transform:none;opacity:1}}
+.note{font-family:var(--f-ui);font-size:.74rem;color:var(--olive-ink);margin-top:16px}
+
+/* masters */
+.masters{background:var(--sand-lt)}
+.m-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,36px)}
+@media(max-width:800px){.m-grid{grid-template-columns:1fr}}
+.m-card{min-width:0}
+.m-ph{aspect-ratio:4/5;background:var(--sand-dp);position:relative;overflow:hidden;border-radius:999px 999px 0 0}
+.m-ph svg{position:absolute;inset:0;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.m-card:hover .m-ph svg{transform:scale(1.08)}
+.m-card h3{font-size:2rem;color:var(--brick);margin-top:18px}
+.m-card p{margin:6px 0 0}
+
+/* prices */
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,6vw,80px)}
+@media(max-width:860px){.two{grid-template-columns:1fr}}
+.two>*{min-width:0}
+.price{list-style:none;margin:0;padding:0}
+.price li{display:flex;align-items:baseline;gap:12px;padding:15px 0;border-bottom:1px solid rgba(43,30,23,.25)}
+.price li::after{content:none}
+.price .dots{flex:1;border-bottom:1.5px dotted rgba(43,30,23,.4);transform:translateY(-4px);min-width:16px}
+.price .n{font-size:1.3rem}
+.price .p{font-family:var(--f-display);font-size:1.4rem;color:var(--brick);white-space:nowrap;font-variant-numeric:tabular-nums}
+.price small{display:block;font-family:var(--f-ui);font-size:.72rem;color:var(--olive-ink)}
+details{border-bottom:1px solid rgba(43,30,23,.25)}
+summary{cursor:pointer;list-style:none;padding:16px 0;display:flex;justify-content:space-between;gap:14px;font-family:var(--f-display);font-size:1.45rem;color:var(--brick)}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-ui);transition:transform .3s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 18px;max-width:46ch}
+h3.sub-h{font-size:2.1rem;color:var(--brick);margin-bottom:12px}
+
+/* contact */
+.contact{background:var(--brick);color:var(--sand);position:relative;overflow:hidden}
+.contact .label{color:#D9C9B0}
+.contact h2{color:var(--sand);font-size:clamp(2.6rem,9vw,7rem)}
+.c-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(28px,6vw,80px);margin-top:36px}
+@media(max-width:800px){.c-grid{grid-template-columns:1fr}}
+.c-grid>*{min-width:0}
+.contact .btn{border-color:var(--sand);color:var(--sand)}
+.contact .btn::before{background:var(--sand)}
+.contact .btn:hover{color:var(--brick)}
+.contact .btn.solid{background:var(--sand);color:var(--brick)}
+.contact .btn.solid::before{background:var(--sand-dp)}
+.contact .btn.solid:hover{color:var(--brick-dk)}
+dl{margin:0;display:grid;gap:18px}
+dt{font-family:var(--f-ui);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#D9C9B0}
+dd{margin:2px 0 0;font-size:1.4rem;overflow-wrap:anywhere}
+.big-berry{position:absolute;right:-60px;bottom:-80px;width:340px;opacity:.12;pointer-events:none}
+footer{background:var(--brick-dk);color:#D9C9B0;font-family:var(--f-ui);font-size:.75rem;padding-block:20px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* preloader */
+.pre{position:fixed;inset:0;z-index:100;background:var(--sand);display:grid;place-items:center;animation:preOut .7s ease 1.4s forwards}
+.pre svg{width:min(34vw,170px);overflow:visible}
+.pre .b{transform-origin:50% 100%;transform-box:fill-box;animation:grow .9s cubic-bezier(.3,1.4,.5,1) .15s both}
+.pre .l1,.pre .l2{transform-box:fill-box;transform-origin:50% 100%;animation:leaf .8s ease-out both}
+.pre .l1{animation-delay:.6s}.pre .l2{animation-delay:.75s}
+.pre p{font-family:var(--f-ui);font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--olive-ink);margin:18px 0 0;text-align:center;animation:fade .6s ease 1.1s both}
+.pre-in{display:flex;flex-direction:column;align-items:center}
+@keyframes grow{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes leaf{from{transform:scale(0) rotate(-15deg)}to{transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes preOut{to{opacity:0;visibility:hidden;pointer-events:none}}
+
+/* cursor */
+.cur{position:fixed;left:0;top:0;width:16px;height:16px;border-radius:50%;background:var(--brick);pointer-events:none;z-index:90;mix-blend-mode:multiply;transform:translate(-50%,-50%);transition:width .25s,height .25s,opacity .25s;opacity:0}
+.cur.on{opacity:.9}.cur.big{width:54px;height:54px;opacity:.55}
+@media(hover:none){.cur{display:none}}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .track{animation:none}.pre{display:none}
+  .rv{transform:none}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="berry" viewBox="0 0 640 640">
+      <path fill="#7A7840" d="M270 60c-60 80-95 170-90 265l4 3 22-10 6-45 2-60 8 57 6 60c25 5 55 5 75-5 5-70-10-170-33-265z"/>
+      <path fill="#7A7840" d="M525 118c-90 18-170 70-215 150l30 22 52-6 62-80-52 90-30 55c40 5 70-25 90-60 30-55 50-110 63-171z"/>
+      <circle cx="296" cy="432" r="146" fill="#7F372C"/>
+      <ellipse cx="236" cy="530" rx="17" ry="9" transform="rotate(25 236 530)" fill="#C4B5A0"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="pre" aria-hidden="true">
+  <div class="pre-in">
+    <svg viewBox="0 0 640 640">
+      <g class="l1"><path fill="#7A7840" d="M270 60c-60 80-95 170-90 265l4 3 22-10 6-45 2-60 8 57 6 60c25 5 55 5 75-5 5-70-10-170-33-265z"/></g>
+      <g class="l2"><path fill="#7A7840" d="M525 118c-90 18-170 70-215 150l30 22 52-6 62-80-52 90-30 55c40 5 70-25 90-60 30-55 50-110 63-171z"/></g>
+      <g class="b"><circle cx="296" cy="432" r="146" fill="#7F372C"/><ellipse cx="236" cy="530" rx="17" ry="9" transform="rotate(25 236 530)" fill="#C4B5A0"/></g>
+    </svg>
+    <p>Калина</p>
+  </div>
+</div>
+<div class="cur" id="cur"></div>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top"><svg viewBox="0 0 640 640"><use href="#berry"/></svg><span>Калина</span></a>
+    <nav>
+      <a href="#works">Работы</a><a href="#masters">Мастера</a><a href="#prices">Цены</a><a href="#care">Уход</a><a href="#book">Запись</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero" id="hero">
+    <svg class="berry-float bf1" data-k="22" viewBox="0 0 640 640"><use href="#berry"/></svg>
+    <svg class="berry-float bf2" data-k="-30" viewBox="0 0 640 640" style="transform:rotate(18deg)"><use href="#berry"/></svg>
+    <div class="wrap">
+      <h1 aria-label="Калина"><span style="--i:0">К</span><span style="--i:1">а</span><span style="--i:2">л</span><span style="--i:3">и</span><span style="--i:4">н</span><span style="--i:5">а</span></h1>
+      <div class="sub">Tattoo and piercing studio</div>
+      <p class="lede">Татуировки и проколы в спокойной студии. Эскиз обсуждаем лично, работаем стерильно и без спешки.</p>
+      <div class="cta-row">
+        <a class="btn solid" href="#book">Записаться</a>
+        <a class="btn" href="#works">Смотреть работы</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+
+  <section id="works">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><div class="label">Портфолио</div><h2>Работы</h2></div>
+        <div class="filters" role="group" aria-label="Фильтр работ">
+          <button class="chip" data-f="all" aria-pressed="true">Все</button>
+          <button class="chip" data-f="tattoo" aria-pressed="false">Тату</button>
+          <button class="chip" data-f="piercing" aria-pressed="false">Пирсинг</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="note">Сейчас в плитках иллюстрации-заглушки в цветах студии. Сюда встанут ваши фото работ.</p>
+    </div>
+  </section>
+
+  <section class="masters" id="masters">
+    <div class="wrap">
+      <div class="sec-head rv"><div><div class="label">Команда</div><h2>Мастера</h2></div></div>
+      <div class="m-grid">
+        <article class="m-card rv"><div class="m-ph"><svg viewBox="0 0 400 500" data-art="m1"></svg></div><h3>Имя мастера</h3><p>Тату · ботаника, fine line, орнамент</p></article>
+        <article class="m-card rv"><div class="m-ph"><svg viewBox="0 0 400 500" data-art="m2"></svg></div><h3>Имя мастера</h3><p>Тату · графика, чёрно-серая работа</p></article>
+        <article class="m-card rv"><div class="m-ph"><svg viewBox="0 0 400 500" data-art="m3"></svg></div><h3>Имя мастера</h3><p>Пирсинг · ухо, нос, украшения из титана</p></article>
+      </div>
+      <p class="note">Имена и специализации примерные, замените на реальные.</p>
+    </div>
+  </section>
+
+  <section id="prices">
+    <div class="wrap two">
+      <div class="rv">
+        <div class="label">Прайс</div>
+        <h3 class="sub-h">Цены</h3>
+        <ul class="price">
+          <li><span class="n">Мини-тату до 5 см<small>эскиз в стоимости</small></span><span class="dots"></span><span class="p">от 5 000 ₽</span></li>
+          <li><span class="n">Тату среднего размера<small>до 15 см, 1 сеанс</small></span><span class="dots"></span><span class="p">от 12 000 ₽</span></li>
+          <li><span class="n">Крупная работа<small>рукав, спина, бедро</small></span><span class="dots"></span><span class="p">от 8 000 ₽/час</span></li>
+          <li><span class="n">Прокол мочки или хряща<small>с украшением из титана</small></span><span class="dots"></span><span class="p">от 3 500 ₽</span></li>
+          <li><span class="n">Консультация и эскиз</span><span class="dots"></span><span class="p">бесплатно</span></li>
+        </ul>
+        <p class="note">Цены примерные, укажите свои. Точную стоимость мастер называет после обсуждения эскиза.</p>
+      </div>
+      <div class="rv" id="care">
+        <div class="label">Заживление</div>
+        <h3 class="sub-h">Уход</h3>
+        <details open><summary>Свежая татуировка</summary><p>Снимите плёнку через 2–4 часа или как скажет мастер. Мойте тёплой водой с мягким мылом, промакивайте чистой салфеткой. Наносите тонкий слой крема 2–3 раза в день.</p></details>
+        <details><summary>Первые две недели</summary><p>Не паритесь в бане, не купайтесь в бассейне и водоёмах, не загорайте. Корочки не отдирайте, зуд снимайте лёгким похлопыванием.</p></details>
+        <details><summary>Свежий прокол</summary><p>Промывайте физраствором дважды в день. Не крутите украшение и не трогайте грязными руками. Смену украшения обсудите с мастером после заживления.</p></details>
+        <details><summary>Когда писать мастеру</summary><p>Покраснение растёт, появилась температура или гнойное отделяемое. Лучше написать сразу, чем ждать.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="book">
+    <svg class="big-berry" viewBox="0 0 640 640"><use href="#berry"/></svg>
+    <div class="wrap" style="position:relative">
+      <div class="label rv">Запись</div>
+      <h2 class="rv">Придите на эскиз</h2>
+      <div class="c-grid">
+        <div class="rv">
+          <p style="max-width:32ch;margin:0 0 24px">Напишите идею, размер и место на теле. Мастер ответит в течение дня и предложит время.</p>
+          <div class="cta-row" style="justify-content:flex-start">
+            <a class="btn solid" href="#book">Telegram</a>
+            <a class="btn" href="#book">WhatsApp</a>
+          </div>
+        </div>
+        <dl class="rv">
+          <div><dt>Адрес</dt><dd>Город, улица, дом</dd></div>
+          <div><dt>Часы работы</dt><dd>Ежедневно 11:00–21:00</dd></div>
+          <div><dt>Телефон</dt><dd>+7 (000) 000-00-00</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap"><span>Калина · tattoo and piercing studio</span><span>Консультация перед сеансом обязательна. Только с 18 лет.</span></div></footer>
+
+<script>
+(function(){
+  var mq=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // marquee
+  var words=['Тату','Пирсинг','Эскизы','Ботаника','Fine line','Орнамент','Титан','Стерильно'];
+  var one=words.map(function(w){return '<span>'+w+'<i></i></span>'}).join('');
+  document.getElementById('track').innerHTML=one+one+one+one;
+
+  // gallery art
+  var C={sand:'#C4B5A0',lt:'#D2C6B3',dp:'#B3A28A',br:'#7F372C',ol:'#7A7840',ink:'#2B1E17'};
+  function leaf(x,y,s,r,f){return '<path transform="translate('+x+' '+y+') rotate('+r+') scale('+s+')" fill="'+f+'" d="M0 0c-40-60-45-130 0-190 45 60 40 130 0 190z"/>'}
+  function circ(x,y,r,f){return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="'+f+'"/>'}
+  function ring(x,y,r,w,c){return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="none" stroke="'+c+'" stroke-width="'+w+'"/>'}
+  var arts={
+    bot:function(){return '<rect width="300" height="400" fill="'+C.lt+'"/>'+leaf(150,330,1.2,0,C.ol)+leaf(150,330,1,-35,C.ol)+leaf(150,330,.9,38,C.ol)+circ(150,250,34,C.br)},
+    orn:function(){var s='<rect width="300" height="400" fill="'+C.br+'"/>';for(var i=0;i<8;i++){s+=leaf(150,200,.55,i*45,C.sand)}return s+circ(150,200,20,C.br)+ring(150,200,26,3,C.sand)},
+    fine:function(){return '<rect width="300" height="400" fill="'+C.sand+'"/><path d="M60 330C80 220 140 280 150 180S230 120 250 60" fill="none" stroke="'+C.ink+'" stroke-width="2.5" stroke-linecap="round"/>'+leaf(150,180,.28,30,C.ink)+leaf(120,255,.22,-50,C.ink)+leaf(205,115,.2,40,C.ink)+circ(250,60,6,C.br)},
+    black:function(){var s='<rect width="300" height="400" fill="'+C.ink+'"/>';for(var i=0;i<5;i++){s+=ring(150,200,30+i*24,2,C.sand)}return s+circ(150,200,16,C.br)},
+    helix:function(){return '<rect width="300" height="400" fill="'+C.dp+'"/>'+ring(150,200,70,7,C.br)+circ(150,130,16,C.br)+circ(150,130,6,C.sand)},
+    sept:function(){return '<rect width="300" height="400" fill="'+C.ol+'"/><path d="M80 230a70 70 0 0 0 140 0" fill="none" stroke="'+C.sand+'" stroke-width="7" stroke-linecap="round"/>'+circ(80,230,13,C.sand)+circ(220,230,13,C.sand)},
+    lobe:function(){return '<rect width="300" height="400" fill="'+C.br+'"/>'+ring(150,170,40,5,C.sand)+circ(150,230,12,C.sand)+ring(150,290,22,5,C.sand)},
+    nost:function(){return '<rect width="300" height="400" fill="'+C.lt+'"/>'+circ(150,200,70,C.sand)+circ(150,200,40,C.br)+circ(138,188,8,C.lt)}
+  };
+  var items=[
+    ['bot','tattoo','Ботаника','Тату'],['helix','piercing','Хеликс','Пирсинг'],['orn','tattoo','Орнамент','Тату'],['sept','piercing','Септум','Пирсинг'],
+    ['fine','tattoo','Fine line','Тату'],['lobe','piercing','Мочка','Пирсинг'],['black','tattoo','Графика','Тату'],['nost','piercing','Нострил','Пирсинг']
+  ];
+  var grid=document.getElementById('grid');
+  grid.innerHTML=items.map(function(it){
+    return '<figure class="tile rv" tabindex="0" data-c="'+it[1]+'" style="margin:0"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">'+arts[it[0]]()+'</svg><figcaption><b>'+it[2]+'</b><small>'+it[3]+'</small></figcaption></figure>';
+  }).join('');
+  var mArt={
+    m1:'<rect width="400" height="500" fill="#B3A28A"/>'+leaf(200,470,1.6,-20,C.ol)+leaf(200,470,1.4,22,C.ol)+circ(200,250,70,C.br),
+    m2:'<rect width="400" height="500" fill="#2B1E17"/>'+ring(200,250,60,3,C.sand)+ring(200,250,100,3,C.sand)+ring(200,250,140,3,C.sand)+circ(200,250,24,C.br),
+    m3:'<rect width="400" height="500" fill="#7A7840"/>'+ring(200,230,90,9,C.sand)+circ(200,140,22,C.sand)+circ(200,140,9,C.br)
+  };
+  document.querySelectorAll('[data-art]').forEach(function(s){s.innerHTML=mArt[s.getAttribute('data-art')]});
+
+  // filter
+  document.querySelectorAll('.chip').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      var f=b.getAttribute('data-f');
+      document.querySelectorAll('.tile').forEach(function(t){t.classList.toggle('hide',f!=='all'&&t.getAttribute('data-c')!==f)});
+    });
+  });
+
+  // reveal
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=((i%4)*70)+'ms';io.observe(el)});
+  } else document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in')});
+
+  // cursor + hero parallax
+  if(!mq && window.matchMedia('(hover:hover)').matches){
+    var cur=document.getElementById('cur'),x=0,y=0,cx=0,cy=0;
+    window.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;cur.classList.add('on')});
+    document.addEventListener('mouseleave',function(){cur.classList.remove('on')});
+    document.querySelectorAll('a,button,summary,.tile').forEach(function(el){
+      el.addEventListener('mouseenter',function(){cur.classList.add('big')});
+      el.addEventListener('mouseleave',function(){cur.classList.remove('big')});
+    });
+    (function loop(){cx+=(x-cx)*.2;cy+=(y-cy)*.2;cur.style.left=cx+'px';cur.style.top=cy+'px';requestAnimationFrame(loop)})();
+    var hero=document.getElementById('hero'),bs=hero.querySelectorAll('.berry-float');
+    hero.addEventListener('mousemove',function(e){
+      var r=hero.getBoundingClientRect(),dx=(e.clientX-r.left)/r.width-.5,dy=(e.clientY-r.top)/r.height-.5;
+      bs.forEach(function(b,i){var k=+b.getAttribute('data-k');b.style.transform='translate('+(dx*k*-1.4)+'px,'+(dy*k*-1.4)+'px) rotate('+(i?18:0)+'deg)'});
+    });
+  }
+})();
+</script>
+
+</body></html>
