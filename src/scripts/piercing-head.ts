@@ -3,6 +3,7 @@
 // Его шлют маркеры, список, карточки «Проколы на теле» и попап; слушают все на document.
 import type * as THREE from 'three';
 import { createStage, hasWebGL, type Stage, type View } from './three/stage';
+import { url } from '../data/url';
 
 type Vec3 = [number, number, number];
 interface PiercingPoint { p: Vec3; n: Vec3 }
@@ -67,7 +68,7 @@ function init(root: HTMLElement) {
   document.addEventListener('piercing:select', () => root.classList.add('touched'));
 
   stage
-    .load('/models/head.glb')
+    .load(url('/models/head.glb'))
     .then(() => {
       root.classList.add('ready');
       status.textContent = '';

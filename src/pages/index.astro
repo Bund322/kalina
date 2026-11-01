@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PriceList from '../components/PriceList.astro';
 import Contact from '../components/Contact.astro';
 import Teasers from '../components/Teasers.astro';
+import { url } from '../data/url';
 import { Image } from 'astro:assets';
 import { masters, directionLabel, gallery, directionCategories } from '../data/masters';
 
@@ -43,7 +44,7 @@ const marquee = [...words, ...words, ...words, ...words];
       <div class="grid" id="grid">
         {works.map((w) => (
           <figure class="tile rv" data-c={directionCategories(w.master.direction).join(' ')}>
-            <a href={`/masters/${w.master.slug}`} aria-label={`${w.caption ?? 'Работа'} — мастер ${w.master.name}`}>
+            <a href={url(`/masters/${w.master.slug}`)} aria-label={`${w.caption ?? 'Работа'} — мастер ${w.master.name}`}>
               <Image src={w.image} alt={w.caption ?? `Работа мастера ${w.master.name}`} widths={[300, 600]} sizes="(max-width: 900px) 50vw, 25vw" />
               <figcaption><b>{w.caption ?? w.master.name}</b><small>{w.caption ? `${w.master.name} →` : 'Портфолио →'}</small></figcaption>
             </a>
@@ -59,7 +60,7 @@ const marquee = [...words, ...words, ...words, ...words];
       <div class="m-grid">
         {masters.map((m) => (
           <article class="m-card rv">
-            <a href={`/masters/${m.slug}`}>
+            <a href={url(`/masters/${m.slug}`)}>
               <div class="m-ph"><Image src={m.photo} alt={`Мастер ${m.name}`} widths={[400, 800]} sizes="(max-width: 800px) 100vw, 33vw" /></div>
               <h3>{m.name}</h3>
               <p>{[directionLabel[m.direction], m.styles.join(', ')].filter(Boolean).join(' · ')}</p>

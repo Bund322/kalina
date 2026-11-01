@@ -1,4 +1,5 @@
 import studio from './studio.json';
+import { url } from './url';
 
 export type PriceCategory = 'tattoo' | 'piercing' | 'common';
 
@@ -13,4 +14,4 @@ export const contacts = studio.contacts;
 export const prices = studio.prices as PriceItem[];
 
 /** Ссылка на мессенджер или якорь блока записи, пока ссылка не заполнена в studio.json. */
-export const bookingHref = (url: string) => url || '/#book';
+export const bookingHref = (link: string) => link || url('/#book');

@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { createStage, hasWebGL, reducedMotion, type View } from './three/stage';
 import type { SelectDetail } from './popup';
 import { HEAT } from '../data/heat';
+import { url } from '../data/url';
 
 interface ZoneData { id: string; name: string; pain: number }
 
@@ -55,7 +56,7 @@ function init(root: HTMLElement) {
   );
 
   stage
-    .load('/models/body.glb')
+    .load(url('/models/body.glb'))
     .then((model) => {
       const zones: string[] = model.userData.zones ?? [];
       const missing = data.filter((d) => !zones.includes(d.id)).map((d) => d.id);

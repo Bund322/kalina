@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Contact from '../../components/Contact.astro';
 import { masters, directionLabel, type Master } from '../../data/masters';
 import { contacts, bookingHref } from '../../data/studio';
+import { url } from '../../data/url';
 
 export function getStaticPaths() {
   return masters.map((master) => ({ params: { slug: master.slug }, props: { master } }));
@@ -14,7 +15,7 @@ const hasOwnLinks = master.telegram || master.instagram;
 ---
 <Base title={master.name} description={`${master.name} — ${directionLabel[master.direction].toLowerCase()}, студия «Калина». ${master.styles.join(', ')}.`}>
   <section class="mp">
-    <div class="wrap"><a class="label back" href="/#masters">← Все мастера</a></div>
+    <div class="wrap"><a class="label back" href={url('/#masters')}>← Все мастера</a></div>
     <div class="wrap mp-grid">
       <div class="mp-ph rv">
         <Image src={master.photo} alt={`Мастер ${master.name}`} widths={[400, 800]} sizes="(max-width: 800px) 100vw, 40vw" loading="eager" />

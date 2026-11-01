@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "placeholders": "node tools/make-placeholders.mjs",
-    "models": "node tools/build-models.mjs"
+    "models": "node tools/build-models.mjs",
+    "check-links": "node tools/check-links.mjs"
   },
   "dependencies": {
     "astro": "^7.4.4",

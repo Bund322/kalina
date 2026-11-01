@@ -17,9 +17,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   (`tools/make-placeholders.mjs`, через sharp; существующие файлы не трогает).
 - `npm run models` — пересобрать 3D-модели `public/models/*.glb` из исходника в `assets-src/`
   (`tools/build-models.mjs`, gltf-transform + meshopt). Запускать после правки исходника или среза.
+- `npm run check-links` — проверить внутренние ссылки и якоря в собранном `dist/` (`tools/check-links.mjs`).
 - `npm run check` — проверка типов (`astro check`; при первом запуске попросит поставить `@astrojs/check`).
 
 Тестов и линтера нет.
+
+**Base-путь.** На GitHub Pages сайт живёт в `/kalina/`: сборка для него — `SITE_BASE=/kalina npm run build`
+(в Git Bash на Windows — с `MSYS_NO_PATHCONV=1`, иначе путь превратится в путь до папки Git). Поэтому
+**любая внутренняя ссылка или путь к файлу из `public/` — только через `url()` из `src/data/url.ts`**
+(`url('/piercing')`, `url('/models/head.glb')`), и в разметке, и в клиентских скриптах.
+
+**Деплой.** `.github/workflows/pages.yml` — превью на GitHub Pages при push в `dev_seits` (временно, на
+время разработки). `.github/workflows/deploy-hosting.yml` — FTP-деплой на хостинг, пока только ручной
+запуск; секреты и включение — в README.
 
 ## Устройство
 

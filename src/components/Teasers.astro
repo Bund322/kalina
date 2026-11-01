@@ -2,12 +2,13 @@
 import { Image } from 'astro:assets';
 import head from '../assets/teasers/head.png';
 import body from '../assets/teasers/body.png';
+import { url } from '../data/url';
 
 // Статичные кадры 3D-моделей — главная остаётся лёгкой, живая сцена грузится только на своей странице.
 // Кадры снимаются со сцен в dev-режиме (см. CLAUDE.md, раздел «Тизеры»).
 const cards = [
-  { href: '/piercing', img: head, label: '3D-модель головы', title: 'Выбрать прокол', text: 'Покрутите голову, нажмите на точку — расскажем о проколе, цене и заживлении.' },
-  { href: '/tattoo', img: body, label: 'Карта боли', title: 'Где больно бить тату', text: 'Нажмите на зону тела и узнайте, насколько там больно и как подготовиться к сеансу.' },
+  { href: url('/piercing'), img: head, label: '3D-модель головы', title: 'Выбрать прокол', text: 'Покрутите голову, нажмите на точку — расскажем о проколе, цене и заживлении.' },
+  { href: url('/tattoo'), img: body, label: 'Карта боли', title: 'Где больно бить тату', text: 'Нажмите на зону тела и узнайте, насколько там больно и как подготовиться к сеансу.' },
 ];
 ---
 <section class="teasers" id="interactive">

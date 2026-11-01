@@ -1,4 +1,6 @@
 ---
+import { url } from '../data/url';
+
 const links = [
   { href: '/#works', label: 'Работы' },
   { href: '/#masters', label: 'Мастера' },
@@ -7,13 +9,14 @@ const links = [
   { href: '/#prices', label: 'Цены' },
   { href: '/#book', label: 'Запись' },
 ];
-const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+// Активный пункт сравниваем с путём без base (на GitHub Pages перед ним стоит /kalina).
+const path = Astro.url.pathname.slice(url('').length).replace(/\/$/, '') || '/';
 ---
 <header>
   <div class="wrap">
-    <a class="brand" href="/"><svg viewBox="0 0 640 640"><use href="#berry"/></svg><span>Калина</span></a>
+    <a class="brand" href={url('/')}><svg viewBox="0 0 640 640"><use href="#berry"/></svg><span>Калина</span></a>
     <nav>
-      {links.map((l) => <a href={l.href} aria-current={l.href === path ? 'page' : undefined}>{l.label}</a>)}
+      {links.map((l) => <a href={url(l.href)} aria-current={l.href === path ? 'page' : undefined}>{l.label}</a>)}
     </nav>
   </div>
 </header>
