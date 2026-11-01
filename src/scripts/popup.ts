@@ -1,11 +1,13 @@
-// Попап прокола: открывается по `piercing:select`, закрывается крестиком, Esc и кликом мимо.
-// Если выбрано несколько проколов на одной точке (язык/смайл, руук/ложный руук) — вверху вкладки.
-import type { SelectDetail } from './piercing-head';
+// Попап сцены (прокол на /piercing, зона на /tattoo). Разметка: <div data-popup data-event="…" data-ignore="…">
+// с карточками <article data-pp="id">. Открывается по событию data-event (detail.ids), закрывается крестиком,
+// Esc и кликом мимо — кроме элементов из data-ignore (модель, список). Несколько ids — вкладки вверху.
+export interface SelectDetail { ids: string[] }
 
-const popup = document.querySelector<HTMLElement>('[data-piercing-popup]');
-if (popup) init(popup);
+document.querySelectorAll<HTMLElement>('[data-popup]').forEach(init);
 
 function init(popup: HTMLElement) {
+  const eventName = popup.dataset.event!;
+  const ignore = popup.dataset.ignore ?? '';
   const card = popup.querySelector<HTMLElement>('.pp-card')!;
   const tabs = popup.querySelector<HTMLElement>('[data-tabs]')!;
   const articles = [...popup.querySelectorAll<HTMLElement>('[data-pp]')];
@@ -14,7 +16,7 @@ function init(popup: HTMLElement) {
   let returnFocus: HTMLElement | null = null;
 
   const select = (ids: string[]) =>
-    document.dispatchEvent(new CustomEvent<SelectDetail>('piercing:select', { detail: { ids } }));
+    document.dispatchEvent(new CustomEvent<SelectDetail>(eventName, { detail: { ids } }));
 
   function show(id: string) {
     articles.forEach((a) => (a.hidden = a.dataset.pp !== id));
@@ -51,7 +53,7 @@ function init(popup: HTMLElement) {
     returnFocus = null;
   }
 
-  document.addEventListener('piercing:select', (e) => {
+  document.addEventListener(eventName, (e) => {
     const ids = (e as CustomEvent<SelectDetail>).detail.ids;
     if (ids.length) open(ids);
     else if (!popup.hidden) close();
@@ -60,11 +62,10 @@ function init(popup: HTMLElement) {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !popup.hidden) select([]);
   });
-  // Клик мимо карточки закрывает её, но не клик по модели (её вращают) и не по другим проколам.
   document.addEventListener('pointerdown', (e) => {
     if (popup.hidden) return;
     const t = e.target as Element;
-    if (card.contains(t) || t.closest('[data-piercing-stage], [data-piercing], [data-close]')) return;
+    if (card.contains(t) || t.closest('[data-close]') || (ignore && t.closest(ignore))) return;
     select([]);
   });
 }

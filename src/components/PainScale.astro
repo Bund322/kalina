@@ -1,0 +1,14 @@
+---
+import { painLabel } from '../data/tattoo-zones';
+
+interface Props { pain: number }
+const { pain } = Astro.props;
+---
+<div class="pain" role="img" aria-label={`Боль ${pain} из 5: ${painLabel[pain].toLowerCase()}`}>
+  <span class="pain-berries" aria-hidden="true">
+    {[1, 2, 3, 4, 5].map((i) => (
+      <svg viewBox="0 0 640 640" class={i <= pain ? 'on' : undefined}><use href="#berry" /></svg>
+    ))}
+  </span>
+  <span class="pain-label">{painLabel[pain]}</span>
+</div>

@@ -1,5 +1,6 @@
 // Готовит 3D-модели для сайта из исходника в assets-src/ (CC0, female base mesh с Fab).
-// head.glb — голова с шеей для /piercing. Скелет и UV убираются (модель статичная, без текстур),
+// head.glb — голова с шеей для /piercing, body.glb — всё тело для /tattoo с атрибутом _ZONE (номер зоны
+// из ZONES у каждой вершины). Скелет и UV убираются (модель статичная, без текстур),
 // геометрия квантуется и сжимается meshopt — в браузере её распаковывает MeshoptDecoder.
 // Запуск: npm run models
 import { NodeIO } from '@gltf-transform/core';
@@ -20,6 +21,63 @@ await MeshoptEncoder.ready;
 const io = new NodeIO()
   .registerExtensions([EXTMeshoptCompression, KHRMeshQuantization])
   .registerDependencies({ 'meshopt.encoder': MeshoptEncoder });
+
+/**
+ * Зоны тела для /tattoo. Порядок важен: номер зоны в _ZONE — индекс в этом списке,
+ * тот же список (id) лежит в src/data/tattoo-zones.json.
+ */
+export const ZONES = ['head', 'neck', 'collarbone', 'chest', 'ribs', 'belly', 'upper-back', 'lower-back', 'buttocks',
+  'shoulder', 'elbow', 'forearm', 'wrist', 'hand', 'thigh', 'knee', 'shin', 'calf', 'ankle', 'foot'];
+const Z = Object.fromEntries(ZONES.map((z, i) => [z, i]));
+
+/**
+ * Делит тело на зоны по костям скелета: у каждой вершины берётся кость с наибольшим весом.
+ * Суставы (локоть, колено, запястье, щиколотка) — вершины, где вес заметно делится между двумя костями.
+ * Перед/спина и бока различаются по нормали (модель смотрит в +Z, ось X — вбок).
+ */
+function assignZones(doc) {
+  const skin = doc.getRoot().listSkins()[0];
+  const names = skin.listJoints().map((j) => j.getName().replace(/.(L|R)$/, ''));
+  const mixed = (w, a, b) => (w[a] ?? 0) > 0.2 && (w[b] ?? 0) > 0.2;
+  const zoneOf = (w, n) => {
+    if (mixed(w, 'upperarm02', 'lowerarm01')) return Z.elbow;
+    if (mixed(w, 'lowerarm02', 'wrist')) return Z.wrist;
+    if (mixed(w, 'upperleg02', 'lowerleg01')) return Z.knee;
+    if (mixed(w, 'lowerleg02', 'foot')) return Z.ankle;
+    const top = Object.entries(w).sort((a, b) => b[1] - a[1])[0][0];
+    const front = n[2] > 0.25, back = n[2] < -0.25, side = Math.abs(n[0]) > 0.75;
+    if (/^neck/.test(top)) return Z.neck;
+    if (top === 'clavicle') return back ? Z['upper-back'] : Z.collarbone;
+    if (top === 'breast') return Z.chest;
+    if (top === 'spine01') return side ? Z.ribs : back ? Z['upper-back'] : Z.chest;
+    if (top === 'spine02') return side ? Z.ribs : back ? Z['upper-back'] : Z.belly;
+    if (/^spine0[34]$/.test(top)) return side && top === 'spine03' ? Z.ribs : back ? Z['lower-back'] : Z.belly;
+    if (/^(spine05|pelvis|root)$/.test(top)) return back ? Z.buttocks : Z.belly;
+    if (/^(shoulder01|upperarm0[12])$/.test(top)) return Z.shoulder;
+    if (/^lowerarm0[12]$/.test(top)) return Z.forearm;
+    if (/^(wrist|hand|finger|metacarpal|thumb)/.test(top)) return Z.hand;
+    if (top === 'upperleg01') return back ? Z.buttocks : Z.thigh;
+    if (top === 'upperleg02') return Z.thigh;
+    if (/^lowerleg0[12]$/.test(top)) return front ? Z.shin : Z.calf;
+    if (/^(foot|toe)/.test(top)) return Z.foot;
+    return Z.head; // лицо, глаза, челюсть и прочие кости головы
+  };
+  for (const mesh of doc.getRoot().listMeshes()) {
+    for (const prim of mesh.listPrimitives()) {
+      const J = prim.getAttribute('JOINTS_0'), W = prim.getAttribute('WEIGHTS_0'), N = prim.getAttribute('NORMAL');
+      const count = J.getCount();
+      const zones = new Float32Array(count);
+      const j = [], w = [], n = [];
+      for (let i = 0; i < count; i++) {
+        J.getElement(i, j); W.getElement(i, w); N.getElement(i, n);
+        const byName = {};
+        for (let k = 0; k < 4; k++) byName[names[j[k]]] = (byName[names[j[k]]] ?? 0) + w[k];
+        zones[i] = zoneOf(byName, n);
+      }
+      prim.setAttribute('_ZONE', doc.createAccessor().setType('SCALAR').setArray(zones).setBuffer(J.getBuffer()));
+    }
+  }
+}
 
 /** Убирает скелет: модель показывается в исходной позе. */
 function stripSkin(doc) {
@@ -59,10 +117,12 @@ function cropAbove(doc, minY) {
   }
 }
 
-async function build(name, edit) {
+async function build(name, edit, extras) {
   const doc = await io.read(SRC);
+  edit(doc); // до stripSkin: разметке зон нужны веса костей
+  // Порядок зон уходит в модель: в three.js он окажется в gltf.scene.userData.zones.
+  if (extras) doc.getRoot().getDefaultScene().setExtras(extras);
   stripSkin(doc);
-  edit(doc);
   for (const m of doc.getRoot().listMaterials()) m.setName('clay');
   await doc.transform(prune(), dedup(), weld(), quantize(), meshopt({ encoder: MeshoptEncoder, level: 'high' }));
   mkdirSync(OUT, { recursive: true });
@@ -74,3 +134,4 @@ async function build(name, edit) {
 }
 
 await build('head.glb', (doc) => cropAbove(doc, HEAD_CUT_Y));
+await build('body.glb', (doc) => assignZones(doc), { zones: ZONES });

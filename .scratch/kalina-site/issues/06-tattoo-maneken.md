@@ -1,6 +1,6 @@
 # 06 — /tattoo: 3D-манекен с зонами и попапом боли
 
-Status: ready-for-agent
+Status: resolved
 Blocked by: 04
 
 ## Что сделать

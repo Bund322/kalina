@@ -1,0 +1,26 @@
+---
+import { tattooZones } from '../data/tattoo-zones';
+import PainScale from './PainScale.astro';
+---
+<div class="pp" data-popup data-event="tattoo:select" data-ignore="[data-tattoo-stage]" hidden>
+  <div class="pp-backdrop" data-close></div>
+  <section class="pp-card" role="dialog" aria-label="Зона" tabindex="-1">
+    <button class="pp-close" type="button" data-close aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+    </button>
+    <div class="pp-tabs" role="tablist" data-tabs hidden></div>
+    {tattooZones.map((z) => (
+      <article data-pp={z.id} hidden>
+        <div class="label">Насколько больно</div>
+        <h3>{z.name}</h3>
+        <PainScale pain={z.pain} />
+        <p>{z.why}</p>
+        <div class="pp-tip"><div class="label">Совет</div><p>{z.tip}</p></div>
+      </article>
+    ))}
+  </section>
+</div>
+
+<script>
+  import '../scripts/popup';
+</script>

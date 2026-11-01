@@ -1,4 +1,4 @@
-// Общая 3D-сцена для страниц с моделями (/piercing, позже /tattoo): рендерер с прозрачным фоном,
+// Общая 3D-сцена для страниц с моделями (/piercing, /tattoo): рендерер с прозрачным фоном,
 // мягкий свет, вращение мышью и пальцем, плавные перелёты камеры, загрузка сжатых meshopt-моделей.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -18,6 +18,8 @@ export interface StageOptions {
   fadeToY?: number;
   minDistance: number;
   maxDistance: number;
+  /** Пределы наклона камеры в долях π (0 — сверху, 1 — снизу). */
+  polar?: [number, number];
   color?: string;
 }
 
@@ -56,8 +58,8 @@ export function createStage(canvas: HTMLCanvasElement, opts: StageOptions) {
   controls.minDistance = opts.minDistance;
   controls.maxDistance = opts.maxDistance;
   // Снизу на модель не заглянуть — там срез.
-  controls.minPolarAngle = Math.PI * 0.22;
-  controls.maxPolarAngle = Math.PI * 0.62;
+  controls.minPolarAngle = Math.PI * (opts.polar?.[0] ?? 0.22);
+  controls.maxPolarAngle = Math.PI * (opts.polar?.[1] ?? 0.62);
 
   const material = new THREE.MeshStandardMaterial({ color: opts.color ?? '#D2C6B3', roughness: 0.85, metalness: 0 });
   if (opts.fadeFromY !== undefined && opts.fadeToY !== undefined) {

@@ -1,0 +1,34 @@
+---
+import { tattooZones } from '../data/tattoo-zones';
+
+const sceneData = tattooZones.map(({ id, name, pain }) => ({ id, name, pain }));
+---
+<div class="ph tb" data-tattoo-stage>
+  <script type="application/json" set:html={JSON.stringify(sceneData)} />
+  <div class="ph-stage tb-stage">
+    <canvas aria-label="3D-модель тела с зонами для татуировки. Вращайте мышью или пальцем; тот же выбор доступен в списке." role="img"></canvas>
+    <div class="ph-loading" aria-hidden="true">
+      <svg viewBox="0 0 640 640"><use href="#berry" /></svg>
+    </div>
+    <p class="ph-status" data-status role="status">Загружаем модель…</p>
+    <div class="ph-views" role="group" aria-label="Ракурс">
+      <button class="chip" data-view="front">Спереди</button>
+      <button class="chip" data-view="back">Сзади</button>
+    </div>
+    <p class="ph-hint">Вращайте модель, нажмите на зону</p>
+  </div>
+  <nav class="ph-list" aria-label="Список зон">
+    <div>
+      <div class="label">Зоны тела</div>
+      <ul>
+        {tattooZones.map((z) => (
+          <li><button data-zone={z.id} aria-pressed="false">{z.name}</button></li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<script>
+  import '../scripts/tattoo-body';
+</script>

@@ -8,7 +8,7 @@ type Vec3 = [number, number, number];
 interface PiercingPoint { p: Vec3; n: Vec3 }
 interface PiercingData { id: string; name: string; group: string; points?: PiercingPoint[]; bar?: boolean; spot?: string }
 
-export interface SelectDetail { ids: string[] }
+import type { SelectDetail } from './popup';
 
 const VIEWS: Record<'full' | 'face' | 'ear', View> = {
   full: { target: [0, 1.47, 0.05], dir: [0.5, 0.1, 1], dist: 0.62 },

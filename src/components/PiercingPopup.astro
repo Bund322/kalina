@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import { piercings, groupLabel } from '../data/piercings';
 ---
-<div class="pp" data-piercing-popup hidden>
+<div class="pp" data-popup data-event="piercing:select" data-ignore="[data-piercing-stage], [data-piercing]" hidden>
   <div class="pp-backdrop" data-close></div>
   <section class="pp-card" role="dialog" aria-label="Прокол" tabindex="-1">
     <button class="pp-close" type="button" data-close aria-label="Закрыть">
@@ -29,5 +29,5 @@ import { piercings, groupLabel } from '../data/piercings';
 </div>
 
 <script>
-  import '../scripts/piercing-popup';
+  import '../scripts/popup';
 </script>

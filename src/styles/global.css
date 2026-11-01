@@ -260,3 +260,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .bp-card:hover .bp-ph img{transform:scale(1.06)}
 .bp-name{font-family:var(--f-display);font-size:1.8rem;color:var(--brick);line-height:1}
 .bp-price{font-family:var(--f-ui);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive-ink)}
+
+/* /tattoo — манекен и шкала боли */
+.tb-stage{aspect-ratio:4/5}
+@media(max-width:900px){.tb-stage{aspect-ratio:3/4;max-height:75vh}}
+.pain{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px}
+.pain-berries{display:flex;gap:4px}
+.pain-berries svg{width:28px;height:28px;opacity:.22;filter:grayscale(1)}
+.pain-berries svg.on{opacity:1;filter:none}
+.pain-label{font-family:var(--f-ui);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--olive-ink)}
+.pp-tip{border-top:1px solid rgba(43,30,23,.2);padding-top:12px}
+.pp-tip p{margin:4px 0 0}
