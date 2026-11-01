@@ -1,0 +1,60 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Contact from '../../components/Contact.astro';
+import { masters, directionLabel, type Master } from '../../data/masters';
+import { contacts, bookingHref } from '../../data/studio';
+
+export function getStaticPaths() {
+  return masters.map((master) => ({ params: { slug: master.slug }, props: { master } }));
+}
+
+const { master } = Astro.props as { master: Master };
+const hasOwnLinks = master.telegram || master.instagram;
+---
+<Base title={master.name} description={`${master.name} — ${directionLabel[master.direction].toLowerCase()}, студия «Калина». ${master.styles.join(', ')}.`}>
+  <section class="mp">
+    <div class="wrap"><a class="label back" href="/#masters">← Все мастера</a></div>
+    <div class="wrap mp-grid">
+      <div class="mp-ph rv">
+        <Image src={master.photo} alt={`Мастер ${master.name}`} widths={[400, 800]} sizes="(max-width: 800px) 100vw, 40vw" loading="eager" />
+      </div>
+      <div class="mp-info">
+        <div class="label rv">{directionLabel[master.direction]}</div>
+        <h1 class="rv">{master.name}</h1>
+        {master.styles.length > 0 && (
+          <ul class="tags rv">{master.styles.map((s) => <li>{s}</li>)}</ul>
+        )}
+        <div class="rv">{master.about.map((p) => <p>{p}</p>)}</div>
+        <div class="cta-row rv" style="justify-content:flex-start">
+          {hasOwnLinks ? (
+            <>
+              {master.telegram && <a class="btn solid" href={master.telegram} target="_blank" rel="noopener">Telegram</a>}
+              {master.instagram && <a class="btn" href={master.instagram} target="_blank" rel="noopener">Instagram</a>}
+            </>
+          ) : (
+            <a class="btn solid" href={bookingHref(contacts.telegram)}>Записаться</a>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {master.works.length > 0 && (
+    <section class="pf" id="works">
+      <div class="wrap">
+        <div class="sec-head rv"><div><div class="label">Портфолио</div><h2>Работы</h2></div></div>
+        <div class="pf-grid">
+          {master.works.map((w) => (
+            <figure class="tile rv" tabindex="0">
+              <Image src={w.image} alt={w.caption ?? `Работа мастера ${master.name}`} widths={[360, 720]} sizes="(max-width: 900px) 50vw, 33vw" />
+              {w.caption && <figcaption><b>{w.caption}</b><small>{master.name}</small></figcaption>}
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Contact />
+</Base>

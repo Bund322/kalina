@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import PriceList from '../components/PriceList.astro';
 import Contact from '../components/Contact.astro';
+import { Image } from 'astro:assets';
+import { masters, directionLabel } from '../data/masters';
 
 const letters = [...'Калина'];
 const words = ['Тату', 'Пирсинг', 'Эскизы', 'Ботаника', 'Fine line', 'Орнамент', 'Титан', 'Стерильно'];
@@ -44,11 +46,18 @@ const marquee = [...words, ...words, ...words, ...words];
     <div class="wrap">
       <div class="sec-head rv"><div><div class="label">Команда</div><h2>Мастера</h2></div></div>
       <div class="m-grid">
-        <article class="m-card rv"><div class="m-ph"><svg viewBox="0 0 400 500" data-art="m1"></svg></div><h3>Имя мастера</h3><p>Тату · ботаника, fine line, орнамент</p></article>
-        <article class="m-card rv"><div class="m-ph"><svg viewBox="0 0 400 500" data-art="m2"></svg></div><h3>Имя мастера</h3><p>Тату · графика, чёрно-серая работа</p></article>
-        <article class="m-card rv"><div class="m-ph"><svg viewBox="0 0 400 500" data-art="m3"></svg></div><h3>Имя мастера</h3><p>Пирсинг · ухо, нос, украшения из титана</p></article>
+        {masters.map((m) => (
+          <article class="m-card rv">
+            <a href={`/masters/${m.slug}`}>
+              <div class="m-ph"><Image src={m.photo} alt={`Мастер ${m.name}`} widths={[400, 800]} sizes="(max-width: 800px) 100vw, 33vw" /></div>
+              <h3>{m.name}</h3>
+              <p>{[directionLabel[m.direction], m.styles.join(', ')].filter(Boolean).join(' · ')}</p>
+              <span class="more">Портфолио →</span>
+            </a>
+          </article>
+        ))}
       </div>
-      <p class="note">Имена и специализации примерные, замените на реальные.</p>
+      <p class="note">Имена, тексты и фото мастеров примерные — замените их в src/data/masters.json и src/content/masters/.</p>
     </div>
   </section>
 

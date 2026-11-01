@@ -1,6 +1,6 @@
 # 02 — Мастера из JSON и страницы мастеров
 
-Status: ready-for-agent
+Status: resolved
 Blocked by: 01
 
 ## Что сделать

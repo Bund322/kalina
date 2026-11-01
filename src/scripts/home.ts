@@ -1,5 +1,5 @@
-// Главная: SVG-заглушки галереи и портретов мастеров, фильтр галереи, параллакс ягод в hero.
-// Заглушки и фильтр временные — их заменят данные из masters.json (задачи 02, 03).
+// Главная: SVG-заглушки галереи, фильтр галереи, параллакс ягод в hero.
+// Заглушки галереи временные — их заменят работы из masters.json (задача 03).
 const C = { sand: '#C4B5A0', lt: '#D2C6B3', dp: '#B3A28A', br: '#7F372C', ol: '#7A7840', ink: '#2B1E17' };
 const leaf = (x: number, y: number, s: number, r: number, f: string) =>
   `<path transform="translate(${x} ${y}) rotate(${r}) scale(${s})" fill="${f}" d="M0 0c-40-60-45-130 0-190 45 60 40 130 0 190z"/>`;
@@ -27,12 +27,6 @@ if (grid) {
     `<figure class="tile rv in" tabindex="0" data-c="${it[1]}" style="margin:0"><svg viewBox="0 0 300 400" preserveAspectRatio="xMidYMid slice">${arts[it[0]]()}</svg><figcaption><b>${it[2]}</b><small>${it[3]}</small></figcaption></figure>`
   ).join('');
 }
-const mArt: Record<string, string> = {
-  m1: `<rect width="400" height="500" fill="#B3A28A"/>` + leaf(200, 470, 1.6, -20, C.ol) + leaf(200, 470, 1.4, 22, C.ol) + circ(200, 250, 70, C.br),
-  m2: `<rect width="400" height="500" fill="#2B1E17"/>` + ring(200, 250, 60, 3, C.sand) + ring(200, 250, 100, 3, C.sand) + ring(200, 250, 140, 3, C.sand) + circ(200, 250, 24, C.br),
-  m3: `<rect width="400" height="500" fill="#7A7840"/>` + ring(200, 230, 90, 9, C.sand) + circ(200, 140, 22, C.sand) + circ(200, 140, 9, C.br),
-};
-document.querySelectorAll('[data-art]').forEach((s) => { s.innerHTML = mArt[s.getAttribute('data-art')!]; });
 
 document.querySelectorAll<HTMLButtonElement>('.chip').forEach((b) => {
   b.addEventListener('click', () => {

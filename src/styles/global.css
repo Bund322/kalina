@@ -78,7 +78,7 @@ section{padding-block:clamp(56px,9vw,110px)}
 .chip[aria-pressed="true"],.chip:hover{background:var(--olive-ink);color:var(--sand)}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-.tile{position:relative;aspect-ratio:3/4;overflow:hidden;min-width:0;cursor:pointer;transition:opacity .4s,transform .4s}
+.tile{margin:0;position:relative;aspect-ratio:3/4;overflow:hidden;min-width:0;cursor:pointer;transition:opacity .4s,transform .4s}
 .tile.hide{display:none}
 .tile svg{position:absolute;inset:0;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .tile:hover svg{transform:scale(1.12) rotate(2deg)}
@@ -166,3 +166,27 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 /* временные страницы-заглушки */
 .stub{min-height:55vh}
 .stub p{max-width:40ch}
+
+/* фото в плитках и портретах (img вместо svg-заглушек) */
+.tile img,.m-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.tile:hover img{transform:scale(1.08)}
+.m-card:hover .m-ph img{transform:scale(1.06)}
+.m-card a{text-decoration:none;display:block}
+.m-card .more{font-family:var(--f-ui);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brick);margin-top:12px;display:inline-block}
+
+/* страница мастера */
+.mp{padding-block:clamp(32px,6vw,80px)}
+.mp-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,6vw,80px);align-items:start}
+@media(max-width:800px){.mp-grid{grid-template-columns:1fr}.mp-ph{max-width:320px}}
+.mp-grid>*{min-width:0}
+.mp-ph{aspect-ratio:4/5;position:relative;overflow:hidden;border-radius:999px 999px 0 0;background:var(--sand-dp)}
+.mp-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mp-info h1{font-size:clamp(3rem,9vw,6.5rem);color:var(--brick);margin:6px 0 18px}
+.mp-info p{margin:0 0 14px;max-width:48ch}
+.back{display:inline-block;text-decoration:none;margin-bottom:clamp(16px,3vw,32px)}
+.back:hover{color:var(--brick)}
+.tags{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tags li{font-family:var(--f-ui);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--olive-ink);color:var(--olive-ink);padding:7px 14px;border-radius:999px}
+.pf{background:var(--sand-lt)}
+.pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.pf-grid{grid-template-columns:repeat(2,1fr)}}
