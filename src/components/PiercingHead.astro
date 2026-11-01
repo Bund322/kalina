@@ -2,7 +2,7 @@
 import { piercings, groupLabel, type PiercingGroup } from '../data/piercings';
 
 // В клиент уходят только поля, нужные сцене.
-const sceneData = piercings.map(({ id, name, group, points, bar, spot }) => ({ id, name, group, points, bar, spot }));
+const sceneData = piercings.map(({ id, name, group, points, area, bar, spot }) => ({ id, name, group, points, area, bar, spot }));
 const groups: PiercingGroup[] = ['ear', 'nose', 'face'];
 ---
 <div class="ph" data-piercing-stage>
