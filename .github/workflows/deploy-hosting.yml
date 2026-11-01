@@ -9,6 +9,9 @@ on:
   # push:
   #   branches: [main]
 
+permissions:
+  contents: read
+
 concurrency:
   group: hosting
   cancel-in-progress: false
@@ -26,7 +29,8 @@ jobs:
       - run: npm run build
       - run: npm run check-links
       - name: Залить dist/ на хостинг
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        # Сторонний action получает FTP-пароль, поэтому закреплён на конкретном коммите, а не на теге.
+        uses: SamKirkland/FTP-Deploy-Action@8e83cea8672e3fbcbb9fdafff34debf6ae4c5f65 # v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
