@@ -60,6 +60,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   Боль 1–5 и тексты — `src/data/tattoo-zones.json` (id совпадают с `ZONES`). `src/scripts/tattoo-body.ts`
   красит зону в шейдере (`flat` номер зоны → `uColors[]`), выбор — событие `tattoo:select`; при выборе
   из списка камера перелетает к зоне. В dev-режиме разметку можно раскрасить через `window.__tattoo`.
+  Переключатель «Показать карту боли» красит все зоны цветами `src/data/heat.ts` (общие со шкалой
+  в легенде); цвета зон плавно догоняют целевые в каждом кадре.
 - **Мастера**: `src/data/masters.json` + фото в `src/content/masters/<slug>/` (в JSON — только имя файла).
   `src/data/masters.ts` валидирует JSON схемой zod и подставляет фото через `import.meta.glob`;
   ошибка в JSON или отсутствующий файл роняют сборку с понятным сообщением. Не больше 9 работ на мастера.
@@ -75,7 +77,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Временное
 
 - Мастера в `masters.json` (Алина, Вера, Ника) и их фото — примерные, фото сгенерированы `npm run placeholders`.
-- Карта боли (раскраска всей модели по шкале, задача 07) ещё не сделана.
 - Тексты, цены и сроки заживления проколов (`piercings.json`) и тексты зон (`tattoo-zones.json`)
   написаны для примера — заказчик их правит.
 - Плейсхолдеры контента (адрес, телефон, имена мастеров, цены) и поясняющие `<p class="note">…</p>` —

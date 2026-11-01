@@ -4,6 +4,7 @@
 import * as THREE from 'three';
 import { createStage, hasWebGL, reducedMotion, type View } from './three/stage';
 import type { SelectDetail } from './popup';
+import { HEAT } from '../data/heat';
 
 interface ZoneData { id: string; name: string; pain: number }
 
@@ -13,7 +14,9 @@ const VIEWS: Record<'front' | 'back', View> = {
 };
 /** Максимум зон, которые понимает шейдер. */
 const MAX_ZONES = 32;
-const COLOR = { base: '#D2C6B3', hover: '#B3A28A', selected: '#7F372C' };
+const COLOR = { base: '#D2C6B3', hover: '#B3A28A', selected: '#7F372C', selectedOnHeat: '#53512A', light: '#F1E9DC' };
+/** Скорость перехода цветов: доля пути за кадр. */
+const FADE = 0.12;
 
 const root = document.querySelector<HTMLElement>('[data-tattoo-stage]');
 if (root) init(root);
@@ -113,13 +116,35 @@ function init(root: HTMLElement) {
     };
 
     let hovered: string | null = null;
+    let heat = false;
+    const painOf = Object.fromEntries(data.map((d) => [d.id, d.pain]));
+    // Целевые цвета зон; в кадре uColors плавно догоняют их (с prefers-reduced-motion — сразу).
+    const target = uniforms.uColors.value.map((c) => c.clone());
+    const light = new THREE.Color(COLOR.light);
     const paint = () => {
-      uniforms.uColors.value.forEach((c, i) => {
+      target.forEach((c, i) => {
         const id = zones[i];
-        c.set(id && id === selected ? COLOR.selected : id && id === hovered ? COLOR.hover : COLOR.base);
+        if (!id) return;
+        if (id === selected) c.set(heat ? COLOR.selectedOnHeat : COLOR.selected);
+        else if (heat) {
+          c.set(HEAT[(painOf[id] ?? 1) - 1]);
+          if (id === hovered) c.lerp(light, 0.35);
+        } else c.set(id === hovered ? COLOR.hover : COLOR.base);
       });
     };
     paint();
+    uniforms.uColors.value.forEach((c, i) => c.copy(target[i]));
+    stage.onFrame(() => {
+      const k = reducedMotion() ? 1 : FADE;
+      uniforms.uColors.value.forEach((c, i) => c.lerp(target[i], k));
+    });
+    const toggle = root.querySelector<HTMLButtonElement>('[data-heat]');
+    toggle?.addEventListener('click', () => {
+      heat = !heat;
+      toggle.setAttribute('aria-checked', String(heat));
+      root.classList.toggle('heat-on', heat);
+      paint();
+    });
     // В dev-режиме разметку зон можно раскрасить из консоли: __tattoo.uniforms.uColors.value[i].set(...).
     if (import.meta.env.DEV) Object.assign(window, { __tattoo: { uniforms, zones, stage } });
 

@@ -1,6 +1,6 @@
 # 07 — Переключатель «Показать карту боли»
 
-Status: ready-for-agent
+Status: resolved
 Blocked by: 06
 
 ## Что сделать

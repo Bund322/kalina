@@ -1,5 +1,6 @@
 ---
 import { tattooZones } from '../data/tattoo-zones';
+import { HEAT } from '../data/heat';
 
 const sceneData = tattooZones.map(({ id, name, pain }) => ({ id, name, pain }));
 ---
@@ -16,6 +17,15 @@ const sceneData = tattooZones.map(({ id, name, pain }) => ({ id, name, pain }));
       <button class="chip" data-view="back">Сзади</button>
     </div>
     <p class="ph-hint">Вращайте модель, нажмите на зону</p>
+    <div class="heat">
+      <button class="heat-toggle" type="button" role="switch" aria-checked="false" data-heat>
+        <span class="heat-knob" aria-hidden="true"></span>Показать карту боли
+      </button>
+      <div class="heat-legend" aria-hidden="true">
+        <span class="heat-scale">{HEAT.map((c, i) => <i style={`background:${c}`}>{i + 1}</i>)}</span>
+        <span class="heat-caption"><span>не больно</span><span>очень больно</span></span>
+      </div>
+    </div>
   </div>
   <nav class="ph-list" aria-label="Список зон">
     <div>
