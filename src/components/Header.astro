@@ -1,0 +1,19 @@
+---
+const links = [
+  { href: '/#works', label: 'Работы' },
+  { href: '/#masters', label: 'Мастера' },
+  { href: '/piercing', label: 'Пирсинг' },
+  { href: '/tattoo', label: 'Тату' },
+  { href: '/#prices', label: 'Цены' },
+  { href: '/#book', label: 'Запись' },
+];
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header>
+  <div class="wrap">
+    <a class="brand" href="/"><svg viewBox="0 0 640 640"><use href="#berry"/></svg><span>Калина</span></a>
+    <nav>
+      {links.map((l) => <a href={l.href} aria-current={l.href === path ? 'page' : undefined}>{l.label}</a>)}
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,19 @@
+---
+import { prices, type PriceCategory } from '../data/studio';
+
+interface Props {
+  /** Какие позиции показать; без фильтра — весь прайс. */
+  only?: PriceCategory[];
+}
+const { only } = Astro.props;
+const items = only ? prices.filter((p) => only.includes(p.category)) : prices;
+---
+<ul class="price">
+  {items.map((p) => (
+    <li>
+      <span class="n">{p.name}{p.note && <small>{p.note}</small>}</span>
+      <span class="dots"></span>
+      <span class="p">{p.price}</span>
+    </li>
+  ))}
+</ul>

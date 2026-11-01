@@ -1,0 +1,24 @@
+---
+import { contacts, bookingHref } from '../data/studio';
+---
+<section class="contact" id="book">
+  <svg class="big-berry" viewBox="0 0 640 640"><use href="#berry"/></svg>
+  <div class="wrap" style="position:relative">
+    <div class="label rv">Запись</div>
+    <h2 class="rv">Придите на эскиз</h2>
+    <div class="c-grid">
+      <div class="rv">
+        <p style="max-width:32ch;margin:0 0 24px">Напишите идею, размер и место на теле. Мастер ответит в течение дня и предложит время.</p>
+        <div class="cta-row" style="justify-content:flex-start">
+          <a class="btn solid" href={bookingHref(contacts.telegram)}>Telegram</a>
+          <a class="btn" href={bookingHref(contacts.whatsapp)}>WhatsApp</a>
+        </div>
+      </div>
+      <dl class="rv">
+        <div><dt>Адрес</dt><dd>{contacts.address}</dd></div>
+        <div><dt>Часы работы</dt><dd>{contacts.hours}</dd></div>
+        <div><dt>Телефон</dt><dd>{contacts.phone}</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>

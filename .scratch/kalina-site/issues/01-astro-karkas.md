@@ -1,6 +1,6 @@
 # 01 — Каркас на Astro и перенос главной
 
-Status: ready-for-agent
+Status: resolved
 
 ## Что сделать
 

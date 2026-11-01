@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import PriceList from '../components/PriceList.astro';
+import Contact from '../components/Contact.astro';
+
+const letters = [...'Калина'];
+const words = ['Тату', 'Пирсинг', 'Эскизы', 'Ботаника', 'Fine line', 'Орнамент', 'Титан', 'Стерильно'];
+// Четыре копии, чтобы лента не обрывалась при сдвиге на -50%.
+const marquee = [...words, ...words, ...words, ...words];
+---
+<Base preloader>
+  <div class="hero" id="hero">
+    <svg class="berry-float bf1" data-k="22" viewBox="0 0 640 640"><use href="#berry"/></svg>
+    <svg class="berry-float bf2" data-k="-30" viewBox="0 0 640 640" style="transform:rotate(18deg)"><use href="#berry"/></svg>
+    <div class="wrap">
+      <h1 aria-label="Калина">{letters.map((l, i) => <span style={`--i:${i}`}>{l}</span>)}</h1>
+      <div class="sub">Tattoo and piercing studio</div>
+      <p class="lede">Татуировки и проколы в спокойной студии. Эскиз обсуждаем лично, работаем стерильно и без спешки.</p>
+      <div class="cta-row">
+        <a class="btn solid" href="#book">Записаться</a>
+        <a class="btn" href="#works">Смотреть работы</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true"><div class="track">{marquee.map((w) => <span>{w}<i></i></span>)}</div></div>
+
+  <section id="works">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div><div class="label">Портфолио</div><h2>Работы</h2></div>
+        <div class="filters" role="group" aria-label="Фильтр работ">
+          <button class="chip" data-f="all" aria-pressed="true">Все</button>
+          <button class="chip" data-f="tattoo" aria-pressed="false">Тату</button>
+          <button class="chip" data-f="piercing" aria-pressed="false">Пирсинг</button>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+      <p class="note">Сейчас в плитках иллюстрации-заглушки в цветах студии. Сюда встанут ваши фото работ.</p>
+    </div>
+  </section>
+
+  <section class="masters" id="masters">
+    <div class="wrap">
+      <div class="sec-head rv"><div><div class="label">Команда</div><h2>Мастера</h2></div></div>
+      <div class="m-grid">
+        <article class="m-card rv"><div class="m-ph"><svg viewBox="0 0 400 500" data-art="m1"></svg></div><h3>Имя мастера</h3><p>Тату · ботаника, fine line, орнамент</p></article>
+        <article class="m-card rv"><div class="m-ph"><svg viewBox="0 0 400 500" data-art="m2"></svg></div><h3>Имя мастера</h3><p>Тату · графика, чёрно-серая работа</p></article>
+        <article class="m-card rv"><div class="m-ph"><svg viewBox="0 0 400 500" data-art="m3"></svg></div><h3>Имя мастера</h3><p>Пирсинг · ухо, нос, украшения из титана</p></article>
+      </div>
+      <p class="note">Имена и специализации примерные, замените на реальные.</p>
+    </div>
+  </section>
+
+  <section id="prices">
+    <div class="wrap two">
+      <div class="rv">
+        <div class="label">Прайс</div>
+        <h3 class="sub-h">Цены</h3>
+        <PriceList />
+        <p class="note">Цены примерные, укажите свои. Точную стоимость мастер называет после обсуждения эскиза.</p>
+      </div>
+      <div class="rv" id="care">
+        <div class="label">Заживление</div>
+        <h3 class="sub-h">Уход</h3>
+        <details open><summary>Свежая татуировка</summary><p>Снимите плёнку через 2–4 часа или как скажет мастер. Мойте тёплой водой с мягким мылом, промакивайте чистой салфеткой. Наносите тонкий слой крема 2–3 раза в день.</p></details>
+        <details><summary>Первые две недели</summary><p>Не паритесь в бане, не купайтесь в бассейне и водоёмах, не загорайте. Корочки не отдирайте, зуд снимайте лёгким похлопыванием.</p></details>
+        <details><summary>Свежий прокол</summary><p>Промывайте физраствором дважды в день. Не крутите украшение и не трогайте грязными руками. Смену украшения обсудите с мастером после заживления.</p></details>
+        <details><summary>Когда писать мастеру</summary><p>Покраснение растёт, появилась температура или гнойное отделяемое. Лучше написать сразу, чем ждать.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <Contact />
+</Base>
+
+<script>import '../scripts/home';</script>

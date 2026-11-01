@@ -1,0 +1,18 @@
+{
+  "name": "Калина",
+  "tagline": "Tattoo and piercing studio",
+  "contacts": {
+    "address": "Город, улица, дом",
+    "hours": "Ежедневно 11:00–21:00",
+    "phone": "+7 (000) 000-00-00",
+    "telegram": "",
+    "whatsapp": ""
+  },
+  "prices": [
+    { "category": "tattoo", "name": "Мини-тату до 5 см", "note": "эскиз в стоимости", "price": "от 5 000 ₽" },
+    { "category": "tattoo", "name": "Тату среднего размера", "note": "до 15 см, 1 сеанс", "price": "от 12 000 ₽" },
+    { "category": "tattoo", "name": "Крупная работа", "note": "рукав, спина, бедро", "price": "от 8 000 ₽/час" },
+    { "category": "piercing", "name": "Прокол мочки или хряща", "note": "с украшением из титана", "price": "от 3 500 ₽" },
+    { "category": "common", "name": "Консультация и эскиз", "price": "бесплатно" }
+  ]
+}
