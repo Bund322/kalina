@@ -34,11 +34,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   (и `public/favicon.svg`).
 - **Контент — в JSON**, не в разметке: `src/data/studio.json` (прайс с категориями `tattoo|piercing|common`,
   контакты, ссылки мессенджеров). Типизированный доступ — `src/data/studio.ts`; пустая ссылка мессенджера
-  заменяется якорем `/#book`. Дальше по ТЗ появится `tattoo-zones.json`.
+  заменяется якорем `/#book`.
 - **3D**: `src/scripts/three/stage.ts` — общая сцена (прозрачный рендерер, свет, OrbitControls без зума
   колесом и без взгляда снизу, перелёты камеры `flyTo`, загрузка meshopt-glb, растворение среза шеи в шейдере).
   Модель — CC0 female base mesh (`assets-src/fab-body-kit/`, см. `SOURCE.md`); на сайт идёт обрезанный
-  и сжатый `public/models/head.glb`.
+  и сжатый `public/models/head.glb` (голова) и `body.glb` (всё тело).
 - **/piercing**: `src/data/piercings.json` — проколы с группой (`ear|nose|face|body`) и точками `{p, n}`
   в координатах `head.glb` (точки сняты рейкастом по модели; при смене модели или среза их надо переснять).
   Две точки — индастриал (`bar: true`, рисуется штанга) и симметрия губ; общий `spot` — один маркер на
@@ -49,9 +49,17 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   в пикселях с проверкой перекрытия головой; точки уха показываются только вблизи, издали — маркер «Ухо».
   Выбор прокола — всплывающее событие `piercing:select` (`detail.ids`, пустой массив — снять выбор);
   его шлют маркеры, список, карточки «Проколы на теле» (`components/BodyPiercings.astro`) и попап,
-  а слушают на `document`. Попап (`components/PiercingPopup.astro` + `src/scripts/piercing-popup.ts`)
+  а слушают на `document`. Попап (`components/PiercingPopup.astro`)
   рендерит карточки всех проколов при сборке и показывает нужную; для общей точки — вкладки.
   На компьютере это карточка справа, на экранах ≤900px — панель снизу с затемнением. Без WebGL остаётся список.
+- **Попап** общий для обеих 3D-страниц: `src/scripts/popup.ts` поднимает каждый `[data-popup]`; событие —
+  в `data-event`, `data-ignore` — элементы, клик по которым не закрывает попап (модель, список).
+- **/tattoo**: `tools/build-models.mjs` размечает зоны тела по костям скелета (кость с наибольшим весом;
+  суставы — где вес делится между двумя костями; перед/спина и бока — по нормали) и пишет номер зоны
+  в атрибут `_ZONE`, а порядок зон (`ZONES`) — в extras сцены (`gltf.scene.userData.zones`).
+  Боль 1–5 и тексты — `src/data/tattoo-zones.json` (id совпадают с `ZONES`). `src/scripts/tattoo-body.ts`
+  красит зону в шейдере (`flat` номер зоны → `uColors[]`), выбор — событие `tattoo:select`; при выборе
+  из списка камера перелетает к зоне. В dev-режиме разметку можно раскрасить через `window.__tattoo`.
 - **Мастера**: `src/data/masters.json` + фото в `src/content/masters/<slug>/` (в JSON — только имя файла).
   `src/data/masters.ts` валидирует JSON схемой zod и подставляет фото через `import.meta.glob`;
   ошибка в JSON или отсутствующий файл роняют сборку с понятным сообщением. Не больше 9 работ на мастера.
@@ -67,8 +75,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Временное
 
 - Мастера в `masters.json` (Алина, Вера, Ника) и их фото — примерные, фото сгенерированы `npm run placeholders`.
-- `/tattoo` — страница-заглушка до задач 06–07.
-- Тексты, цены и сроки заживления проколов в `piercings.json` написаны для примера — заказчик их правит.
+- Карта боли (раскраска всей модели по шкале, задача 07) ещё не сделана.
+- Тексты, цены и сроки заживления проколов (`piercings.json`) и тексты зон (`tattoo-zones.json`)
+  написаны для примера — заказчик их правит.
 - Плейсхолдеры контента (адрес, телефон, имена мастеров, цены) и поясняющие `<p class="note">…</p>` —
   убрать после замены на реальные данные.
 
