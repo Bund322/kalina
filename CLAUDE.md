@@ -42,7 +42,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **/piercing**: `src/data/piercings.json` — проколы с группой (`ear|nose|face|body`) и точками `{p, n}`
   в координатах `head.glb` (точки сняты рейкастом по модели; при смене модели или среза их надо переснять).
   Две точки — индастриал (`bar: true`, рисуется штанга) и симметрия губ; общий `spot` — один маркер на
-  несколько проколов (язык/смайл «внутри рта»). Валидация — `src/data/piercings.ts`.
+  несколько проколов (язык/смайл «внутри рта», руук/ложный руук). Валидация — `src/data/piercings.ts`.
   `components/PiercingHead.astro` отдаёт данные в `<script type="application/json">`, сцену поднимает
   `src/scripts/piercing-head.ts`: маркеры — спрайты постоянного экранного размера, попадание считается
   в пикселях с проверкой перекрытия головой; точки уха показываются только вблизи, издали — маркер «Ухо».
