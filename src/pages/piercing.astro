@@ -5,6 +5,8 @@ import PiercingHead from '../components/PiercingHead.astro';
 import PiercingPopup from '../components/PiercingPopup.astro';
 import BodyPiercings from '../components/BodyPiercings.astro';
 import PriceList from '../components/PriceList.astro';
+import BeforeSession from '../components/BeforeSession.astro';
+import { piercingPriceNote } from '../data/studio';
 ---
 <Base title="Пирсинг" description="Интерактивная 3D-модель головы: выберите прокол — ухо, нос, лицо — и узнайте о нём подробнее.">
   <section class="pc">
@@ -24,13 +26,15 @@ import PriceList from '../components/PriceList.astro';
     </div>
   </section>
 
+  <BeforeSession kind="piercing" />
+
   <section id="prices">
     <div class="wrap two">
       <div class="rv">
         <div class="label">Прайс</div>
         <h3 class="sub-h">Цены</h3>
         <PriceList only={['piercing', 'common']} />
-        <p class="note">Точная цена зависит от прокола и украшения — она указана в карточке каждого прокола.</p>
+        <p class="price-note">{piercingPriceNote}</p>
       </div>
       <div class="rv" id="care">
         <div class="label">Заживление</div>

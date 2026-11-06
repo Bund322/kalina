@@ -4,6 +4,7 @@ import Contact from '../components/Contact.astro';
 import TattooBody from '../components/TattooBody.astro';
 import TattooPopup from '../components/TattooPopup.astro';
 import PriceList from '../components/PriceList.astro';
+import BeforeSession from '../components/BeforeSession.astro';
 ---
 <Base title="Тату" description="Интерактивная карта боли: выберите зону на 3D-модели и узнайте, насколько больно делать там татуировку.">
   <section class="pc">
@@ -15,6 +16,8 @@ import PriceList from '../components/PriceList.astro';
       <TattooBody />
     </div>
   </section>
+
+  <BeforeSession kind="tattoo" />
 
   <section id="prices">
     <div class="wrap two">

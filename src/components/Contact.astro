@@ -1,5 +1,6 @@
 ---
-import { contacts, bookingHref } from '../data/studio';
+import { contacts, phoneHref } from '../data/studio';
+import Socials from './Socials.astro';
 ---
 <section class="contact" id="book">
   <svg class="big-berry" viewBox="0 0 640 640"><use href="#berry"/></svg>
@@ -10,14 +11,15 @@ import { contacts, bookingHref } from '../data/studio';
       <div class="rv">
         <p style="max-width:32ch;margin:0 0 24px">Напишите идею, размер и место на теле. Мастер ответит в течение дня и предложит время.</p>
         <div class="cta-row" style="justify-content:flex-start">
-          <a class="btn solid" href={bookingHref(contacts.telegram)}>Telegram</a>
-          <a class="btn" href={bookingHref(contacts.whatsapp)}>WhatsApp</a>
+          <a class="btn solid" href={contacts.telegram} target="_blank" rel="noopener">Написать в Telegram</a>
+          <a class="btn" href={phoneHref}>Позвонить</a>
         </div>
+        <Socials />
       </div>
       <dl class="rv">
         <div><dt>Адрес</dt><dd>{contacts.address}</dd></div>
         <div><dt>Часы работы</dt><dd>{contacts.hours}</dd></div>
-        <div><dt>Телефон</dt><dd>{contacts.phone}</dd></div>
+        <div><dt>Телефон</dt><dd><a href={phoneHref}>{contacts.phone}</a></dd></div>
       </dl>
     </div>
   </div>

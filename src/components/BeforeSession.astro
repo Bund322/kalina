@@ -1,0 +1,40 @@
+---
+// Блок «Перед сеансом» на /tattoo и /piercing: противопоказания и бланк согласия для 16–17 лет.
+import data from '../data/contraindications.json';
+import { url } from '../data/url';
+
+interface Props {
+  kind: 'tattoo' | 'piercing';
+}
+const { kind } = Astro.props;
+const fits = (i: { only?: string }) => !i.only || i.only === kind;
+---
+<section class="before" id="before">
+  <div class="wrap">
+    <div class="sec-head rv"><div><div class="label">Перед сеансом</div><h2>Важно знать</h2></div></div>
+    <div class="two">
+      <div class="rv">
+        <h3 class="sub-h">Противопоказания</h3>
+        <div class="contra">
+          <div>
+            <div class="label">Заболевания</div>
+            <ul>{data.diseases.filter(fits).map((i) => <li>{i.text}</li>)}</ul>
+          </div>
+          <div>
+            <div class="label">Временные ограничения</div>
+            <ul>{data.temporary.filter(fits).map((i) => <li>{i.text}</li>)}</ul>
+          </div>
+        </div>
+        <p class="contra-allergy">{data.allergy}</p>
+      </div>
+      <div class="rv">
+        <h3 class="sub-h">Если вам нет 18</h3>
+        <div class="consent">
+          <p>Работаем с 16 лет. До 18 нужно письменное согласие родителя или опекуна: скачайте бланк, заполните и возьмите на сеанс.</p>
+          <p>Родителю приходить не обязательно — перед сеансом мы позвоним ему, чтобы подтвердить согласие.</p>
+          <a class="btn solid" href={url('/docs/soglasie-do-18.pdf')} download="Согласие до 18 — Калина.pdf">Скачать согласие (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

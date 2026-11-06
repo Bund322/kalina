@@ -4,6 +4,7 @@ import PriceList from '../components/PriceList.astro';
 import Contact from '../components/Contact.astro';
 import Teasers from '../components/Teasers.astro';
 import { url } from '../data/url';
+import { piercingPriceNote } from '../data/studio';
 import { Image } from 'astro:assets';
 import { masters, directionLabel, gallery, directionCategories } from '../data/masters';
 
@@ -76,20 +77,38 @@ const marquee = [...words, ...words, ...words, ...words];
   <Teasers />
 
   <section id="prices">
+    <div class="wrap">
+      <div class="sec-head rv"><div><div class="label">Прайс</div><h2>Цены</h2></div></div>
+      <div class="two">
+        <div class="rv">
+          <h3 class="sub-h">Тату</h3>
+          <PriceList only={['tattoo', 'common']} />
+          <p class="price-note">Точную стоимость мастер называет после обсуждения эскиза.</p>
+        </div>
+        <div class="rv">
+          <h3 class="sub-h">Пирсинг</h3>
+          <PriceList only={['piercing']} />
+          <p class="price-note">{piercingPriceNote}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="care">
     <div class="wrap two">
       <div class="rv">
-        <div class="label">Прайс</div>
-        <h3 class="sub-h">Цены</h3>
-        <PriceList />
-        <p class="note">Цены примерные, укажите свои. Точную стоимость мастер называет после обсуждения эскиза.</p>
-      </div>
-      <div class="rv" id="care">
         <div class="label">Заживление</div>
         <h3 class="sub-h">Уход</h3>
         <details open><summary>Свежая татуировка</summary><p>Снимите плёнку через 2–4 часа или как скажет мастер. Мойте тёплой водой с мягким мылом, промакивайте чистой салфеткой. Наносите тонкий слой крема 2–3 раза в день.</p></details>
         <details><summary>Первые две недели</summary><p>Не паритесь в бане, не купайтесь в бассейне и водоёмах, не загорайте. Корочки не отдирайте, зуд снимайте лёгким похлопыванием.</p></details>
         <details><summary>Свежий прокол</summary><p>Промывайте физраствором дважды в день. Не крутите украшение и не трогайте грязными руками. Смену украшения обсудите с мастером после заживления.</p></details>
         <details><summary>Когда писать мастеру</summary><p>Покраснение растёт, появилась температура или гнойное отделяемое. Лучше написать сразу, чем ждать.</p></details>
+      </div>
+      <div class="rv">
+        <div class="label">Перед сеансом</div>
+        <h3 class="sub-h">Важно знать</h3>
+        <details><summary>Противопоказания</summary><p>Хронические и острые заболевания, беременность, приём антибиотиков и гормонов, недавние операции. Полный список — на страницах <a href={url('/tattoo#before')}>тату</a> и <a href={url('/piercing#before')}>пирсинга</a>. Об аллергии на материалы и медикаменты предупредите мастера заранее.</p></details>
+        <details><summary>Если вам нет 18</summary><p>Работаем с 16 лет с письменным согласием родителя или опекуна. Родителю приходить не обязательно — мы позвоним ему перед сеансом. <a href={url('/docs/soglasie-do-18.pdf')} download="Согласие до 18 — Калина.pdf">Скачать бланк согласия (PDF)</a>.</p></details>
       </div>
     </div>
   </section>

@@ -4,15 +4,28 @@
   "contacts": {
     "address": "Город, улица, дом",
     "hours": "Ежедневно 11:00–21:00",
-    "phone": "+7 (000) 000-00-00",
-    "telegram": "",
-    "whatsapp": ""
+    "phone": "+7 (999) 536-45-81",
+    "telegram": "https://t.me/kalinastu"
   },
+  "socials": [
+    { "id": "instagram", "label": "Instagram", "href": "https://www.instagram.com/kalinastudios" },
+    { "id": "telegram", "label": "Telegram-канал", "href": "https://t.me/kalinastudios" },
+    { "id": "vk", "label": "ВКонтакте", "href": "https://vk.ru/kalinastudios" }
+  ],
   "prices": [
-    { "category": "tattoo", "name": "Мини-тату до 5 см", "note": "эскиз в стоимости", "price": "от 5 000 ₽" },
-    { "category": "tattoo", "name": "Тату среднего размера", "note": "до 15 см, 1 сеанс", "price": "от 12 000 ₽" },
-    { "category": "tattoo", "name": "Крупная работа", "note": "рукав, спина, бедро", "price": "от 8 000 ₽/час" },
-    { "category": "piercing", "name": "Прокол мочки или хряща", "note": "с украшением из титана", "price": "от 3 500 ₽" },
-    { "category": "common", "name": "Консультация и эскиз", "price": "бесплатно" }
-  ]
+    { "category": "tattoo", "name": "Мини-тату", "price": "от 3 500 ₽" },
+    { "category": "tattoo", "name": "Небольшая тату", "note": "до 10 см", "price": "от 4 500 ₽" },
+    { "category": "tattoo", "name": "Средняя тату", "note": "до 20 см", "price": "от 7 000 ₽" },
+    { "category": "tattoo", "name": "Большая тату", "note": "от 20 см, за сеанс", "price": "от 15 000 ₽" },
+    { "category": "piercing", "name": "Мочка", "note": "две — 2 000 ₽", "price": "1 200 ₽" },
+    { "category": "piercing", "name": "Ухо, нос, губы", "note": "хеликс, форвард хеликс, трагус, пина, ложный руук, конч, флэт, крыло носа, септум, монро, мадонна, медуза, лабрет, смайл", "price": "1 700 ₽" },
+    { "category": "piercing", "name": "Сложные проколы", "note": "дейс, руук, снаг, бровь, язык, вертикальный лабрет, пупок", "price": "1 800 ₽" },
+    { "category": "piercing", "name": "Индастриал", "price": "2 500 ₽" },
+    { "category": "piercing", "name": "Бридж", "price": "2 000 ₽" },
+    { "category": "piercing", "name": "Сосок", "note": "два — 4 000 ₽", "price": "2 000 ₽" },
+    { "category": "piercing", "name": "Восстановление прокола", "price": "1 000 ₽" },
+    { "category": "piercing", "name": "Лечение прокола", "price": "800 ₽" },
+    { "category": "piercing", "name": "Замена, установка или снятие украшения", "price": "500 ₽" }
+  ],
+  "piercingPriceNote": "Цены без учёта украшений. Украшения из титана — от 600 до 1 000 ₽."
 }

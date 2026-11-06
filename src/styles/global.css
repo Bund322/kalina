@@ -1,10 +1,16 @@
 /* Стили перенесены из макета docs/mockup/. Одна светлая тема по фирменной палитре. */
+/* Славянский шрифт заголовков и логотипа. В нём нет знака ₽ — его подставляет Oranienbaum из того же стека. */
+@font-face{font-family:'Akathistos';src:url('../assets/fonts/akathistos-caps.ttf') format('truetype');font-display:swap;
+  /* Латиницу и цифры шрифт рисует церковными знаками — их берём из Oranienbaum. */
+  unicode-range:U+0000-002F,U+003A-0040,U+005B-0060,U+007B-00BF,U+0400-04FF,U+2010-206F}
 :root{
   --sand:#C4B5A0; --sand-lt:#D2C6B3; --sand-dp:#B3A28A;
   --brick:#7F372C; --brick-dk:#5F281F;
   --olive:#7A7840; --olive-ink:#53512A;
   --ink:#2B1E17;
-  --f-display:'Oranienbaum','Times New Roman',serif;
+  --f-display:'Akathistos','Oranienbaum','Times New Roman',serif;
+  /* Цифры цен и значения в карточках — читаемый Oranienbaum. */
+  --f-num:'Oranienbaum','Times New Roman',serif;
   --f-body:'Cormorant Garamond',Georgia,serif;
   --f-ui:'Golos Text',system-ui,sans-serif;
   color-scheme:light;
@@ -88,6 +94,7 @@ section{padding-block:clamp(56px,9vw,110px)}
 .tile figcaption b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.3rem}
 .tile figcaption small{font-family:var(--f-ui);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
 @media(hover:none){.tile figcaption{transform:none;opacity:1}}
+.price-note{font-family:var(--f-ui);font-size:.8rem;color:var(--olive-ink);margin-top:16px}
 .note{font-family:var(--f-ui);font-size:.74rem;color:var(--olive-ink);margin-top:16px}
 
 /* masters */
@@ -110,7 +117,7 @@ section{padding-block:clamp(56px,9vw,110px)}
 .price li::after{content:none}
 .price .dots{flex:1;border-bottom:1.5px dotted rgba(43,30,23,.4);transform:translateY(-4px);min-width:16px}
 .price .n{font-size:1.3rem}
-.price .p{font-family:var(--f-display);font-size:1.4rem;color:var(--brick);white-space:nowrap;font-variant-numeric:tabular-nums}
+.price .p{font-family:var(--f-num);font-size:1.4rem;color:var(--brick);white-space:nowrap;font-variant-numeric:tabular-nums}
 .price small{display:block;font-family:var(--f-ui);font-size:.72rem;color:var(--olive-ink)}
 details{border-bottom:1px solid rgba(43,30,23,.25)}
 summary{cursor:pointer;list-style:none;padding:16px 0;display:flex;justify-content:space-between;gap:14px;font-family:var(--f-display);font-size:1.45rem;color:var(--brick)}
@@ -118,6 +125,7 @@ summary::-webkit-details-marker{display:none}
 summary::after{content:"+";font-family:var(--f-ui);transition:transform .3s}
 details[open] summary::after{transform:rotate(45deg)}
 details p{margin:0 0 18px;max-width:46ch}
+details p a{color:var(--brick)}
 h3.sub-h{font-size:2.1rem;color:var(--brick);margin-bottom:12px}
 
 /* contact */
@@ -138,7 +146,17 @@ dt{font-family:var(--f-ui);font-size:.7rem;letter-spacing:.18em;text-transform:u
 dd{margin:2px 0 0;font-size:1.4rem;overflow-wrap:anywhere}
 .big-berry{position:absolute;right:-60px;bottom:-80px;width:340px;opacity:.12;pointer-events:none}
 footer{background:var(--brick-dk);color:#D9C9B0;font-family:var(--f-ui);font-size:.75rem;padding-block:20px}
-footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+dd a{color:inherit;text-decoration:none}
+/* socials */
+.socials{list-style:none;margin:0;padding:0;display:flex;gap:10px}
+.socials a{display:grid;place-items:center;width:44px;height:44px;border:1.5px solid currentColor;border-radius:999px;color:inherit;transition:background .25s,color .25s}
+.socials svg{width:20px;height:20px}
+.contact .socials{margin-top:22px;color:var(--sand)}
+.contact .socials a:hover{background:var(--sand);color:var(--brick)}
+footer .socials a{width:34px;height:34px;border-width:1px}
+footer .socials svg{width:16px;height:16px}
+footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 
 /* preloader */
 .pre{position:fixed;inset:0;z-index:100;background:var(--sand);display:grid;place-items:center;animation:preOut .7s ease 1.4s forwards}
@@ -237,7 +255,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .pp-card p{margin:0 0 16px;font-size:1.15rem}
 .pp-meta{display:flex;gap:24px;flex-wrap:wrap;margin:0 0 14px}
 .pp-meta dt{font-family:var(--f-ui);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-ink)}
-.pp-meta dd{margin:2px 0 0;font-family:var(--f-display);font-size:1.35rem;color:var(--brick)}
+.pp-meta dd{margin:2px 0 0;font-family:var(--f-num);font-size:1.35rem;color:var(--brick)}
 .pp-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
 .pp-photos img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block;border-radius:8px;background:var(--sand-dp)}
 @media(max-width:900px){
@@ -289,8 +307,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .heat-caption{display:flex;justify-content:space-between;font-family:var(--f-ui);font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:var(--olive-ink)}
 
 /* тизеры 3D-страниц на главной */
-.ts-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,36px)}
+.ts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,36px)}
 @media(max-width:800px){.ts-grid{grid-template-columns:1fr}}
+.ts-ph.photo img{object-fit:cover}
 .ts-card{display:flex;flex-direction:column;gap:6px;text-decoration:none;min-width:0}
 .ts-ph{display:block;aspect-ratio:1/1;border-radius:999px 999px 24px 24px;overflow:hidden;background:radial-gradient(circle at 50% 45%,var(--sand-lt),var(--sand-dp) 85%);margin-bottom:12px}
 .ts-ph img{width:100%;height:100%;object-fit:contain;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
@@ -298,3 +317,33 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .ts-title{font-family:var(--f-display);font-size:clamp(2rem,4vw,2.8rem);color:var(--brick);line-height:1}
 .ts-text{max-width:40ch}
 .ts-more{font-family:var(--f-ui);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brick);margin-top:4px}
+
+/* before: противопоказания и согласие до 18 */
+.before{background:var(--sand-lt)}
+.contra{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,36px)}
+@media(max-width:560px){.contra{grid-template-columns:1fr}}
+.contra ul{margin:10px 0 0;padding-left:1.1em;font-size:1.1rem;line-height:1.35}
+.contra li{margin-bottom:8px}
+.contra li::marker{color:var(--brick)}
+.contra-allergy{margin:22px 0 0;padding:14px 18px;border-left:3px solid var(--brick);background:rgba(127,55,44,.08);font-size:1.15rem}
+.consent{border:1.5px solid var(--brick);border-radius:24px;padding:clamp(20px,3vw,32px)}
+.consent p{margin:0 0 14px;max-width:44ch}
+.consent .btn{margin-top:8px}
+
+/* education */
+.edu .two{align-items:center}
+.edu-intro h2{font-size:clamp(2.4rem,6vw,4.4rem);color:var(--brick);margin:8px 0 20px}
+.edu-intro p{max-width:44ch;margin:0 0 16px}
+.edu-outcome{font-family:var(--f-ui);font-size:.95rem;color:var(--olive-ink);padding-left:14px;border-left:3px solid var(--olive)}
+.edu-ph{border-radius:999px 999px 24px 24px;overflow:hidden;aspect-ratio:4/5}
+.edu-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.edu-courses{background:var(--sand-lt)}
+.course-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,24px)}
+@media(max-width:1000px){.course-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.course-grid{grid-template-columns:1fr}}
+.course{border:1.5px solid var(--brick);border-radius:24px;padding:24px 22px;display:flex;flex-direction:column;min-width:0}
+.course h3{font-size:1.9rem;color:var(--brick)}
+.course-price{font-family:var(--f-num);font-size:1.6rem;color:var(--olive-ink);margin:10px 0 14px}
+.course ul{margin:0;padding-left:1.1em;font-size:1.1rem;line-height:1.35}
+.course li{margin-bottom:6px}
+.course li::marker{color:var(--brick)}
