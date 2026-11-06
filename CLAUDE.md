@@ -33,6 +33,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 время разработки). `.github/workflows/deploy-hosting.yml` — FTP-деплой на хостинг, пока только ручной
 запуск; секреты и включение — в README.
 
+**Тире.** Во всех текстах сайта (разметка, JSON-контент, `<title>`, комментарии в `src/`) — только короткое
+тире «–» (U+2013) с пробелами вокруг; длинное «—» не используем. Проверка: `grep -rn "—" src` должен быть пустым.
+
 ## Устройство
 
 - `src/layouts/Base.astro` — общий каркас: `<head>`, шрифты Google Fonts, SVG-символ ягоды, шапка,

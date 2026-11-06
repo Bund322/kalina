@@ -45,7 +45,7 @@ const marquee = [...words, ...words, ...words, ...words];
       <div class="grid" id="grid">
         {works.map((w) => (
           <figure class="tile rv" data-c={directionCategories(w.master.direction).join(' ')}>
-            <a href={url(`/masters/${w.master.slug}`)} aria-label={`${w.caption ?? 'Работа'} — мастер ${w.master.name}`}>
+            <a href={url(`/masters/${w.master.slug}`)} aria-label={`${w.caption ?? 'Работа'} – мастер ${w.master.name}`}>
               <Image src={w.image} alt={w.caption ?? `Работа мастера ${w.master.name}`} widths={[300, 600]} sizes="(max-width: 900px) 50vw, 25vw" />
               <figcaption><b>{w.caption ?? w.master.name}</b><small>{w.caption ? `${w.master.name} →` : 'Портфолио →'}</small></figcaption>
             </a>
@@ -106,8 +106,8 @@ const marquee = [...words, ...words, ...words, ...words];
       <div class="rv">
         <div class="label">Перед сеансом</div>
         <h3 class="sub-h">Важно знать</h3>
-        <details><summary>Противопоказания</summary><p>Хронические и острые заболевания, беременность, приём антибиотиков и гормонов, недавние операции. Полный список — на страницах <a href={url('/tattoo#before')}>тату</a> и <a href={url('/piercing#before')}>пирсинга</a>. Об аллергии на материалы и медикаменты предупредите мастера заранее.</p></details>
-        <details><summary>Если вам нет 18</summary><p>Работаем с 16 лет с письменным согласием родителя или опекуна. Родителю приходить не обязательно — мы позвоним ему перед сеансом. <a href={url('/docs/soglasie-do-18.pdf')} download="Согласие до 18 — Калина.pdf">Скачать бланк согласия (PDF)</a>.</p></details>
+        <details><summary>Противопоказания</summary><p>Хронические и острые заболевания, беременность, приём антибиотиков и гормонов, недавние операции. Полный список – на страницах <a href={url('/tattoo#before')}>тату</a> и <a href={url('/piercing#before')}>пирсинга</a>. Об аллергии на материалы и медикаменты предупредите мастера заранее.</p></details>
+        <details><summary>Если вам нет 18</summary><p>Работаем с 16 лет с письменным согласием родителя или опекуна. Родителю приходить не обязательно – мы позвоним ему перед сеансом. <a href={url('/docs/soglasie-do-18.pdf')} download="Согласие до 18 – Калина.pdf">Скачать бланк согласия (PDF)</a>.</p></details>
       </div>
     </div>
   </section>

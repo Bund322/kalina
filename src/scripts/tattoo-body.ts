@@ -1,6 +1,6 @@
-// /tattoo: 3D-манекен с зонами для татуировки. У каждой вершины body.glb есть атрибут _zone — номер зоны,
+// /tattoo: 3D-манекен с зонами для татуировки. У каждой вершины body.glb есть атрибут _zone – номер зоны,
 // порядок зон лежит в самой модели (gltf.scene.userData.zones). Зона подсвечивается шейдером целиком.
-// Выбор зоны — событие `tattoo:select` (detail.ids) на document, как у проколов.
+// Выбор зоны – событие `tattoo:select` (detail.ids) на document, как у проколов.
 import * as THREE from 'three';
 import { createStage, hasWebGL, reducedMotion, type View } from './three/stage';
 import type { SelectDetail } from './popup';
@@ -44,7 +44,7 @@ function init(root: HTMLElement) {
 
   if (!hasWebGL()) {
     root.classList.add('no-webgl');
-    status.textContent = 'Ваш браузер не показывает 3D — выберите зону из списка.';
+    status.textContent = 'Ваш браузер не показывает 3D – выберите зону из списка.';
     return;
   }
 
@@ -60,18 +60,18 @@ function init(root: HTMLElement) {
     .then((model) => {
       const zones: string[] = model.userData.zones ?? [];
       const missing = data.filter((d) => !zones.includes(d.id)).map((d) => d.id);
-      if (missing.length) console.warn('tattoo-zones.json: этих зон нет в body.glb —', missing.join(', '));
+      if (missing.length) console.warn('tattoo-zones.json: этих зон нет в body.glb –', missing.join(', '));
       setup(zones);
       root.classList.add('ready');
       status.textContent = '';
     })
     .catch(() => {
       root.classList.add('no-webgl');
-      status.textContent = 'Не удалось загрузить модель — выберите зону из списка.';
+      status.textContent = 'Не удалось загрузить модель – выберите зону из списка.';
     });
 
   function setup(zones: string[]) {
-    // Шейдер красит треугольник по номеру зоны его вершины (flat — без смешивания на стыках).
+    // Шейдер красит треугольник по номеру зоны его вершины (flat – без смешивания на стыках).
     const uniforms = {
       uColors: { value: Array.from({ length: MAX_ZONES }, () => new THREE.Color(COLOR.base)) },
     };
@@ -89,7 +89,7 @@ function init(root: HTMLElement) {
 
     const zoneIndex = (id: string | null) => (id ? zones.indexOf(id) : -1);
 
-    // Центр и «лицевая» сторона каждой зоны — для перелёта камеры при выборе из списка.
+    // Центр и «лицевая» сторона каждой зоны – для перелёта камеры при выборе из списка.
     // Парные зоны (руки, ноги) считаем по одной стороне, иначе центр окажется между ними.
     const centers = zones.map(() => ({ sum: new THREE.Vector3(), normal: new THREE.Vector3(), n: 0 }));
     const p = new THREE.Vector3(), nrm = new THREE.Vector3();
@@ -119,7 +119,7 @@ function init(root: HTMLElement) {
     let hovered: string | null = null;
     let heat = false;
     const painOf = Object.fromEntries(data.map((d) => [d.id, d.pain]));
-    // Целевые цвета зон; в кадре uColors плавно догоняют их (с prefers-reduced-motion — сразу).
+    // Целевые цвета зон; в кадре uColors плавно догоняют их (с prefers-reduced-motion – сразу).
     const target = uniforms.uColors.value.map((c) => c.clone());
     const light = new THREE.Color(COLOR.light);
     const paint = () => {
@@ -151,7 +151,7 @@ function init(root: HTMLElement) {
 
     document.addEventListener('tattoo:select', (e) => {
       paint();
-      // С модели зону выбирают там, где её видно; перелёт — только при выборе из списка.
+      // С модели зону выбирают там, где её видно; перелёт – только при выборе из списка.
       const fromList = (e.target as Element | null)?.closest?.('[data-tattoo-stage]') && !(e as CustomEvent).detail.fromModel;
       const id = (e as CustomEvent<SelectDetail>).detail.ids[0];
       const v = id && fromList ? viewOf(id) : null;

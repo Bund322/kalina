@@ -1,5 +1,5 @@
 // /piercing: 3D-голова с точками проколов. Данные приходят из <script type="application/json"> в разметке,
-// выбор прокола — всплывающее событие `piercing:select` (detail.ids; пустой список — снять выбор).
+// выбор прокола – всплывающее событие `piercing:select` (detail.ids; пустой список – снять выбор).
 // Его шлют маркеры, список, карточки «Проколы на теле» и попап; слушают все на document.
 import type * as THREE from 'three';
 import { createStage, hasWebGL, type Stage, type View } from './three/stage';
@@ -50,7 +50,7 @@ function init(root: HTMLElement) {
 
   if (!hasWebGL()) {
     root.classList.add('no-webgl');
-    status.textContent = 'Ваш браузер не показывает 3D — выберите прокол из списка.';
+    status.textContent = 'Ваш браузер не показывает 3D – выберите прокол из списка.';
     return;
   }
 
@@ -76,11 +76,11 @@ function init(root: HTMLElement) {
     })
     .catch(() => {
       root.classList.add('no-webgl');
-      status.textContent = 'Не удалось загрузить модель — выберите прокол из списка.';
+      status.textContent = 'Не удалось загрузить модель – выберите прокол из списка.';
       stage = null;
     });
 
-  // Перелёт к выбранному проколу: ухо — крупным планом, остальное — лицо.
+  // Перелёт к выбранному проколу: ухо – крупным планом, остальное – лицо.
   document.addEventListener('piercing:select', (e) => {
     const p = data.find((d) => d.id === (e as CustomEvent<SelectDetail>).detail.ids[0]);
     if (!stage || !p?.points) return;
@@ -140,7 +140,7 @@ function setupMarkers(stage: Stage, data: PiercingData[], getSelected: () => str
     });
   }
 
-  // Штанга индастриала — тонкая линия между двумя точками.
+  // Штанга индастриала – тонкая линия между двумя точками.
   const bars = data.filter((d) => d.bar && d.points?.length === 2).map((d) => {
     const geo = new T.BufferGeometry().setFromPoints(d.points!.map(lift));
     const line = new T.Line(geo, new T.LineBasicMaterial({ color: '#7F372C' }));

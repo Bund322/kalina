@@ -2,7 +2,7 @@ import type { ImageMetadata } from 'astro';
 import { z } from 'astro/zod';
 import raw from './masters.json';
 
-// Фото мастеров лежат в src/content/masters/<slug>/, в masters.json — только имя файла.
+// Фото мастеров лежат в src/content/masters/<slug>/, в masters.json – только имя файла.
 const files = import.meta.glob<{ default: ImageMetadata }>(
   '/src/content/masters/*/*.{jpg,jpeg,png,webp,avif}',
   { eager: true },
@@ -98,7 +98,7 @@ export interface GalleryItem extends Work {
 
 /**
  * Работы всех мастеров для общей галереи: сначала обложки (первая работа каждого мастера),
- * затем вторые работы и т. д. — так мастера чередуются, а не идут блоками.
+ * затем вторые работы и т. д. – так мастера чередуются, а не идут блоками.
  */
 export function gallery(): GalleryItem[] {
   const rounds = Math.max(0, ...masters.map((m) => m.works.length));

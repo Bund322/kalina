@@ -2,8 +2,8 @@ import type { ImageMetadata } from 'astro';
 import { z } from 'astro/zod';
 import raw from './piercings.json';
 
-// Координаты точек — в системе координат public/models/head.glb (метры модели, ось Y вверх, лицо смотрит в +Z).
-// p — точка на коже, n — нормаль наружу: по ней маркер чуть приподнимается над поверхностью.
+// Координаты точек – в системе координат public/models/head.glb (метры модели, ось Y вверх, лицо смотрит в +Z).
+// p – точка на коже, n – нормаль наружу: по ней маркер чуть приподнимается над поверхностью.
 const vec3 = z.tuple([z.number(), z.number(), z.number()]);
 
 const schema = z.array(
@@ -15,7 +15,7 @@ const schema = z.array(
     points: z.array(z.object({ p: vec3, n: vec3 })).max(2).optional(),
     /** Индастриал: две точки соединяются штангой. */
     bar: z.boolean().optional(),
-    /** Проколы с одинаковым spot делят один маркер (язык и смайл — «внутри рта»). */
+    /** Проколы с одинаковым spot делят один маркер (язык и смайл – «внутри рта»). */
     spot: z.string().optional(),
     description: z.string().min(1),
     /** Строкой, как на сайте: «от 3 500 ₽». */

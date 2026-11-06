@@ -1,6 +1,6 @@
 // Попап сцены (прокол на /piercing, зона на /tattoo). Разметка: <div data-popup data-event="…" data-ignore="…">
 // с карточками <article data-pp="id">. Открывается по событию data-event (detail.ids), закрывается крестиком,
-// Esc и кликом мимо — кроме элементов из data-ignore (модель, список). Несколько ids — вкладки вверху.
+// Esc и кликом мимо – кроме элементов из data-ignore (модель, список). Несколько ids – вкладки вверху.
 export interface SelectDetail { ids: string[] }
 
 document.querySelectorAll<HTMLElement>('[data-popup]').forEach(init);

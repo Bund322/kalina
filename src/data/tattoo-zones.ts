@@ -6,7 +6,7 @@ const schema = z.array(
   z.object({
     id: z.string().regex(/^[a-z0-9-]+$/),
     name: z.string().min(1),
-    /** Насколько больно: 1 — почти не больно, 5 — очень больно. */
+    /** Насколько больно: 1 – почти не больно, 5 – очень больно. */
     pain: z.number().int().min(1).max(5),
     why: z.string().min(1),
     tip: z.string().min(1),

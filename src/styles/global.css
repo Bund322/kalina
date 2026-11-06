@@ -1,7 +1,7 @@
 /* Стили перенесены из макета docs/mockup/. Одна светлая тема по фирменной палитре. */
-/* Славянский шрифт заголовков и логотипа — свой, собран из Akathistos Caps (npm run font). */
+/* Славянский шрифт заголовков и логотипа – свой, собран из Akathistos Caps (npm run font). */
 @font-face{font-family:'Kalina Display';src:url('../assets/fonts/kalina-display.woff2') format('woff2');font-display:swap;
-  /* Латиницу шрифт рисует церковными знаками — её берём из Oranienbaum. */
+  /* Латиницу шрифт рисует церковными знаками – её берём из Oranienbaum. */
   unicode-range:U+0000-0040,U+005B-0060,U+007B-00FF,U+0400-04FF,U+2010-206F,U+20BD,U+2116}
 :root{
   --sand:#C4B5A0; --sand-lt:#D2C6B3; --sand-dp:#B3A28A;
@@ -9,7 +9,7 @@
   --olive:#7A7840; --olive-ink:#53512A;
   --ink:#2B1E17;
   --f-display:'Kalina Display','Oranienbaum','Times New Roman',serif;
-  /* Названия в карточках, цифры цен и значения — читаемый Oranienbaum. */
+  /* Названия в карточках, цифры цен и значения – читаемый Oranienbaum. */
   --f-num:'Oranienbaum','Times New Roman',serif;
   --f-body:'Cormorant Garamond',Georgia,serif;
   --f-ui:'Golos Text',system-ui,sans-serif;
@@ -39,7 +39,7 @@ nav a:hover::after,nav a[aria-current="page"]::after{transform:scaleX(1)}
 @media(max-width:560px){
   .brand span{display:none}
   header .wrap{gap:10px}
-  /* шесть пунктов не влезают в одну строку на узких экранах — лента прокручивается вбок */
+  /* шесть пунктов не влезают в одну строку на узких экранах – лента прокручивается вбок */
   nav{flex-wrap:nowrap;gap:10px;overflow-x:auto;scrollbar-width:none;min-width:0;justify-content:flex-start}
   nav::-webkit-scrollbar{display:none}
   nav a{font-size:.62rem;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
@@ -214,7 +214,7 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 .tile>a{position:absolute;inset:0;display:block;color:inherit;text-decoration:none}
 .tile:focus-within figcaption{transform:none;opacity:1}
 
-/* /piercing — 3D-голова */
+/* /piercing – 3D-голова */
 .pc-lede{max-width:34ch;margin:0}
 .ph{display:grid;grid-template-columns:1fr 320px;gap:clamp(20px,3vw,40px);align-items:start}
 @media(max-width:900px){.ph{grid-template-columns:1fr}}
@@ -240,7 +240,7 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 .ph-list button:hover{border-color:var(--brick);color:var(--brick)}
 .ph-list button[aria-pressed="true"]{background:var(--brick);border-color:var(--brick);color:var(--sand)}
 
-/* попап прокола: на компьютере — карточка справа, на телефоне — панель снизу */
+/* попап прокола: на компьютере – карточка справа, на телефоне – панель снизу */
 .pp-card{position:fixed;z-index:70;background:var(--sand-lt);color:var(--ink);box-shadow:0 18px 50px rgba(43,30,23,.28);overflow-y:auto;overscroll-behavior:contain;outline:none;
   top:84px;right:max(16px,calc((100vw - 1180px)/2 + 16px));width:min(380px,calc(100vw - 32px));max-height:calc(100vh - 108px);border-radius:20px;padding:26px 24px 24px;
   opacity:0;transform:translateX(24px);transition:opacity .3s,transform .4s cubic-bezier(.2,.8,.2,1)}
@@ -279,7 +279,7 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 .bp-name{font-family:var(--f-num);font-size:1.8rem;color:var(--brick);line-height:1}
 .bp-price{font-family:var(--f-ui);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive-ink)}
 
-/* /tattoo — манекен и шкала боли */
+/* /tattoo – манекен и шкала боли */
 .tb-stage{aspect-ratio:4/5}
 @media(max-width:900px){.tb-stage{aspect-ratio:3/4;max-height:75vh}}
 .pain{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px}

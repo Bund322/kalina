@@ -9,7 +9,7 @@ import { url } from '../data/url';
 interface Props {
   title?: string;
   description?: string;
-  /** Прелоадер с ягодой — только на главной: анимация заголовка hero ждёт его ухода. */
+  /** Прелоадер с ягодой – только на главной: анимация заголовка hero ждёт его ухода. */
   preloader?: boolean;
 }
 const {
@@ -17,7 +17,7 @@ const {
   description = 'Татуировки и пирсинг в спокойной студии. Эскиз обсуждаем лично, работаем стерильно и без спешки.',
   preloader = false,
 } = Astro.props;
-const fullTitle = title ? `${title} — Калина` : 'Калина Tattoo Studio';
+const fullTitle = title ? `${title} – Калина` : 'Калина Tattoo Studio';
 ---
 <!doctype html>
 <html lang="ru">

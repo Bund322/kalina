@@ -13,12 +13,12 @@ export interface View {
 }
 
 export interface StageOptions {
-  /** Ниже этой высоты модель плавно растворяется в фоне — скрывает срез шеи. */
+  /** Ниже этой высоты модель плавно растворяется в фоне – скрывает срез шеи. */
   fadeFromY?: number;
   fadeToY?: number;
   minDistance: number;
   maxDistance: number;
-  /** Пределы наклона камеры в долях π (0 — сверху, 1 — снизу). */
+  /** Пределы наклона камеры в долях π (0 – сверху, 1 – снизу). */
   polar?: [number, number];
   color?: string;
 }
@@ -53,11 +53,11 @@ export function createStage(canvas: HTMLCanvasElement, opts: StageOptions) {
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
   controls.enablePan = false;
-  // Колесо мыши не трогаем — иначе страница перестаёт прокручиваться над моделью. Приближение — кнопками видов.
+  // Колесо мыши не трогаем – иначе страница перестаёт прокручиваться над моделью. Приближение – кнопками видов.
   controls.enableZoom = false;
   controls.minDistance = opts.minDistance;
   controls.maxDistance = opts.maxDistance;
-  // Снизу на модель не заглянуть — там срез.
+  // Снизу на модель не заглянуть – там срез.
   controls.minPolarAngle = Math.PI * (opts.polar?.[0] ?? 0.22);
   controls.maxPolarAngle = Math.PI * (opts.polar?.[1] ?? 0.62);
 
@@ -93,7 +93,7 @@ export function createStage(canvas: HTMLCanvasElement, opts: StageOptions) {
     return gltf.scene;
   }
 
-  // Перелёт камеры: интерполяция цели и положения, с prefers-reduced-motion — мгновенно.
+  // Перелёт камеры: интерполяция цели и положения, с prefers-reduced-motion – мгновенно.
   let flight: { from: THREE.Vector3; to: THREE.Vector3; tFrom: THREE.Vector3; tTo: THREE.Vector3; start: number; dur: number } | null = null;
 
   function viewPosition(v: View) {

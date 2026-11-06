@@ -17,15 +17,15 @@
     { "category": "tattoo", "name": "Небольшая тату", "note": "до 10 см", "price": "от 4 500 ₽" },
     { "category": "tattoo", "name": "Средняя тату", "note": "до 20 см", "price": "от 7 000 ₽" },
     { "category": "tattoo", "name": "Большая тату", "note": "от 20 см, за сеанс", "price": "от 15 000 ₽" },
-    { "category": "piercing", "name": "Мочка", "note": "две — 2 000 ₽", "price": "1 200 ₽" },
+    { "category": "piercing", "name": "Мочка", "note": "две – 2 000 ₽", "price": "1 200 ₽" },
     { "category": "piercing", "name": "Ухо, нос, губы", "note": "хеликс, форвард хеликс, трагус, пина, ложный руук, конч, флэт, крыло носа, септум, монро, мадонна, медуза, лабрет, смайл", "price": "1 700 ₽" },
     { "category": "piercing", "name": "Сложные проколы", "note": "дейс, руук, снаг, бровь, язык, вертикальный лабрет, пупок", "price": "1 800 ₽" },
     { "category": "piercing", "name": "Индастриал", "price": "2 500 ₽" },
     { "category": "piercing", "name": "Бридж", "price": "2 000 ₽" },
-    { "category": "piercing", "name": "Сосок", "note": "два — 4 000 ₽", "price": "2 000 ₽" },
+    { "category": "piercing", "name": "Сосок", "note": "два – 4 000 ₽", "price": "2 000 ₽" },
     { "category": "piercing", "name": "Восстановление прокола", "price": "1 000 ₽" },
     { "category": "piercing", "name": "Лечение прокола", "price": "800 ₽" },
     { "category": "piercing", "name": "Замена, установка или снятие украшения", "price": "500 ₽" }
   ],
-  "piercingPriceNote": "Цены без учёта украшений. Украшения из титана — от 600 до 1 000 ₽."
+  "piercingPriceNote": "Цены без учёта украшений. Украшения из титана – от 600 до 1 000 ₽."
 }
