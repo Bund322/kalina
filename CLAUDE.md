@@ -17,7 +17,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   (`tools/make-placeholders.mjs`, через sharp; существующие файлы не трогает).
 - `npm run models` — пересобрать 3D-модели `public/models/*.glb` из исходника в `assets-src/`
   (`tools/build-models.mjs`, gltf-transform + meshopt). Запускать после правки исходника или среза.
-- `npm run check-links` — проверить внутренние ссылки и якоря в собранном `dist/` (`tools/check-links.mjs`).
+- `npm run check-links` — проверить внутренние ссылки, якоря и файлы (PDF) в собранном `dist/` (`tools/check-links.mjs`).
 - `npm run check` — проверка типов (`astro check`; при первом запуске попросит поставить `@astrojs/check`).
 
 Тестов и линтера нет.
@@ -39,12 +39,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `src/styles/global.css` — все стили, перенесены из макета. Палитра — CSS-переменные в `:root`
   (`--sand`, `--brick`, `--olive`, `--ink` и оттенки); тема одна, светлая. Новые цвета — через переменные.
   Блок `@media(prefers-reduced-motion:reduce)` глушит анимации — новые анимации должны в него укладываться.
+  Заголовочный шрифт `--f-display` — славянский Akathistos Caps (`src/assets/fonts/`, подключён через `@font-face`
+  с `unicode-range`: латиница и цифры в нём церковные, их и знак ₽ подставляет Oranienbaum из того же стека).
+  Цены и значения в карточках — `--f-num` (Oranienbaum).
 - Логотип-ягода — `components/BerrySymbol.astro` (`<use href="#berry">`); в `components/Preloader.astro`
   та же фигура продублирована отдельными `<g>` для анимации — при правке формы менять оба места
   (и `public/favicon.svg`).
 - **Контент — в JSON**, не в разметке: `src/data/studio.json` (прайс с категориями `tattoo|piercing|common`,
-  контакты, ссылки мессенджеров). Типизированный доступ — `src/data/studio.ts`; пустая ссылка мессенджера
-  заменяется якорем `/#book`.
+  контакты, соцсети `socials` — их иконки рисует `components/Socials.astro` в блоке записи и подвале).
+  Типизированный доступ — `src/data/studio.ts`.
+- **Перед сеансом**: `components/BeforeSession.astro` (на /tattoo и /piercing, якорь `#before`) — противопоказания
+  из `src/data/contraindications.json` и ссылка на бланк `public/docs/soglasie-do-18.pdf` (работаем с 16 лет).
+- **/education**: курсы и цены для моделей — `src/data/education.json`; карточка на главной — в `Teasers.astro`.
 - **3D**: `src/scripts/three/stage.ts` — общая сцена (прозрачный рендерер, свет, OrbitControls без зума
   колесом и без взгляда снизу, перелёты камеры `flyTo`, загрузка meshopt-glb, растворение среза шеи в шейдере).
   Модель — CC0 female base mesh (`assets-src/fab-body-kit/`, см. `SOURCE.md`); на сайт идёт обрезанный
@@ -95,7 +101,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Временное
 
 - Мастера в `masters.json` (Алина, Вера, Ника) и их фото — примерные, фото сгенерированы `npm run placeholders`.
-- Тексты, цены и сроки заживления проколов (`piercings.json`) и тексты зон (`tattoo-zones.json`)
+- Цены медузы (1 700 ₽) и симметрии губ (3 400 ₽) в `piercings.json` подставлены по аналогии — в прайсе заказчика их нет.
+- Тексты и сроки заживления проколов (`piercings.json`) и тексты зон (`tattoo-zones.json`)
   написаны для примера — заказчик их правит.
 - Плейсхолдеры контента (адрес, телефон, имена мастеров, цены) и поясняющие `<p class="note">…</p>` —
   убрать после замены на реальные данные.
