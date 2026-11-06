@@ -52,8 +52,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   Названия в карточках (работы, мастера, проколы, зоны, курсы), цены и значения — `--f-num` (Oranienbaum).
 - Орнамент – фирменная угловая композиция студии: `src/assets/ornament.webp` (только прозрачность; исходник с цветом –
   `assets-src/ornament/`). Класс `.orn` на секции кладёт её маской в `::before` в левый верхний угол; цвет – `--orn`,
-  размер – `--orn-size`, другой угол – зеркалом через `--orn-sx`/`--orn-sy: -1`. Сейчас – прайс (главная, /tattoo,
-  /piercing; правый верхний угол) и блок записи (левый нижний).
+  размер – `--orn-size`, другой угол – зеркалом через `--orn-sx`/`--orn-sy: -1`. Сейчас – только блок записи
+  внизу страниц (левый нижний угол).
 - Логотип-ягода — `components/BerrySymbol.astro` (`<use href="#berry">`); в `components/Preloader.astro`
   та же фигура продублирована отдельными `<g>` для анимации — при правке формы менять оба места
   (и `public/favicon.svg`).

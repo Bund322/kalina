@@ -145,7 +145,6 @@ h3.sub-h{font-size:2.1rem;color:var(--brick);margin-bottom:12px}
 dl{margin:0;display:grid;gap:18px}
 dt{font-family:var(--f-ui);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#D9C9B0}
 dd{margin:2px 0 0;font-size:1.4rem;overflow-wrap:anywhere}
-.big-berry{position:absolute;right:-60px;bottom:-80px;width:340px;opacity:.12;pointer-events:none}
 footer{background:var(--brick-dk);color:#D9C9B0;font-family:var(--f-ui);font-size:.75rem;padding-block:20px}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 dd a{color:inherit;text-decoration:none}
@@ -356,5 +355,4 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
   transform:scale(var(--orn-sx,1),var(--orn-sy,1));
   -webkit-mask:url('../assets/ornament.webp') 0 0/var(--orn-size,clamp(240px,36vw,520px)) no-repeat;
   mask:url('../assets/ornament.webp') 0 0/var(--orn-size,clamp(240px,36vw,520px)) no-repeat}
-#prices.orn{--orn-sx:-1}
 .contact.orn{--orn:#934536;--orn-sy:-1}
