@@ -349,11 +349,12 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 .course li{margin-bottom:6px}
 .course li::marker{color:var(--brick)}
 
-/* ornament: славянская «вышивка» из src/assets/ornament.svg – маской, цвет из --orn; уходит в фон к центру */
+/* ornament: фирменный узор студии из src/assets/ornament.webp (угловая композиция, нарисована под левый верхний угол) –
+   маской, цвет из --orn. Другие углы – зеркалом: --orn-sx/--orn-sy = -1. */
 .orn{position:relative;isolation:isolate}
 .orn::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--orn);
-  -webkit-mask:url('../assets/ornament.svg') 0 0/clamp(220px,28vw,340px) repeat,radial-gradient(circle at var(--orn-at,100% 0),#000 0,transparent var(--orn-r,55%));
-  -webkit-mask-composite:source-in;
-  mask:url('../assets/ornament.svg') 0 0/clamp(220px,28vw,340px) repeat,radial-gradient(circle at var(--orn-at,100% 0),#000 0,transparent var(--orn-r,55%));
-  mask-composite:intersect}
-.contact.orn{--orn:#934536;--orn-at:0 100%;--orn-r:70%}
+  transform:scale(var(--orn-sx,1),var(--orn-sy,1));
+  -webkit-mask:url('../assets/ornament.webp') 0 0/var(--orn-size,clamp(240px,36vw,520px)) no-repeat;
+  mask:url('../assets/ornament.webp') 0 0/var(--orn-size,clamp(240px,36vw,520px)) no-repeat}
+#prices.orn{--orn-sx:-1}
+.contact.orn{--orn:#934536;--orn-sy:-1}
