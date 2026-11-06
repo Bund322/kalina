@@ -2,7 +2,7 @@
 // порядок зон лежит в самой модели (gltf.scene.userData.zones). Зона подсвечивается шейдером целиком.
 // Выбор зоны – событие `tattoo:select` (detail.ids) на document, как у проколов.
 import * as THREE from 'three';
-import { createStage, hasWebGL, reducedMotion, type View } from './three/stage';
+import { createStage, hasWebGL, reducedMotion, tapSlop, type View } from './three/stage';
 import type { SelectDetail } from './popup';
 import { HEAT } from '../data/heat';
 import { url } from '../data/url';
@@ -15,6 +15,8 @@ const VIEWS: Record<'front' | 'back', View> = {
 };
 /** Максимум зон, которые понимает шейдер. */
 const MAX_ZONES = 32;
+/** Радиус поиска зоны вокруг пальца, px: мелкие зоны (запястье, щиколотка) иначе не попасть. */
+const TOUCH_RADIUS = 20;
 const COLOR = { base: '#D2C6B3', hover: '#B3A28A', selected: '#7F372C', selectedOnHeat: '#53512A', light: '#F1E9DC' };
 /** Скорость перехода цветов: доля пути за кадр. */
 const FADE = 0.12;
@@ -48,11 +50,13 @@ function init(root: HTMLElement) {
     return;
   }
 
-  const stage = createStage(canvas, { minDistance: 1, maxDistance: 4.2, polar: [0.3, 0.6] });
-  stage.flyTo(VIEWS.front, true);
+  const stage = createStage(canvas, { minDistance: 1, maxDistance: 5.2, polar: [0.3, 0.6] });
+  // На узкой сцене (телефон) руки уходят под скруглённые края арки – отодвигаем камеру.
+  const fit = (v: View): View => (canvas.clientWidth / canvas.clientHeight < 0.78 ? { ...v, dist: v.dist * 1.25 } : v);
+  stage.flyTo(fit(VIEWS.front), true);
   stage.controls.addEventListener('start', () => root.classList.add('touched'));
   root.querySelectorAll<HTMLButtonElement>('[data-view]').forEach((b) =>
-    b.addEventListener('click', () => stage.flyTo(VIEWS[b.dataset.view as keyof typeof VIEWS])),
+    b.addEventListener('click', () => stage.flyTo(fit(VIEWS[b.dataset.view as keyof typeof VIEWS]))),
   );
 
   stage
@@ -158,12 +162,23 @@ function init(root: HTMLElement) {
       if (v) stage.flyTo(v, reducedMotion());
     });
 
-    const zoneAt = (e: PointerEvent): string | null => {
-      const ray = stage.pointerRay(e);
-      const h = ray.intersectObjects(stage.meshes, false)[0];
+    const zoneUnder = (x: number, y: number): string | null => {
+      const h = stage.pointerRay({ clientX: x, clientY: y }).intersectObjects(stage.meshes, false)[0];
       if (!h?.face) return null;
       const attr = (h.object as THREE.Mesh).geometry.attributes._zone;
       return attr ? zones[Math.round(attr.getX(h.face.a))] ?? null : null;
+    };
+    // Пальцем: если точно под ним пусто, берём ближайшую зону по кольцам вокруг точки касания.
+    const zoneAt = (e: PointerEvent): string | null => {
+      const z = zoneUnder(e.clientX, e.clientY);
+      if (z || e.pointerType === 'mouse') return z;
+      for (const r of [TOUCH_RADIUS / 2, TOUCH_RADIUS]) {
+        for (let a = 0; a < 8; a++) {
+          const hit = zoneUnder(e.clientX + r * Math.cos((a * Math.PI) / 4), e.clientY + r * Math.sin((a * Math.PI) / 4));
+          if (hit) return hit;
+        }
+      }
+      return null;
     };
 
     let down: { x: number; y: number } | null = null;
@@ -177,7 +192,7 @@ function init(root: HTMLElement) {
     });
     canvas.addEventListener('pointerleave', () => { hovered = null; paint(); });
     canvas.addEventListener('pointerup', (e) => {
-      if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6) return;
+      if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > tapSlop(e)) return;
       const z = zoneAt(e);
       if (z) root.dispatchEvent(new CustomEvent('tattoo:select', { detail: { ids: [z], fromModel: true }, bubbles: true }));
     });

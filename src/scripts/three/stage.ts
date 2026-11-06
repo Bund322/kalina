@@ -23,6 +23,9 @@ export interface StageOptions {
   color?: string;
 }
 
+/** Насколько может сдвинуться указатель, чтобы это ещё было нажатие, а не поворот: палец дрожит сильнее мыши. */
+export const tapSlop = (e: PointerEvent) => (e.pointerType === 'mouse' ? 6 : 12);
+
 export const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export function hasWebGL(): boolean {
@@ -58,8 +61,30 @@ export function createStage(canvas: HTMLCanvasElement, opts: StageOptions) {
   controls.minDistance = opts.minDistance;
   controls.maxDistance = opts.maxDistance;
   // Снизу на модель не заглянуть – там срез.
-  controls.minPolarAngle = Math.PI * (opts.polar?.[0] ?? 0.22);
-  controls.maxPolarAngle = Math.PI * (opts.polar?.[1] ?? 0.62);
+  const polar = [Math.PI * (opts.polar?.[0] ?? 0.22), Math.PI * (opts.polar?.[1] ?? 0.62)];
+  controls.minPolarAngle = polar[0];
+  controls.maxPolarAngle = polar[1];
+
+  // Пальцем: вертикальный свайп прокручивает страницу (touch-action: pan-y в CSS), горизонтальный крутит
+  // модель вокруг оси – наклон на время касания замораживаем; двумя пальцами – приближение щипком.
+  // OrbitControls ставит холсту touch-action: none – возвращаем странице вертикальную прокрутку.
+  canvas.style.touchAction = 'pan-y';
+  const touches = new Set<number>();
+  canvas.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse') return;
+    if (!touches.size) {
+      controls.minPolarAngle = controls.maxPolarAngle = controls.getPolarAngle();
+      controls.enableZoom = true;
+    }
+    touches.add(e.pointerId);
+  }, { capture: true });
+  const release = (e: PointerEvent) => {
+    if (!touches.delete(e.pointerId) || touches.size) return;
+    [controls.minPolarAngle, controls.maxPolarAngle] = polar;
+    controls.enableZoom = false;
+  };
+  canvas.addEventListener('pointerup', release);
+  canvas.addEventListener('pointercancel', release);
 
   const material = new THREE.MeshStandardMaterial({ color: opts.color ?? '#D2C6B3', roughness: 0.85, metalness: 0 });
   if (opts.fadeFromY !== undefined && opts.fadeToY !== undefined) {
@@ -106,6 +131,7 @@ export function createStage(canvas: HTMLCanvasElement, opts: StageOptions) {
     const { target, pos } = viewPosition(v);
     // Ограничения дистанции не должны мешать перелёту к крупному плану.
     controls.minDistance = Math.min(opts.minDistance, v.dist);
+    controls.maxDistance = Math.max(opts.maxDistance, v.dist);
     if (instant) {
       flight = null;
       camera.position.copy(pos);
@@ -149,7 +175,7 @@ export function createStage(canvas: HTMLCanvasElement, opts: StageOptions) {
   controls.addEventListener('start', () => { flight = null; });
 
   const raycaster = new THREE.Raycaster();
-  function pointerRay(e: PointerEvent | MouseEvent) {
+  function pointerRay(e: { clientX: number; clientY: number }) {
     const r = canvas.getBoundingClientRect();
     const ndc = new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
     camera.updateMatrixWorld();

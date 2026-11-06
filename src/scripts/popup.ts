@@ -1,6 +1,7 @@
 // Попап сцены (прокол на /piercing, зона на /tattoo). Разметка: <div data-popup data-event="…" data-ignore="…">
 // с карточками <article data-pp="id">. Открывается по событию data-event (detail.ids), закрывается крестиком,
 // Esc и кликом мимо – кроме элементов из data-ignore (модель, список). Несколько ids – вкладки вверху.
+// На телефоне это шторка снизу: её можно смахнуть вниз за ручку или за верх, пока текст не прокручен.
 export interface SelectDetail { ids: string[] }
 
 document.querySelectorAll<HTMLElement>('[data-popup]').forEach(init);
@@ -14,6 +15,10 @@ function init(popup: HTMLElement) {
   const nameOf = (id: string) => articles.find((a) => a.dataset.pp === id)?.querySelector('h3')?.textContent ?? id;
   const mobile = window.matchMedia('(max-width: 900px)');
   let returnFocus: HTMLElement | null = null;
+  // После касания модели телефон досылает «клик» в ту же точку – туда, где уже открылось затемнение.
+  // Такой клик не должен закрывать только что открытую шторку.
+  let openedAt = 0;
+  const GHOST_CLICK_MS = 450;
 
   const select = (ids: string[]) =>
     document.dispatchEvent(new CustomEvent<SelectDetail>(eventName, { detail: { ids } }));
@@ -39,6 +44,8 @@ function init(popup: HTMLElement) {
       return b;
     })));
     show(ids[0]);
+    if (popup.hidden) openedAt = performance.now();
+    card.style.transform = card.style.transition = '';
     popup.hidden = false;
     document.documentElement.classList.toggle('pp-lock', mobile.matches);
     requestAnimationFrame(() => popup.classList.add('open'));
@@ -58,7 +65,11 @@ function init(popup: HTMLElement) {
     if (ids.length) open(ids);
     else if (!popup.hidden) close();
   });
-  popup.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', () => select([])));
+  popup.querySelectorAll('[data-close]').forEach((el) =>
+    el.addEventListener('click', () => {
+      if (performance.now() - openedAt > GHOST_CLICK_MS) select([]);
+    }),
+  );
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !popup.hidden) select([]);
   });
@@ -68,4 +79,56 @@ function init(popup: HTMLElement) {
     if (card.contains(t) || t.closest('[data-close]') || (ignore && t.closest(ignore))) return;
     select([]);
   });
+  setupSwipe(card, mobile, () => select([]));
+}
+
+/** Смахивание шторки вниз: тянется за пальцем, закрывается дальше трети высоты или быстрым жестом. */
+function setupSwipe(card: HTMLElement, mobile: MediaQueryList, close: () => void) {
+  let start: { x: number; y: number; t: number } | null = null;
+  let dragging = false;
+  let dy = 0;
+
+  card.addEventListener('touchstart', (e) => {
+    if (!mobile.matches || e.touches.length !== 1) return;
+    const touch = e.touches[0];
+    const top = card.getBoundingClientRect().top;
+    // За ручку (верх шторки) – всегда; ниже – только если текст прокручен к началу.
+    if (card.scrollTop > 0 && touch.clientY - top > 48) return;
+    start = { x: touch.clientX, y: touch.clientY, t: performance.now() };
+    dragging = false;
+    dy = 0;
+  }, { passive: true });
+
+  card.addEventListener('touchmove', (e) => {
+    if (!start) return;
+    const touch = e.touches[0];
+    const mx = touch.clientX - start.x, my = touch.clientY - start.y;
+    if (!dragging) {
+      // Горизонтальный жест – это лента фото, вверх – прокрутка текста.
+      if (Math.abs(mx) > Math.abs(my) || my < 0) { start = null; return; }
+      if (my < 6) return;
+      dragging = true;
+      card.style.transition = 'none';
+    }
+    e.preventDefault();
+    dy = Math.max(0, my);
+    card.style.transform = `translateY(${dy}px)`;
+  }, { passive: false });
+
+  const end = () => {
+    if (!start) return;
+    const speed = dy / Math.max(1, performance.now() - start.t);
+    start = null;
+    if (!dragging) return;
+    dragging = false;
+    card.style.transition = '';
+    if (dy > card.offsetHeight / 3 || speed > 0.6) {
+      card.style.transform = 'translateY(100%)';
+      setTimeout(close, 200);
+    } else {
+      card.style.transform = '';
+    }
+  };
+  card.addEventListener('touchend', end);
+  card.addEventListener('touchcancel', end);
 }

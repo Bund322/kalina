@@ -2,7 +2,7 @@
 // выбор прокола – всплывающее событие `piercing:select` (detail.ids; пустой список – снять выбор).
 // Его шлют маркеры, список, карточки «Проколы на теле» и попап; слушают все на document.
 import type * as THREE from 'three';
-import { createStage, hasWebGL, type Stage, type View } from './three/stage';
+import { createStage, hasWebGL, tapSlop, type Stage, type View } from './three/stage';
 import { url } from '../data/url';
 
 type Vec3 = [number, number, number];
@@ -211,7 +211,7 @@ function setupMarkers(stage: Stage, data: PiercingData[], getSelected: () => str
   });
   canvas.addEventListener('pointerup', (e) => {
     // Клик, а не поворот модели.
-    if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > 6) return;
+    if (!down || Math.hypot(e.clientX - down.x, e.clientY - down.y) > tapSlop(e)) return;
     const h = hit(e);
     if (h === 'cluster') flyTo(VIEWS.ear);
     else if (h) select(h.ids);
