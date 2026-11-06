@@ -41,7 +41,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   Блок `@media(prefers-reduced-motion:reduce)` глушит анимации — новые анимации должны в него укладываться.
   Заголовочный шрифт `--f-display` — славянский Akathistos Caps (`src/assets/fonts/`, подключён через `@font-face`
   с `unicode-range`: латиница и цифры в нём церковные, их и знак ₽ подставляет Oranienbaum из того же стека).
-  Цены и значения в карточках — `--f-num` (Oranienbaum).
+  Названия в карточках (работы, мастера, проколы, зоны, курсы), цены и значения — `--f-num` (Oranienbaum).
 - Логотип-ягода — `components/BerrySymbol.astro` (`<use href="#berry">`); в `components/Preloader.astro`
   та же фигура продублирована отдельными `<g>` для анимации — при правке формы менять оба места
   (и `public/favicon.svg`).

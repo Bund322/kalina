@@ -9,7 +9,7 @@
   --olive:#7A7840; --olive-ink:#53512A;
   --ink:#2B1E17;
   --f-display:'Akathistos','Oranienbaum','Times New Roman',serif;
-  /* Цифры цен и значения в карточках — читаемый Oranienbaum. */
+  /* Названия в карточках, цифры цен и значения — читаемый Oranienbaum. */
   --f-num:'Oranienbaum','Times New Roman',serif;
   --f-body:'Cormorant Garamond',Georgia,serif;
   --f-ui:'Golos Text',system-ui,sans-serif;
@@ -91,7 +91,7 @@ section{padding-block:clamp(56px,9vw,110px)}
 .tile:hover svg{transform:scale(1.12) rotate(2deg)}
 .tile figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(transparent,rgba(43,30,23,.78));color:#F1E9DC;transform:translateY(60%);opacity:0;transition:all .45s cubic-bezier(.2,.8,.2,1)}
 .tile:hover figcaption,.tile:focus-visible figcaption{transform:none;opacity:1}
-.tile figcaption b{display:block;font-family:var(--f-display);font-weight:400;font-size:1.3rem}
+.tile figcaption b{display:block;font-family:var(--f-num);font-weight:400;font-size:1.3rem}
 .tile figcaption small{font-family:var(--f-ui);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
 @media(hover:none){.tile figcaption{transform:none;opacity:1}}
 .price-note{font-family:var(--f-ui);font-size:.8rem;color:var(--olive-ink);margin-top:16px}
@@ -105,7 +105,7 @@ section{padding-block:clamp(56px,9vw,110px)}
 .m-ph{aspect-ratio:4/5;background:var(--sand-dp);position:relative;overflow:hidden;border-radius:999px 999px 0 0}
 .m-ph svg{position:absolute;inset:0;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .m-card:hover .m-ph svg{transform:scale(1.08)}
-.m-card h3{font-size:2rem;color:var(--brick);margin-top:18px}
+.m-card h3{font-family:var(--f-num);font-size:2rem;color:var(--brick);margin-top:18px}
 .m-card p{margin:6px 0 0}
 
 /* prices */
@@ -251,7 +251,7 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 .pp-close svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
 .pp-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 48px 16px 0}
 .pp-tabs .chip[aria-selected="true"]{background:var(--olive-ink);color:var(--sand)}
-.pp-card h3{font-size:2.3rem;color:var(--brick);margin:4px 48px 14px 0}
+.pp-card h3{font-family:var(--f-num);font-size:2.3rem;color:var(--brick);margin:4px 48px 14px 0}
 .pp-card p{margin:0 0 16px;font-size:1.15rem}
 .pp-meta{display:flex;gap:24px;flex-wrap:wrap;margin:0 0 14px}
 .pp-meta dt{font-family:var(--f-ui);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-ink)}
@@ -276,7 +276,7 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 .bp-ph{display:block;width:100%;aspect-ratio:3/4;overflow:hidden;border-radius:999px 999px 0 0;background:var(--sand-dp);margin-bottom:10px}
 .bp-ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
 .bp-card:hover .bp-ph img{transform:scale(1.06)}
-.bp-name{font-family:var(--f-display);font-size:1.8rem;color:var(--brick);line-height:1}
+.bp-name{font-family:var(--f-num);font-size:1.8rem;color:var(--brick);line-height:1}
 .bp-price{font-family:var(--f-ui);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--olive-ink)}
 
 /* /tattoo — манекен и шкала боли */
@@ -342,7 +342,7 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 @media(max-width:1000px){.course-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.course-grid{grid-template-columns:1fr}}
 .course{border:1.5px solid var(--brick);border-radius:24px;padding:24px 22px;display:flex;flex-direction:column;min-width:0}
-.course h3{font-size:1.9rem;color:var(--brick)}
+.course h3{font-family:var(--f-num);font-size:1.9rem;color:var(--brick)}
 .course-price{font-family:var(--f-num);font-size:1.6rem;color:var(--olive-ink);margin:10px 0 14px}
 .course ul{margin:0;padding-left:1.1em;font-size:1.1rem;line-height:1.35}
 .course li{margin-bottom:6px}
