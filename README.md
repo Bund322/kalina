@@ -23,6 +23,7 @@ npm run dev
 | `npm run check-links` | проверить внутренние ссылки в собранном `dist/` |
 | `npm run placeholders` | создать фото-заглушки для файлов из JSON, которых ещё нет |
 | `npm run models` | пересобрать 3D-модели из `assets-src/` (нужно редко) |
+| `npm run font` | пересобрать заголовочный шрифт Kalina Display (нужно редко, см. ниже) |
 
 ## Как поменять контент
 
@@ -94,6 +95,22 @@ Telegram-канала и ВК в блоке записи и подвале), с�
 
 `src/data/education.json`: курсы (`title`, `price`, `program` — список пунктов), итог курсов, цены для моделей
 и ссылка на канал. Фото страницы — `src/assets/education/practice.jpg`.
+
+## Шрифт заголовков
+
+Заголовки и логотип набраны своим шрифтом **Kalina Display** — это Akathistos Caps с понятными М, Я, Э, Ё, Ъ, У,
+цифрами и символами `? % + × № & ₽`. Готовые файлы:
+
+- `src/assets/fonts/kalina-display.woff2` — для сайта;
+- `assets-src/fonts/KalinaDisplay-Regular.ttf` — для установки на компьютер (Figma, Photoshop, Word).
+
+Знаки собирает скрипт `tools/build-font.py`. Чтобы пересобрать после правки скрипта, нужен Python 3:
+
+```bash
+python -m venv .venv-font
+.venv-font/Scripts/python -m pip install fonttools brotli skia-pathops
+.venv-font/Scripts/python tools/build-font.py
+```
 
 ## Деплой
 

@@ -4,3 +4,5 @@ dist/
 .env
 .env.*
 .playwright-mcp/
+.venv-font/
+tools/__pycache__/

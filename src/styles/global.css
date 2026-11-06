@@ -1,14 +1,14 @@
 /* Стили перенесены из макета docs/mockup/. Одна светлая тема по фирменной палитре. */
-/* Славянский шрифт заголовков и логотипа. В нём нет знака ₽ — его подставляет Oranienbaum из того же стека. */
-@font-face{font-family:'Akathistos';src:url('../assets/fonts/akathistos-caps.ttf') format('truetype');font-display:swap;
-  /* Латиницу и цифры шрифт рисует церковными знаками — их берём из Oranienbaum. */
-  unicode-range:U+0000-002F,U+003A-0040,U+005B-0060,U+007B-00BF,U+0400-04FF,U+2010-206F}
+/* Славянский шрифт заголовков и логотипа — свой, собран из Akathistos Caps (npm run font). */
+@font-face{font-family:'Kalina Display';src:url('../assets/fonts/kalina-display.woff2') format('woff2');font-display:swap;
+  /* Латиницу шрифт рисует церковными знаками — её берём из Oranienbaum. */
+  unicode-range:U+0000-0040,U+005B-0060,U+007B-00FF,U+0400-04FF,U+2010-206F,U+20BD,U+2116}
 :root{
   --sand:#C4B5A0; --sand-lt:#D2C6B3; --sand-dp:#B3A28A;
   --brick:#7F372C; --brick-dk:#5F281F;
   --olive:#7A7840; --olive-ink:#53512A;
   --ink:#2B1E17;
-  --f-display:'Akathistos','Oranienbaum','Times New Roman',serif;
+  --f-display:'Kalina Display','Oranienbaum','Times New Roman',serif;
   /* Названия в карточках, цифры цен и значения — читаемый Oranienbaum. */
   --f-num:'Oranienbaum','Times New Roman',serif;
   --f-body:'Cormorant Garamond',Georgia,serif;

@@ -9,6 +9,7 @@
     "check": "astro check",
     "placeholders": "node tools/make-placeholders.mjs",
     "models": "node tools/build-models.mjs",
+    "font": "python tools/build-font.py",
     "check-links": "node tools/check-links.mjs"
   },
   "dependencies": {

@@ -17,6 +17,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   (`tools/make-placeholders.mjs`, через sharp; существующие файлы не трогает).
 - `npm run models` — пересобрать 3D-модели `public/models/*.glb` из исходника в `assets-src/`
   (`tools/build-models.mjs`, gltf-transform + meshopt). Запускать после правки исходника или среза.
+- `npm run font` — пересобрать заголовочный шрифт Kalina Display (`tools/build-font.py`; нужен Python
+  с `fonttools brotli skia-pathops`, локально — в `.venv-font/`).
 - `npm run check-links` — проверить внутренние ссылки, якоря и файлы (PDF) в собранном `dist/` (`tools/check-links.mjs`).
 - `npm run check` — проверка типов (`astro check`; при первом запуске попросит поставить `@astrojs/check`).
 
@@ -39,8 +41,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `src/styles/global.css` — все стили, перенесены из макета. Палитра — CSS-переменные в `:root`
   (`--sand`, `--brick`, `--olive`, `--ink` и оттенки); тема одна, светлая. Новые цвета — через переменные.
   Блок `@media(prefers-reduced-motion:reduce)` глушит анимации — новые анимации должны в него укладываться.
-  Заголовочный шрифт `--f-display` — славянский Akathistos Caps (`src/assets/fonts/`, подключён через `@font-face`
-  с `unicode-range`: латиница и цифры в нём церковные, их и знак ₽ подставляет Oranienbaum из того же стека).
+  Заголовочный шрифт `--f-display` — свой Kalina Display (`src/assets/fonts/kalina-display.woff2`). Его собирает
+  `npm run font` (`tools/build-font.py`, Python + fontTools/skia-pathops) из Akathistos Caps в `assets-src/fonts/`:
+  церковные М, Я, Э, Ё, Ъ, У заменены привычными, добавлены цифры и `? % + × № & ₽`; новые знаки склеены из
+  деталей самого шрифта (стволы с засечками, дуги З/О, нога Л, перекладина Т). Латиница в шрифте церковная —
+  `unicode-range` в `@font-face` отдаёт её Oranienbaum. Рядом скрипт кладёт TTF для установки в систему.
   Названия в карточках (работы, мастера, проколы, зоны, курсы), цены и значения — `--f-num` (Oranienbaum).
 - Логотип-ягода — `components/BerrySymbol.astro` (`<use href="#berry">`); в `components/Preloader.astro`
   та же фигура продублирована отдельными `<g>` для анимации — при правке формы менять оба места
