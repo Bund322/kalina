@@ -19,6 +19,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   (`tools/build-models.mjs`, gltf-transform + meshopt). Запускать после правки исходника или среза.
 - `npm run font` — пересобрать заголовочный шрифт Kalina Display (`tools/build-font.py`; нужен Python
   с `fonttools brotli skia-pathops`, локально — в `.venv-font/`).
+- `npm run glyphs` — раскадровка Kalina Display: каждая буква (А–Я, Ё), цифра и знак — отдельный PNG без фона
+  в `docs/font/glyphs/` (`tools/render-glyphs.py`, Pillow из `.venv-font/`; кегль и цвет — `--size`, `--color`).
 - `npm run check-links` — проверить внутренние ссылки, якоря и файлы (PDF) в собранном `dist/` (`tools/check-links.mjs`).
 - `npm run check` — проверка типов (`astro check`; при первом запуске попросит поставить `@astrojs/check`).
 
