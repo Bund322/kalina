@@ -1,5 +1,5 @@
 ---
-import { contacts, phoneHref } from '../data/studio';
+import { contacts, phoneHref, routeHref } from '../data/studio';
 import Socials from './Socials.astro';
 ---
 <section class="contact orn" id="book">
@@ -20,6 +20,10 @@ import Socials from './Socials.astro';
         <div><dt>Часы работы</dt><dd>{contacts.hours}<small>{contacts.hoursNote}</small></dd></div>
         <div><dt>Телефон</dt><dd><a href={phoneHref}>{contacts.phone}</a></dd></div>
       </dl>
+    </div>
+    <div class="c-map rv">
+      <iframe src={contacts.map} title="Студия «Калина» на карте" loading="lazy" allowfullscreen></iframe>
+      <a href={routeHref} target="_blank" rel="noopener">Как добраться – открыть в Яндекс Картах</a>
     </div>
   </div>
 </section>

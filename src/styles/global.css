@@ -136,6 +136,10 @@ h3.sub-h{font-size:2.1rem;color:var(--brick);margin-bottom:12px}
 .c-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(28px,6vw,80px);margin-top:36px}
 @media(max-width:800px){.c-grid{grid-template-columns:1fr}}
 .c-grid>*{min-width:0}
+.c-map{margin-top:clamp(36px,5vw,56px)}
+.c-map iframe{display:block;width:100%;height:clamp(280px,40vw,400px);border:1.5px solid rgba(217,201,176,.5);border-radius:20px;background:var(--sand-dp)}
+.c-map a{display:inline-block;margin-top:12px;font-family:var(--f-ui);font-size:.8rem;letter-spacing:.08em;color:var(--sand);text-underline-offset:3px}
+.c-map a:hover{color:#D9C9B0}
 .contact .btn{border-color:var(--sand);color:var(--sand)}
 .contact .btn::before{background:var(--sand)}
 .contact .btn:hover{color:var(--brick)}

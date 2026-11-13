@@ -61,6 +61,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   (и `public/favicon.svg`).
 - **Контент — в JSON**, не в разметке: `src/data/studio.json` (прайс с категориями `tattoo|piercing|common`,
   контакты, соцсети `socials` — их иконки рисует `components/Socials.astro` в блоке записи и подвале).
+  В блоке записи (`components/Contact.astro`) – карта: iframe виджета конструктора Яндекс Карт (`contacts.map`,
+  `loading="lazy"`) и ссылка «Как добраться» – маршрут до `contacts.route` (`routeHref` в `studio.ts`).
   Типизированный доступ — `src/data/studio.ts`.
 - **Перед сеансом**: `components/BeforeSession.astro` (на /tattoo и /piercing, якорь `#before`) — противопоказания
   из `src/data/contraindications.json` и ссылка на бланк `public/docs/soglasie-do-18.pdf` (работаем с 16 лет).

@@ -20,6 +20,8 @@ export const contacts = studio.contacts;
 export const socials = studio.socials as Social[];
 export const prices = studio.prices as PriceItem[];
 export const piercingPriceNote = studio.piercingPriceNote;
+/** Маршрут до студии в Яндекс Картах: от текущего места пользователя до адреса из `contacts.route`. */
+export const routeHref = `https://yandex.ru/maps/?rtext=~${encodeURIComponent(contacts.route)}`;
 /** Ссылка для звонка: только цифры и плюс. */
 export const phoneHref = `tel:${contacts.phone.replace(/[^\d+]/g, '')}`;
 
