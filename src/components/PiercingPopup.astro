@@ -16,7 +16,9 @@ import { piercings, groupLabel } from '../data/piercings';
         <dl class="pp-meta">
           <div><dt>Цена</dt><dd>{p.price}</dd></div>
           <div><dt>Заживление</dt><dd>{p.healing}</dd></div>
+          <div><dt>Украшение</dt><dd>{p.jewelry}</dd></div>
         </dl>
+        {p.ring && <p class="pp-ring">{p.ring}</p>}
         <p>{p.description}</p>
         <div class="pp-photos">
           {p.photos.map((img, i) => (

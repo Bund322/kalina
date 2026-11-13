@@ -21,6 +21,10 @@ const schema = z.array(
     /** Строкой, как на сайте: «от 3 500 ₽». */
     price: z.string().min(1),
     healing: z.string().min(1),
+    /** Первое украшение, которое ставят при проколе (по методичке студии). */
+    jewelry: z.string().min(1),
+    /** Когда можно поменять на кольцо – только если это есть в методичке. */
+    ring: z.string().optional(),
     /** Имена файлов в src/content/piercings/. */
     photos: z.array(z.string().min(1)).min(1).max(3, 'не больше 3 фото на прокол'),
   }),
