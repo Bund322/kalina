@@ -179,6 +179,7 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .track{animation:none}.pre{display:none}
+  .works-strip{scroll-behavior:auto}
   .rv{transform:none}
 }
 
@@ -347,6 +348,21 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 .course ul{margin:0;padding-left:1.1em;font-size:1.1rem;line-height:1.35}
 .course li{margin-bottom:6px}
 .course li::marker{color:var(--brick)}
+.works{margin-top:clamp(40px,6vw,64px)}
+.works-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.works-head .sub-h{margin:0}
+.works-nav{display:flex;gap:8px}
+.works-btn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--brick);background:transparent;color:var(--brick);font-size:1.6rem;line-height:1;cursor:pointer;transition:background .25s,color .25s,opacity .25s}
+.works-btn:hover:not(:disabled){background:var(--brick);color:var(--sand)}
+.works-btn:disabled{opacity:.3;cursor:default}
+.works-strip{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3 * 14px) / 3.5);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+.works-strip::-webkit-scrollbar{display:none}
+.works-strip li{scroll-snap-align:start}
+.works-strip img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:16px;background:var(--sand-dp)}
+@media(max-width:560px){
+  .works-nav{display:none}
+  .works-strip{grid-auto-columns:76%;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));scroll-padding-inline:max(16px,env(safe-area-inset-left,0px))}
+}
 
 /* ornament: фирменный узор студии из src/assets/ornament.webp (угловая композиция, нарисована под левый верхний угол) –
    маской, цвет из --orn. Другие углы – зеркалом: --orn-sx/--orn-sy = -1. */

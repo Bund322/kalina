@@ -5,6 +5,10 @@ import { Image } from 'astro:assets';
 import photo from '../assets/education/practice.jpg';
 import edu from '../data/education.json';
 import { contacts } from '../data/studio';
+
+// Работы учеников – лента в блоке «Для моделей»; порядок – по имени файла.
+const works = Object.values(import.meta.glob<{ default: ImageMetadata }>('../assets/education/students/*.jpg', { eager: true }))
+  .map((m) => m.default);
 ---
 <Base title="Обучение" description="Курсы тату и пирсинга в студии «Калина»: теория, практика на моделях, диплом и возможность работать в студии.">
   <section class="edu">
@@ -44,7 +48,7 @@ import { contacts } from '../data/studio';
       <div class="rv">
         <div class="label">Для моделей</div>
         <h3 class="sub-h">Стать моделью</h3>
-        <p style="max-width:40ch;margin:0 0 20px">Ученики отрабатывают практику на моделях под контролем мастера – это возможность сделать тату или прокол дешевле.</p>
+        <p style="max-width:40ch;margin:0 0 20px">Ученики отрабатывают практику на моделях под контролем мастера – это возможность сделать тату или прокол дешевле. Так выглядят работы наших учеников.</p>
         <a class="btn" href={edu.models.channel} target="_blank" rel="noopener">Канал с моделями</a>
       </div>
       <div class="rv">
@@ -55,7 +59,23 @@ import { contacts } from '../data/studio';
         </ul>
       </div>
     </div>
+    <div class="wrap works rv">
+      <div class="works-head">
+        <h3 class="sub-h">Работы учеников</h3>
+        <div class="works-nav">
+          <button class="works-btn" type="button" data-dir="-1" aria-label="Предыдущие работы">‹</button>
+          <button class="works-btn" type="button" data-dir="1" aria-label="Следующие работы">›</button>
+        </div>
+      </div>
+      <ul class="works-strip" data-works>
+        {works.map((w) => (
+          <li><Image src={w} alt="Работа ученика студии" widths={[360, 720]} sizes="(max-width: 560px) 76vw, 300px" /></li>
+        ))}
+      </ul>
+    </div>
   </section>
+
+  <script>import '../scripts/works-strip';</script>
 
   <Contact />
 </Base>
