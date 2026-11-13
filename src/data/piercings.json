@@ -7,7 +7,7 @@
     "description": "Классический прокол мягкой части уха – самый быстрый в заживлении и почти безболезненный. Хорошая точка старта: сюда подходят и гвоздики, и кольца.",
     "price": "1 200 ₽, две – 2 000 ₽",
     "healing": "1–2 месяца",
-    "photos": ["lobe-1.jpg"]
+    "photos": ["lobe-1.jpg", "lobe-2.jpg"]
   },
   {
     "id": "helix",
@@ -17,7 +17,7 @@
     "description": "Прокол хряща по верхнему внешнему краю уха. Можно сделать один или несколько подряд – получится аккуратная «дорожка».",
     "price": "1 700 ₽",
     "healing": "4–6 месяцев",
-    "photos": ["helix-1.jpg", "helix-2.jpg"]
+    "photos": ["helix-1.jpg", "helix-2.jpg", "helix-3.jpg"]
   },
   {
     "id": "forward-helix",
@@ -37,7 +37,7 @@
     "description": "Прокол плоской части хряща в верхней половине уха. Хорошо видно украшение – подходит для заметных гвоздиков и кластеров.",
     "price": "1 700 ₽",
     "healing": "6–9 месяцев",
-    "photos": ["flat-1.jpg"]
+    "photos": ["flat-1.jpg", "flat-2.jpg"]
   },
   {
     "id": "tragus",
@@ -47,7 +47,7 @@
     "description": "Прокол небольшого хрящевого выступа перед слуховым проходом. Аккуратный и заметный, украшение – маленький гвоздик или кольцо.",
     "price": "1 700 ₽",
     "healing": "4–6 месяцев",
-    "photos": ["tragus-1.jpg"]
+    "photos": ["tragus-1.jpg", "tragus-2.jpg"]
   },
   {
     "id": "rook",
@@ -58,7 +58,7 @@
     "description": "Вертикальный прокол складки хряща над дейсом, во внутренней части уха. Подходит не всем – мастер оценит анатомию на консультации.",
     "price": "1 800 ₽",
     "healing": "6–9 месяцев",
-    "photos": ["rook-1.jpg", "rook-2.jpg"]
+    "photos": ["rook-1.jpg"]
   },
   {
     "id": "false-rook",
@@ -79,7 +79,7 @@
     "description": "Прокол в «чаше» ушной раковины – внутренний или внешний. Сюда подходят и гвоздики, и крупные кольца вокруг края уха.",
     "price": "1 700 ₽",
     "healing": "6–9 месяцев",
-    "photos": ["conch-1.jpg"]
+    "photos": ["conch-1.jpg", "conch-2.jpg"]
   },
   {
     "id": "daith",
@@ -100,7 +100,7 @@
     "description": "Два прокола в верхней части хряща, соединённые одной длинной штангой. Эффектный, но требовательный к уходу и анатомии уха.",
     "price": "2 500 ₽",
     "healing": "6–12 месяцев",
-    "photos": ["industrial-1.jpg", "industrial-2.jpg", "industrial-3.jpg"]
+    "photos": ["industrial-1.jpg", "industrial-2.jpg"]
   },
   {
     "id": "pinna",
@@ -130,7 +130,7 @@
     "description": "Прокол крыла носа. Носится с гвоздиком или тонким кольцом, заживает спокойно при правильном уходе.",
     "price": "1 700 ₽",
     "healing": "3–6 месяцев",
-    "photos": ["nostril-1.jpg", "nostril-2.jpg"]
+    "photos": ["nostril-1.jpg", "nostril-2.jpg", "nostril-3.jpg"]
   },
   {
     "id": "septum",
@@ -140,7 +140,7 @@
     "description": "Прокол мягкой перегородки носа ниже хряща. Кольцо можно перевернуть и спрятать, когда нужно.",
     "price": "1 700 ₽",
     "healing": "2–3 месяца",
-    "photos": ["septum-1.jpg", "septum-2.jpg", "septum-3.jpg"]
+    "photos": ["septum-1.jpg"]
   },
   {
     "id": "bridge",
@@ -170,7 +170,7 @@
     "description": "Прокол под нижней губой по центру. Внутри – плоский диск, который бережёт зубы и дёсны.",
     "price": "1 700 ₽",
     "healing": "2–3 месяца",
-    "photos": ["labret-1.jpg", "labret-2.jpg"]
+    "photos": ["labret-1.jpg", "labret-2.jpg", "labret-3.jpg"]
   },
   {
     "id": "vertical-labret",
@@ -180,7 +180,7 @@
     "description": "Прокол проходит вертикально через нижнюю губу: оба конца штанги видны снаружи. Внутри рта украшения нет.",
     "price": "1 800 ₽",
     "healing": "2–3 месяца",
-    "photos": ["vertical-labret-1.jpg", "vertical-labret-2.jpg"]
+    "photos": ["vertical-labret-1.jpg", "vertical-labret-2.jpg", "vertical-labret-3.jpg"]
   },
   {
     "id": "lip-symmetry",
@@ -190,7 +190,7 @@
     "description": "Два симметричных прокола по бокам нижней губы. Делаем за один сеанс, чтобы украшения стояли ровно.",
     "price": "3 400 ₽",
     "healing": "2–3 месяца",
-    "photos": ["lip-symmetry-1.jpg", "lip-symmetry-2.jpg"]
+    "photos": ["lip-symmetry-1.jpg", "lip-symmetry-2.jpg", "lip-symmetry-3.jpg"]
   },
   {
     "id": "medusa",
@@ -200,7 +200,7 @@
     "description": "Прокол по центру ямки над верхней губой. Украшение – лабрет с плоским диском внутри.",
     "price": "1 700 ₽",
     "healing": "2–3 месяца",
-    "photos": ["medusa-1.jpg", "medusa-2.jpg"]
+    "photos": ["medusa-1.jpg"]
   },
   {
     "id": "monroe",
@@ -210,7 +210,7 @@
     "description": "Прокол над верхней губой слева, на месте «мушки». Украшение – небольшой гвоздик-лабрет.",
     "price": "1 700 ₽",
     "healing": "2–3 месяца",
-    "photos": ["monroe-1.jpg", "monroe-2.jpg"]
+    "photos": ["monroe-1.jpg"]
   },
   {
     "id": "madonna",
@@ -231,7 +231,7 @@
     "description": "Вертикальный прокол по центру языка. Первые дни язык отекает, поэтому сначала ставим штангу подлиннее и меняем после заживления.",
     "price": "1 800 ₽",
     "healing": "4–6 недель",
-    "photos": ["tongue-1.jpg", "tongue-2.jpg"]
+    "photos": ["tongue-1.jpg", "tongue-2.jpg", "tongue-3.jpg"]
   },
   {
     "id": "smiley",
@@ -242,7 +242,7 @@
     "description": "Прокол уздечки верхней губы: украшение видно только при улыбке. Тонкая зона – подходит не всем.",
     "price": "1 700 ₽",
     "healing": "4–6 недель",
-    "photos": ["smiley-1.jpg"]
+    "photos": ["smiley-1.jpg", "smiley-2.jpg"]
   },
   {
     "id": "navel",
@@ -251,7 +251,7 @@
     "description": "Прокол кожи над или под пупком. Нужна подходящая анатомия – мастер проверит её на консультации.",
     "price": "1 800 ₽",
     "healing": "6–12 месяцев",
-    "photos": ["navel-1.jpg"]
+    "photos": ["navel-1.jpg", "navel-2.jpg"]
   },
   {
     "id": "nipples",
