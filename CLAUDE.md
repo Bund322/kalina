@@ -124,7 +124,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Временное
 
 - Мастера в `masters.json` (Алина, Вера, Ника) и их фото — примерные, фото сгенерированы `npm run placeholders`.
-- Фото проколов в `src/content/piercings/` реальные не у всех: у форвард-хеликса, ложного рука, пинны, снага,
+- Фото проколов в `src/content/piercings/` реальные не у всех: у форвард-хеликса, ложного рука, снага,
   мадонны и сосков – заглушки `npm run placeholders`.
 - Цены медузы (1 700 ₽) и симметрии губ (3 400 ₽) в `piercings.json` подставлены по аналогии — в прайсе заказчика их нет.
 - Тексты и сроки заживления проколов (`piercings.json`) и тексты зон (`tattoo-zones.json`)
