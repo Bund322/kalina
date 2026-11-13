@@ -45,6 +45,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   пропом `preloader` — только на главной: анимация букв заголовка hero (`1.5s`) ждёт его ухода (`preOut … 1.4s`).
 - `src/styles/global.css` — все стили, перенесены из макета. Палитра — CSS-переменные в `:root`
   (`--sand`, `--brick`, `--olive`, `--ink` и оттенки); тема одна, светлая. Новые цвета — через переменные.
+  Фоны разделов чередуются: обычный песочный и светлый `--sand-lt` (класс `.alt` или свой класс раздела), два
+  соседних раздела одного фона не ставим; на /piercing блок «Перед сеансом» поэтому обычный (`<BeforeSession plain />`).
   Блок `@media(prefers-reduced-motion:reduce)` глушит анимации — новые анимации должны в него укладываться.
   Заголовочный шрифт `--f-display` — свой Kalina Display (`src/assets/fonts/kalina-display.woff2`). Его собирает
   `npm run font` (`tools/build-font.py`, Python + fontTools/skia-pathops) из Akathistos Caps в `assets-src/fonts/`:

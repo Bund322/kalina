@@ -5,11 +5,13 @@ import { url } from '../data/url';
 
 interface Props {
   kind: 'tattoo' | 'piercing';
+  /** Обычный песочный фон вместо светлого – когда светлый раздел уже стоит перед блоком (/piercing). */
+  plain?: boolean;
 }
-const { kind } = Astro.props;
+const { kind, plain = false } = Astro.props;
 const fits = (i: { only?: string }) => !i.only || i.only === kind;
 ---
-<section class="before" id="before">
+<section class:list={["before", { plain }]} id="before">
   <div class="wrap">
     <div class="sec-head rv"><div><div class="label">Перед сеансом</div><h2>Важно знать</h2></div></div>
     <div class="two">

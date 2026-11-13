@@ -75,6 +75,8 @@ nav a:hover::after,nav a[aria-current="page"]::after{transform:scaleX(1)}
 
 /* sections */
 section{padding-block:clamp(56px,9vw,110px)}
+/* Разделы чередуют фон: обычный песочный и светлый (.alt), чтобы соседние не сливались. */
+.alt{background:var(--sand-lt)}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(24px,4vw,44px)}
 .sec-head h2{font-size:clamp(2.4rem,7vw,5rem);color:var(--brick)}
 .rv{transform:translateY(26px);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
@@ -330,6 +332,7 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 
 /* before: противопоказания и согласие до 18 */
 .before{background:var(--sand-lt)}
+.before.plain{background:var(--sand)}
 .contra{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,36px)}
 @media(max-width:560px){.contra{grid-template-columns:1fr}}
 .contra ul{margin:10px 0 0;padding-left:1.1em;font-size:1.1rem;line-height:1.35}
