@@ -21,5 +21,28 @@
       { "photo": "work-8.jpg", "caption": "Пупок", "type": "piercing" },
       { "photo": "work-9.jpg", "caption": "Портрет собаки, голень", "type": "tattoo" }
     ]
+  },
+  {
+    "slug": "kira",
+    "name": "Кира",
+    "photo": "photo.jpg",
+    "direction": "both",
+    "styles": ["блэкворк", "цветная татуировка", "каллиграфия", "пирсинг лица"],
+    "about": [
+      "Описание мастера появится позже: здесь будет рассказ о стиле, опыте и подходе к работе."
+    ],
+    "telegram": "",
+    "instagram": "",
+    "works": [
+      { "photo": "work-1.jpg", "caption": "Цветы, блэкворк, предплечье", "type": "tattoo" },
+      { "photo": "work-2.jpg", "caption": "Бровь", "type": "piercing" },
+      { "photo": "work-3.jpg", "caption": "Сова и перо, предплечье", "type": "tattoo" },
+      { "photo": "work-4.jpg", "caption": "Симметрия губ", "type": "piercing" },
+      { "photo": "work-5.jpg", "caption": "Каллиграфия, предплечье", "type": "tattoo" },
+      { "photo": "work-6.jpg", "caption": "Язык", "type": "piercing" },
+      { "photo": "work-7.jpg", "caption": "Портрет, нога", "type": "tattoo" },
+      { "photo": "work-8.jpg", "caption": "Лабрет", "type": "piercing" },
+      { "photo": "work-9.jpg", "caption": "Пупок", "type": "piercing" }
+    ]
   }
 ]
