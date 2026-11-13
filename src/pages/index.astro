@@ -7,8 +7,11 @@ import { url } from '../data/url';
 import { piercingPriceNote } from '../data/studio';
 import { Image } from 'astro:assets';
 import { masters, directionLabel, gallery, workCategories } from '../data/masters';
+import edu from '../data/education.json';
 
 const works = gallery();
+// Цены для моделей – те же, что на странице обучения: «тату от 800 ₽, пирсинг от 600 ₽».
+const modelPrices = edu.models.prices.map((m) => `${m.name.toLowerCase()} ${m.price}`).join(', ');
 
 const letters = [...'Калина'];
 const words = ['Тату', 'Пирсинг', 'Эскизы', 'Ботаника', 'Орнамент', 'Титан', 'Стерильно'];
@@ -89,6 +92,13 @@ const marquee = [...words, ...words, ...words, ...words];
           <PriceList only={['piercing']} />
           <p class="price-note">{piercingPriceNote}</p>
         </div>
+      </div>
+      <div class="model-cta rv">
+        <div>
+          <h3 class="sub-h">Стать моделью</h3>
+          <p>Ученики студии делают тату и проколы под присмотром мастера – дешевле обычного: {modelPrices}. Свободные места публикуем в канале.</p>
+        </div>
+        <a class="btn" href={edu.models.channel} target="_blank" rel="noopener">Канал для моделей</a>
       </div>
     </div>
   </section>

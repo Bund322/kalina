@@ -67,6 +67,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Перед сеансом**: `components/BeforeSession.astro` (на /tattoo и /piercing, якорь `#before`) — противопоказания
   из `src/data/contraindications.json` и ссылка на бланк `public/docs/soglasie-do-18.pdf` (работаем с 16 лет).
 - **/education**: курсы и цены для моделей — `src/data/education.json`; карточка на главной — в `Teasers.astro`.
+  Под ценами на главной — плашка «Стать моделью» (`.model-cta`): цены и канал для моделей берёт оттуда же.
   Работы учеников — фото в `src/assets/education/students/` (порядок в ленте — по имени файла, `01-…`, `02-…`), лента
   в блоке «Для моделей»; стрелки на компьютере — `src/scripts/works-strip.ts`, на телефоне они скрыты.
 - **3D**: `src/scripts/three/stage.ts` — общая сцена (прозрачный рендерер, свет, OrbitControls без зума
