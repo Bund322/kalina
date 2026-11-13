@@ -1,6 +1,7 @@
 // Главная: фильтр галереи «Работы» и параллакс ягод в hero.
 
-// У плитки в data-c перечислены категории через пробел: мастер «both» попадает и в тату, и в пирсинг.
+// У плитки в data-c перечислены категории через пробел: тип работы, а без него – направление мастера
+// (работа мастера «both» без типа попадает и в тату, и в пирсинг).
 document.querySelectorAll<HTMLButtonElement>('.chip').forEach((b) => {
   b.addEventListener('click', () => {
     document.querySelectorAll('.chip').forEach((x) => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));

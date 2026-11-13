@@ -21,7 +21,7 @@ const schema = z.array(
     telegram: z.string().optional(),
     instagram: z.string().optional(),
     works: z
-      .array(z.object({ photo: z.string().min(1), caption: z.string().optional() }))
+      .array(z.object({ photo: z.string().min(1), caption: z.string().optional(), type: z.enum(['tattoo', 'piercing']).optional() }))
       .max(MAX_WORKS, `у мастера может быть не больше ${MAX_WORKS} работ`),
   }),
 );
@@ -31,6 +31,8 @@ export type Direction = 'tattoo' | 'piercing' | 'both';
 export interface Work {
   image: ImageMetadata;
   caption?: string;
+  /** Тату или прокол – для фильтра галереи; если не указан, берётся направление мастера. */
+  type?: 'tattoo' | 'piercing';
 }
 
 export interface Master {
@@ -85,7 +87,7 @@ function load(): Master[] {
       telegram: m.telegram || undefined,
       instagram: m.instagram || undefined,
       photo: photo(m.slug, m.photo),
-      works: m.works.map((w) => ({ image: photo(m.slug, w.photo), caption: w.caption })),
+      works: m.works.map((w) => ({ image: photo(m.slug, w.photo), caption: w.caption, type: w.type })),
     };
   });
 }
@@ -114,3 +116,6 @@ export function gallery(): GalleryItem[] {
 
 /** Категории для фильтра галереи: «both» относится и к тату, и к пирсингу. */
 export const directionCategories = (d: Direction) => (d === 'both' ? ['tattoo', 'piercing'] : [d]);
+
+/** Категории работы: её собственный тип, а без него – направление мастера. */
+export const workCategories = (w: GalleryItem) => (w.type ? [w.type] : directionCategories(w.master.direction));

@@ -11,15 +11,15 @@
     "telegram": "",
     "instagram": "",
     "works": [
-      { "photo": "work-1.jpg", "caption": "Ягнёнок, голень" },
-      { "photo": "work-2.jpg", "caption": "Медуза, септум, вертикальный лабрет" },
-      { "photo": "work-3.jpg", "caption": "Маска ханья, предплечье" },
-      { "photo": "work-4.jpg", "caption": "Бридж" },
-      { "photo": "work-5.jpg", "caption": "Карп кои, плечо" },
-      { "photo": "work-6.jpg", "caption": "Бровь" },
-      { "photo": "work-7.jpg", "caption": "Колючки и сердце, грудь" },
-      { "photo": "work-8.jpg", "caption": "Пупок" },
-      { "photo": "work-9.jpg", "caption": "Портрет собаки, голень" }
+      { "photo": "work-1.jpg", "caption": "Ягнёнок, голень", "type": "tattoo" },
+      { "photo": "work-2.jpg", "caption": "Медуза, септум, вертикальный лабрет", "type": "piercing" },
+      { "photo": "work-3.jpg", "caption": "Маска ханья, предплечье", "type": "tattoo" },
+      { "photo": "work-4.jpg", "caption": "Бридж", "type": "piercing" },
+      { "photo": "work-5.jpg", "caption": "Карп кои, плечо", "type": "tattoo" },
+      { "photo": "work-6.jpg", "caption": "Бровь", "type": "piercing" },
+      { "photo": "work-7.jpg", "caption": "Колючки и сердце, грудь", "type": "tattoo" },
+      { "photo": "work-8.jpg", "caption": "Пупок", "type": "piercing" },
+      { "photo": "work-9.jpg", "caption": "Портрет собаки, голень", "type": "tattoo" }
     ]
   }
 ]
