@@ -152,7 +152,6 @@ h3.sub-h{font-size:2.1rem;color:var(--brick);margin-bottom:12px}
 dl{margin:0;display:grid;gap:18px}
 dt{font-family:var(--f-ui);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#D9C9B0}
 dd{margin:2px 0 0;font-size:1.4rem;overflow-wrap:anywhere}
-dd small{display:block;font-family:var(--f-ui);font-size:.8rem;color:#D9C9B0;margin-top:4px}
 footer{background:var(--brick-dk);color:#D9C9B0;font-family:var(--f-ui);font-size:.75rem;padding-block:20px}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 dd a{color:inherit;text-decoration:none}
