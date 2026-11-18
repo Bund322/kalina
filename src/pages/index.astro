@@ -4,7 +4,7 @@ import PriceList from '../components/PriceList.astro';
 import Contact from '../components/Contact.astro';
 import Teasers from '../components/Teasers.astro';
 import { url } from '../data/url';
-import { piercingPriceNote } from '../data/studio';
+import { piercingPriceNote, businessSchema } from '../data/studio';
 import { Image } from 'astro:assets';
 import { masters, directionLabel, gallery, workCategories } from '../data/masters';
 import edu from '../data/education.json';
@@ -22,7 +22,7 @@ const half = Array.from({ length: Math.ceil(24 / words.length) }, () => words).f
 const marquee = [...half, ...half];
 const marqueeDur = `${(half.length * 2.3).toFixed(1)}s`;
 ---
-<Base preloader>
+<Base preloader schema={businessSchema(Astro.site)}>
   <div class="hero" id="hero">
     <svg class="berry-float bf1" data-k="22" viewBox="0 0 640 640"><use href="#berry"/></svg>
     <svg class="berry-float bf2" data-k="-30" viewBox="0 0 640 640" style="transform:rotate(18deg)"><use href="#berry"/></svg>

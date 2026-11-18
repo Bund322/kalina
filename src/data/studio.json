@@ -6,6 +6,7 @@
     "route": "Санкт-Петербург, Лиговский проспект, 43",
     "map": "https://yandex.ru/map-widget/v1/?um=constructor%3Ad704060d5865dd47e19d4f576e92d52e05eb7666bb1c85c6a81f12ddc17f9a08&source=constructor",
     "hours": "Ежедневно 12:00–22:00 (работаем по предварительной записи)",
+    "hoursSchema": "Mo-Su 12:00-22:00",
     "phone": "+7 (999) 536-45-81",
     "telegram": "https://t.me/kalinastu"
   },

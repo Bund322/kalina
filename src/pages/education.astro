@@ -10,12 +10,12 @@ import { contacts } from '../data/studio';
 const works = Object.values(import.meta.glob<{ default: ImageMetadata }>('../assets/education/students/*.jpg', { eager: true }))
   .map((m) => m.default);
 ---
-<Base title="Обучение" description="Курсы тату и пирсинга в студии «Калина»: теория, практика на моделях, диплом и возможность работать в студии.">
+<Base title="Обучение тату и пирсингу в Санкт-Петербурге" description="Курсы тату и пирсинга в Санкт-Петербурге: теория, практика на моделях под присмотром мастера, диплом и работа в студии «Калина».">
   <section class="edu">
     <div class="wrap two">
       <div class="rv edu-intro">
         <div class="label">Обучение</div>
-        <h2>Научим бить тату и делать проколы</h2>
+        <h1>Научим бить тату и делать проколы</h1>
         <p>Теория, отработка на искусственной коже и практика на живых моделях под присмотром мастера. Учим в рабочей студии – на тех же стерильных стандартах, что и на сеансах.</p>
         <p class="edu-outcome">{edu.outcome}</p>
         <div class="cta-row" style="justify-content:flex-start">

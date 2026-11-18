@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../data/url';
+---
+<Base title="Страница не найдена" description="Такой страницы нет на сайте студии «Калина».">
+  <section class="nf">
+    <div class="wrap">
+      <div class="label">Ошибка 404</div>
+      <h1>Страница не найдена</h1>
+      <p>Возможно, ссылка устарела или в адресе опечатка. Начните с главной или загляните в разделы.</p>
+      <div class="cta-row">
+        <a class="btn solid" href={url('/')}>На главную</a>
+        <a class="btn" href={url('/tattoo')}>Тату</a>
+        <a class="btn" href={url('/piercing')}>Пирсинг</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -78,7 +78,7 @@ section{padding-block:clamp(56px,9vw,110px)}
 /* Разделы чередуют фон: обычный песочный и светлый (.alt), чтобы соседние не сливались. */
 .alt{background:var(--sand-lt)}
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:clamp(24px,4vw,44px)}
-.sec-head h2{font-size:clamp(2.4rem,7vw,5rem);color:var(--brick)}
+.sec-head h1,.sec-head h2{font-size:clamp(2.4rem,7vw,5rem);color:var(--brick)}
 .rv{transform:translateY(26px);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
 .rv.in{transform:none}
 
@@ -350,7 +350,7 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 
 /* education */
 .edu .two{align-items:center}
-.edu-intro h2{font-size:clamp(2.4rem,6vw,4.4rem);color:var(--brick);margin:8px 0 20px}
+.edu-intro h1{font-size:clamp(2.4rem,6vw,4.4rem);color:var(--brick);margin:8px 0 20px}
 .edu-intro p{max-width:44ch;margin:0 0 16px}
 .edu-outcome{font-family:var(--f-ui);font-size:.95rem;color:var(--olive-ink);padding-left:14px;border-left:3px solid var(--olive)}
 .edu-ph{border-radius:999px 999px 24px 24px;overflow:hidden;aspect-ratio:4/5}
@@ -365,6 +365,10 @@ footer .socials a:hover{background:#D9C9B0;color:var(--brick-dk)}
 .course ul{margin:0;padding-left:1.1em;font-size:1.1rem;line-height:1.35}
 .course li{margin-bottom:6px}
 .course li::marker{color:var(--brick)}
+.nf{min-height:60vh;display:grid;align-content:center;text-align:center}
+.nf h1{font-size:clamp(2.6rem,8vw,5.5rem);color:var(--brick);margin:10px 0 18px}
+.nf p{max-width:44ch;margin:0 auto 26px}
+.nf .cta-row{justify-content:center}
 .model-cta{display:flex;align-items:center;justify-content:space-between;gap:clamp(18px,4vw,48px);margin-top:clamp(40px,6vw,64px);padding:clamp(22px,3vw,32px) clamp(22px,4vw,40px);border:1.5px solid var(--brick);border-radius:24px}
 .model-cta .sub-h{margin-bottom:8px}
 .model-cta p{margin:0;max-width:52ch}

@@ -15,17 +15,26 @@ import Footer from '../components/Footer.astro';
 import { url } from '../data/url';
 
 interface Props {
+  /** Заголовок страницы без « – Калина»; у главной не задаётся. */
   title?: string;
   description?: string;
+  /** Структурированные данные (JSON-LD) для поисковиков – на главной описание студии. */
+  schema?: Record<string, unknown>;
   /** Прелоадер с ягодой – только на главной: анимация заголовка hero ждёт его ухода. */
   preloader?: boolean;
 }
 const {
   title,
-  description = 'Татуировки и пирсинг в спокойной студии. Эскиз обсуждаем лично, работаем стерильно и без спешки.',
+  description = 'Студия татуировки и пирсинга в Санкт-Петербурге у Лиговского проспекта. Авторские эскизы, стерильно, украшения из титана. Обучение тату и пирсингу.',
+  schema,
   preloader = false,
 } = Astro.props;
-const fullTitle = title ? `${title} – Калина` : 'Калина Tattoo Studio';
+const fullTitle = title ? `${title} – Калина` : 'Тату и пирсинг в Санкт-Петербурге – студия Калина';
+// Превью на GitHub Pages (сборка с base /kalina) закрыто от поисковиков, чтобы не спорить с основным сайтом.
+const preview = import.meta.env.BASE_URL !== '/';
+// Абсолютные ссылки возможны, только когда известен адрес сайта (SITE_URL в astro.config.mjs).
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL(url('/og.jpg'), Astro.site).href : url('/og.jpg');
 ---
 <!doctype html>
 <html lang="ru">
@@ -35,7 +44,23 @@ const fullTitle = title ? `${title} – Калина` : 'Калина Tattoo Stu
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="color-scheme" content="only light" />
+    <meta name="theme-color" content="#C4B5A0" />
+    {preview && <meta name="robots" content="noindex, nofollow" />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href={url('/favicon.ico')} sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Калина" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   </head>
   <body>
     <BerrySymbol />

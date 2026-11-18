@@ -12,8 +12,9 @@ export function getStaticPaths() {
 
 const { master } = Astro.props as { master: Master };
 const hasOwnLinks = master.telegram;
+const role = { tattoo: 'мастер тату', piercing: 'мастер пирсинга', both: 'мастер тату и пирсинга' }[master.direction];
 ---
-<Base title={master.name} description={`${master.name} – ${directionLabel[master.direction].toLowerCase()}, студия «Калина». ${master.styles.join(', ')}.`}>
+<Base title={`${master.name} – ${role}`} description={`${master.name} – ${role} в студии «Калина», Санкт-Петербург. ${master.styles.join(', ')}. Портфолио и запись.`}>
   <section class="mp">
     <div class="wrap"><a class="label back" href={url('/#masters')}>← Все мастера</a></div>
     <div class="wrap mp-grid">

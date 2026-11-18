@@ -11,9 +11,11 @@
     "models": "node tools/build-models.mjs",
     "font": "python tools/build-font.py",
     "glyphs": "python tools/render-glyphs.py",
+    "icons": "node tools/make-icons.mjs && python tools/make-og.py",
     "check-links": "node tools/check-links.mjs"
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.6",
     "@fontsource/cormorant-garamond": "^5.3.0",
     "@fontsource/golos-text": "^5.3.0",
     "@fontsource/oranienbaum": "^5.3.0",
