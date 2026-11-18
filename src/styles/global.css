@@ -130,7 +130,7 @@ summary::-webkit-details-marker{display:none}
 summary::after{content:"+";font-family:var(--f-ui);transition:transform .3s}
 details[open] summary::after{transform:rotate(45deg)}
 details p{margin:0 0 18px;max-width:46ch}
-details ul{margin:0 0 12px;padding-left:1.1em;max-width:46ch}
+details ul,details ol{margin:0 0 12px;padding-left:1.3em;max-width:46ch}
 details li{margin-bottom:6px}
 details li::marker{color:var(--brick)}
 details p a{color:var(--brick)}
