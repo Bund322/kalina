@@ -11,7 +11,7 @@ export interface PriceItem {
 }
 
 export interface Social {
-  id: 'instagram' | 'telegram' | 'vk';
+  id: 'telegram' | 'vk';
   label: string;
   href: string;
 }

@@ -19,7 +19,6 @@ const schema = z.array(
     styles: z.array(z.string()).default([]),
     about: z.array(z.string()).default([]),
     telegram: z.string().optional(),
-    instagram: z.string().optional(),
     works: z
       .array(z.object({ photo: z.string().min(1), caption: z.string().optional(), type: z.enum(['tattoo', 'piercing']).optional() }))
       .max(MAX_WORKS, `у мастера может быть не больше ${MAX_WORKS} работ`),
@@ -43,7 +42,6 @@ export interface Master {
   styles: string[];
   about: string[];
   telegram?: string;
-  instagram?: string;
   works: Work[];
 }
 
@@ -85,7 +83,6 @@ function load(): Master[] {
     return {
       ...m,
       telegram: m.telegram || undefined,
-      instagram: m.instagram || undefined,
       photo: photo(m.slug, m.photo),
       works: m.works.map((w) => ({ image: photo(m.slug, w.photo), caption: w.caption, type: w.type })),
     };
