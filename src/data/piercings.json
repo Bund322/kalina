@@ -9,7 +9,7 @@
     "healing": "8–12 недель",
     "jewelry": "Лабрет",
     "ring": "Кольцо можно поставить через 3 месяца после прокола.",
-    "photos": ["lobe-1.jpg", "lobe-2.jpg"]
+    "photos": ["lobe-1.jpg", "lobe-2.jpg", "lobe-3.jpg"]
   },
   {
     "id": "helix",
@@ -21,7 +21,7 @@
     "healing": "3–9 месяцев",
     "jewelry": "Лабрет",
     "ring": "Кольцо можно поставить через 3 месяца после прокола.",
-    "photos": ["helix-1.jpg", "helix-2.jpg"]
+    "photos": ["helix-1.jpg", "helix-2.jpg", "helix-3.jpg"]
   },
   {
     "id": "forward-helix",
@@ -33,7 +33,7 @@
     "healing": "3–9 месяцев",
     "jewelry": "Лабрет",
     "ring": "Кольцо можно поставить через 3 месяца после прокола.",
-    "photos": ["forward-helix-1.jpg", "forward-helix-2.jpg"]
+    "photos": ["forward-helix-1.jpg", "forward-helix-2.jpg", "forward-helix-3.jpg"]
   },
   {
     "id": "flat",
@@ -55,7 +55,7 @@
     "price": "1 700 ₽",
     "healing": "3–9 месяцев",
     "jewelry": "Лабрет",
-    "photos": ["tragus-1.jpg", "tragus-2.jpg"]
+    "photos": ["tragus-1.jpg", "tragus-2.jpg", "tragus-3.jpg"]
   },
   {
     "id": "rook",
@@ -68,7 +68,7 @@
     "healing": "3–9 месяцев",
     "jewelry": "Микробанан (изогнутая штанга)",
     "ring": "Кольцо можно поставить через 3 месяца после прокола.",
-    "photos": ["rook-1.jpg"]
+    "photos": ["rook-1.jpg", "rook-2.jpg", "rook-3.jpg"]
   },
   {
     "id": "false-rook",
@@ -92,7 +92,7 @@
     "healing": "3–9 месяцев",
     "jewelry": "Лабрет",
     "ring": "Кольцо можно поставить через 3 месяца после прокола.",
-    "photos": ["conch-1.jpg", "conch-2.jpg"]
+    "photos": ["conch-1.jpg", "conch-2.jpg", "conch-3.jpg"]
   },
   {
     "id": "daith",
@@ -104,7 +104,7 @@
     "healing": "3–9 месяцев",
     "jewelry": "Микробанан (изогнутая штанга)",
     "ring": "Кольцо можно поставить через 3 месяца после прокола.",
-    "photos": ["daith-1.jpg"]
+    "photos": ["daith-1.jpg", "daith-2.jpg", "daith-3.jpg"]
   },
   {
     "id": "industrial",
@@ -116,7 +116,7 @@
     "price": "2 500 ₽",
     "healing": "3–9 месяцев",
     "jewelry": "Штанга",
-    "photos": ["industrial-1.jpg", "industrial-2.jpg"]
+    "photos": ["industrial-1.jpg", "industrial-2.jpg", "industrial-3.jpg"]
   },
   {
     "id": "pinna",
@@ -128,7 +128,7 @@
     "healing": "3–9 месяцев",
     "jewelry": "Лабрет",
     "ring": "Кольцо можно поставить через 3 месяца после прокола.",
-    "photos": ["pinna-1.jpg"]
+    "photos": ["pinna-1.jpg", "pinna-2.jpg"]
   },
   {
     "id": "snug",
@@ -185,7 +185,7 @@
     "price": "1 800 ₽",
     "healing": "6–8 недель",
     "jewelry": "Микробанан (изогнутая штанга)",
-    "photos": ["eyebrow-1.jpg"]
+    "photos": ["eyebrow-1.jpg", "eyebrow-2.jpg", "eyebrow-3.jpg"]
   },
   {
     "id": "labret",
@@ -279,7 +279,7 @@
     "healing": "4–8 недель",
     "jewelry": "Циркуляр (подкова) или микробанан",
     "ring": "Кольцо можно поставить через месяц после прокола.",
-    "photos": ["smiley-1.jpg", "smiley-2.jpg"]
+    "photos": ["smiley-1.jpg", "smiley-2.jpg", "smiley-3.jpg"]
   },
   {
     "id": "navel",
