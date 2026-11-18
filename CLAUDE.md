@@ -21,6 +21,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
   с `fonttools brotli skia-pathops`, локально — в `.venv-font/`).
 - `npm run glyphs` — раскадровка Kalina Display: каждая буква (А–Я, Ё), цифра и знак — отдельный PNG без фона
   в `docs/font/glyphs/` (`tools/render-glyphs.py`, Pillow из `.venv-font/`; кегль и цвет — `--size`, `--color`).
+- `npm run icons` — пересобрать `public/favicon.ico`, `apple-touch-icon.png` и картинку превью ссылок `public/og.jpg`
+  (`tools/make-icons.mjs` через sharp + `tools/make-og.py` через Pillow из `.venv-font/`).
 - `npm run check-links` — проверить внутренние ссылки, якоря и файлы (PDF) в собранном `dist/` (`tools/check-links.mjs`).
 - `npm run check` — проверка типов (`astro check`; при первом запуске попросит поставить `@astrojs/check`).
 
@@ -34,6 +36,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Деплой.** `.github/workflows/pages.yml` — превью на GitHub Pages при push в `dev_seits` (временно, на
 время разработки). `.github/workflows/deploy-hosting.yml` — FTP-деплой на хостинг, пока только ручной
 запуск; секреты и включение — в README.
+
+**SEO.** Адрес сайта – `SITE_URL` (в `astro.config.mjs` → `site`): без него нет канонических ссылок, `og:url` и карты
+сайта (`@astrojs/sitemap`). Сборка с base (превью на GitHub Pages) получает `noindex` и `Disallow: /` в `robots.txt`
+(`src/pages/robots.txt.ts`). Заголовки страниц – проп `title` у `<Base>` (без « – Калина», у главной – по умолчанию),
+главный заголовок страницы – единственный `h1`. Разметка schema.org студии – `businessSchema()` в `studio.ts`.
+Шрифты – с сайта (`@fontsource`), к Google не ходим. Instagram не размещаем (Meta признана экстремистской в РФ).
 
 **Тире.** Во всех текстах сайта (разметка, JSON-контент, `<title>`, комментарии в `src/`) — только короткое
 тире «–» (U+2013) с пробелами вокруг; длинное «—» не используем. Проверка: `grep -rn "—" src` должен быть пустым.

@@ -149,11 +149,23 @@ github-pages** и разрешите в «Deployment branches» ветку `dev_
    | `FTP_SERVER_DIR` | папка сайта на сервере с `/` в конце, например `public_html/` |
    | `FTP_PROTOCOL` | необязательно: `ftps` (по умолчанию) или `ftp`, если хостинг не умеет FTPS |
 
-3. Запустите вручную: **Actions → «Деплой на хостинг» → Run workflow**.
-4. Чтобы сайт обновлялся сам при каждом push в `main`, раскомментируйте в workflow блок `push`.
+3. На вкладке **Variables** того же раздела заведите переменную `SITE_URL` – адрес сайта, например `https://kalina-studio.ru`
+   (без слеша в конце). По ней строятся канонические ссылки, картинка превью и карта сайта.
+4. Запустите вручную: **Actions → «Деплой на хостинг» → Run workflow**.
+5. Чтобы сайт обновлялся сам при каждом push в `main`, раскомментируйте в workflow блок `push`.
 
-**Вручную:** `npm run build` и залейте содержимое `dist/` в папку сайта через FTP-клиент (например, FileZilla)
+**Вручную:** `SITE_URL=https://ваш-домен npm run build` и залейте содержимое `dist/` в папку сайта через FTP-клиент (например, FileZilla)
 или файловый менеджер в панели хостинга.
+
+## SEO
+
+- Заголовки и описания страниц – проп `title`/`description` у `<Base>` в каждой странице; у главной – по умолчанию
+  в `src/layouts/Base.astro`. Описание студии для поисковиков (schema.org) – `businessSchema()` в `src/data/studio.ts`.
+- Картинка превью ссылок – `public/og.jpg`, иконки – `public/favicon.ico` и `apple-touch-icon.png`. Пересобрать из
+  `public/favicon.svg` и шрифта: `npm run icons` (`tools/make-icons.mjs` + `tools/make-og.py`, Python с Pillow).
+- `robots.txt` и `noindex` строятся сами: превью на GitHub Pages закрыто от поисковиков, основной сайт открыт.
+- Карта сайта (`sitemap-index.xml`) и канонические ссылки появляются, только когда при сборке задан `SITE_URL`.
+- Что сделать после запуска на домене – в [docs/release-checklist.md](docs/release-checklist.md).
 
 ## Устройство
 

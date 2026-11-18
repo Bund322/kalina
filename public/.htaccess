@@ -1,0 +1,2 @@
+# Apache (Timeweb, SprintHost): своя страница для несуществующих адресов. GitHub Pages берёт 404.html сам.
+ErrorDocument 404 /404.html

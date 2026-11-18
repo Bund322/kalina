@@ -27,6 +27,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          # Адрес сайта на домене (Settings → Secrets and variables → Actions → Variables): канонические ссылки и карта сайта.
+          SITE_URL: ${{ vars.SITE_URL }}
       - run: npm run check-links
       - name: Залить dist/ на хостинг
         # Сторонний action получает FTP-пароль, поэтому закреплён на конкретном коммите, а не на теге.
