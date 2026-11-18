@@ -15,8 +15,12 @@ const modelPrices = edu.models.prices.map((m) => `${m.name.toLowerCase()} ${m.pr
 
 const letters = [...'Калина'];
 const words = ['Тату', 'Эскизы', 'Пирсинг', 'Титан', 'Обучение'];
-// Четыре копии, чтобы лента не обрывалась при сдвиге на -50%.
-const marquee = [...words, ...words, ...words, ...words];
+// Лента – две одинаковые половины, анимация сдвигает её на -50%. Половина должна быть шире любого экрана,
+// иначе в конце круга справа появляется пустота: набираем в неё не меньше 24 слов при любом их числе.
+// Длительность растёт вместе с длиной половины, чтобы скорость не зависела от числа слов (~2,3 с на слово).
+const half = Array.from({ length: Math.ceil(24 / words.length) }, () => words).flat();
+const marquee = [...half, ...half];
+const marqueeDur = `${(half.length * 2.3).toFixed(1)}s`;
 ---
 <Base preloader>
   <div class="hero" id="hero">
@@ -33,7 +37,7 @@ const marquee = [...words, ...words, ...words, ...words];
     </div>
   </div>
 
-  <div class="marquee" aria-hidden="true"><div class="track">{marquee.map((w) => <span>{w}<i></i></span>)}</div></div>
+  <div class="marquee" aria-hidden="true"><div class="track" style={`animation-duration:${marqueeDur}`}>{marquee.map((w) => <span>{w}<i></i></span>)}</div></div>
 
   <section id="works">
     <div class="wrap">
