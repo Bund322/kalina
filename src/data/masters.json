@@ -65,5 +65,22 @@
       { "photo": "work-6.jpg", "caption": "Зомби с конусом, голень", "type": "tattoo" },
       { "photo": "work-7.jpg", "caption": "Веточки, рука", "type": "tattoo" }
     ]
+  },
+  {
+    "slug": "sofia",
+    "name": "София",
+    "photo": "photo.jpg",
+    "direction": "tattoo",
+    "styles": ["графика тушью", "ботаника", "дотворк"],
+    "about": [
+      "Описание мастера появится позже: здесь будет рассказ о стиле, опыте и подходе к работе."
+    ],
+    "telegram": "",
+    "instagram": "",
+    "works": [
+      { "photo": "work-1.jpg", "caption": "Лиса, голень", "type": "tattoo" },
+      { "photo": "work-2.jpg", "caption": "Лилия, предплечье", "type": "tattoo" },
+      { "photo": "work-3.jpg", "caption": "Лотос, бедро", "type": "tattoo" }
+    ]
   }
 ]
