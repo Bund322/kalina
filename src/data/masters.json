@@ -44,5 +44,26 @@
       { "photo": "work-8.jpg", "caption": "Лабрет", "type": "piercing" },
       { "photo": "work-9.jpg", "caption": "Пупок", "type": "piercing" }
     ]
+  },
+  {
+    "slug": "maria",
+    "name": "Мария",
+    "photo": "photo.jpg",
+    "direction": "tattoo",
+    "styles": ["ботаника", "fine line", "дотворк", "цветные мини"],
+    "about": [
+      "Описание мастера появится позже: здесь будет рассказ о стиле, опыте и подходе к работе."
+    ],
+    "telegram": "",
+    "instagram": "",
+    "works": [
+      { "photo": "work-1.jpg", "caption": "Сакура, предплечье", "type": "tattoo" },
+      { "photo": "work-2.jpg", "caption": "Плачущее сердце, предплечье", "type": "tattoo" },
+      { "photo": "work-3.jpg", "caption": "Васильки и компас, предплечье", "type": "tattoo" },
+      { "photo": "work-4.jpg", "caption": "Звезда, рёбра", "type": "tattoo" },
+      { "photo": "work-5.jpg", "caption": "Пионы и тюльпаны, голень", "type": "tattoo" },
+      { "photo": "work-6.jpg", "caption": "Зомби с конусом, голень", "type": "tattoo" },
+      { "photo": "work-7.jpg", "caption": "Веточки, рука", "type": "tattoo" }
+    ]
   }
 ]
