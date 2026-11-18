@@ -141,7 +141,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Временное
 
 - Фото проколов в `src/content/piercings/` реальные не у всех: у снага, мадонны и сосков – заглушки `npm run placeholders`.
-- Реквизиты исполнителя (самозанятый: ФИО и ИНН) в подвал ещё не добавлены – ждём данные.
+- Реквизиты исполнителя (самозанятый: ИНН, ФИО по желанию) в подвал ещё не добавлены – ждём данные.
 
 ## Agent skills
 
